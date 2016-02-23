@@ -1,0 +1,10 @@
+{
+  "title": "Tabris.js RSS Reader",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "promise": "^6.1.0",
+    "tabris": "^1.2.0",
+    "whatwg-fetch": "^0.7.0"
+  }
+}
