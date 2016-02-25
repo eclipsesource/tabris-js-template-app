@@ -1,12 +1,14 @@
 var getThemeRssItemStyle = require('./../styles/general').getThemeRssItemStyle;
 var detailScreen = require('./../pages/details');
 var getRssFeedItems = require('./../services/rss_fetch').getRssFeedItems;
+var sizing = require('./../helpers/sizing');
 
 module.exports = function( feedConfig ) {
+
     var widget = tabris.create("CollectionView", {
         layoutData: {left: 0, top: 0, right: 0, bottom: 0},
         items: [],
-        itemHeight: 220,
+        itemHeight: sizing.getListItemHeight(), //220,
         refreshEnabled: true,
         _rssFeed: feedConfig, // Save the rssConfig used by this widget so it can be used later.
         initializeCell: function(cell){
