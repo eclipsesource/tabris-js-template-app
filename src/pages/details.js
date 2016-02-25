@@ -16,7 +16,8 @@ function open(pageTitle, feedItem) {
 module.exports  = {
 	open: open,
 	init: init,
-	addRssItemWebView: addRssItemWebView
+	addRssItemWebView: addRssItemWebView,
+	rssItemWebViewHTML: rssItemWebViewHTML
 }
 
 /*************************

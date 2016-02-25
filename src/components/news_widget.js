@@ -13,7 +13,6 @@ module.exports = function( feedConfig , tab) {
         _rssFeed: feedConfig, // Save the rssConfig used by this widget so it can be used later.
         _tab: tab,
         initializeCell: function(cell){
-
             var style = cellStyle(feedConfig);
             var container = tabris.create('Composite', style.container).appendTo(cell),
                 icon      = tabris.create('ImageView', style.image).appendTo(container),
@@ -21,17 +20,21 @@ module.exports = function( feedConfig , tab) {
                 title     = tabris.create('TextView',  style.title).appendTo(container);
 
             cell.on("change:item", function(widget, item) {
-
                 title.set({text: item.title});
-                icon.set({image: item.image, opacity: selectedItem === item? 0.4 : 1} );
-                overlay.set({opacity: selectedItem === item? 0.4 : 1} );
+                icon.set({image: item.image, opacity: selectedItem === item ? 0.4 : 1} );
+                overlay.set({opacity: selectedItem === item? 0.4 : 0.8} );
             });
         }
     }).on("select", function(target, feedItem) {
         if(sizing.isTabletLandscape){
-            widget.set( {right:'75%',itemHeight:Math.floor(sizing.getListItemHeight()*0.7)} ).refresh();
+            widget.set( {right:'75%',itemHeight:Math.floor(sizing.getListItemHeight()*0.7) } ).refresh();
             selectedItem = feedItem;
-            detailScreen.addRssItemWebView(tab,feedItem,{ left: "25%", right: 0, top: 0, bottom: 0});
+            if(tab.get('_rssItemWebView')){
+                tab.get('_rssItemWebView').set('html',detailScreen.rssItemWebViewHTML(feedItem));
+            }
+            else {
+                detailScreen.addRssItemWebView(tab,feedItem,{ left: "25%", right: 0, top: 0, bottom: 0});
+            }
         }
         else {
             detailScreen.open(feedConfig.name, feedItem);
