@@ -3,7 +3,7 @@ var detailScreen = require('./../pages/details');
 var getRssFeedItems = require('./../services/rss_fetch').getRssFeedItems;
 var sizing = require('./../helpers/sizing');
 
-module.exports = function( feedConfig ) {
+module.exports = function( feedConfig , tab) {
 
     var widget = tabris.create("CollectionView", {
         layoutData: {left: 0, top: 0, right: 0, bottom: 0},
@@ -11,6 +11,7 @@ module.exports = function( feedConfig ) {
         itemHeight: sizing.getListItemHeight(), //220,
         refreshEnabled: true,
         _rssFeed: feedConfig, // Save the rssConfig used by this widget so it can be used later.
+        _tab: tab,
         initializeCell: function(cell){
 
             var style = cellStyle(feedConfig);
@@ -20,12 +21,23 @@ module.exports = function( feedConfig ) {
                 title     = tabris.create('TextView',  style.title).appendTo(container);
 
             cell.on("change:item", function(widget, item) {
-                title.set('text', item.title);
-                icon.set('image', item.image );
+
+                title.set({text: item.title});
+                icon.set({image: item.image, opacity: selectedItem === item? 0.4 : 1} );
+                overlay.set({opacity: selectedItem === item? 0.4 : 1} );
             });
         }
     }).on("select", function(target, feedItem) {
-        detailScreen.open(feedConfig.name, feedItem);
+        if(sizing.isTabletLandscape){
+            widget.set( {right:'75%',itemHeight:Math.floor(sizing.getListItemHeight()*0.7)} ).refresh();
+            selectedItem = feedItem;
+            detailScreen.addRssItemWebView(tab,feedItem,{ left: "25%", right: 0, top: 0, bottom: 0});
+        }
+        else {
+            detailScreen.open(feedConfig.name, feedItem);
+        }
+
+
     }).on('refresh', function(widget){
         refreshNewsWidget( widget );
     });
@@ -67,3 +79,5 @@ function updateWidgetLoading(widget,loading){
         refreshMessage: loading ? "loading feed..." : ""
     });
 }
+
+var selectedItem;

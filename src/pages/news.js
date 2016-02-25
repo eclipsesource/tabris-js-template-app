@@ -13,7 +13,7 @@ function init() {
     // Now we will create a tab per source and add to the container
     config.rssFeeds.forEach(function( rssFeed ){
         var tab = tabris.create( 'Tab', { title: rssFeed.name, background: 'white', _rssFeed: rssFeed} ).appendTo(TabFolder);
-        newsWidgetComponent( rssFeed ).appendTo(tab);
+        newsWidgetComponent( rssFeed , tab ).appendTo(tab);
     });
 
     // When the user change the tab we need to change the tab container background
