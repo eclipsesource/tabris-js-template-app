@@ -31,7 +31,7 @@ module.exports = function( feedConfig , tab) {
     }).on("select", function(target, feedItem) {
         if(sizing.isTablet()){
             widget.set( {right:'75%',itemHeight:Math.floor(sizing.getListItemHeight()*0.7)} ).refresh();
-            widget.animate({opacity: 0.4});
+            //widget.animate({opacity: 1});
             selectedItem = feedItem;
             if(tab.get('_tabletHtmlContainer')){
                 tab.get('_tabletHtmlContainer').get('_rssItemWebView').set('html',detailScreen.rssItemWebViewHTML(feedItem));
@@ -47,15 +47,17 @@ module.exports = function( feedConfig , tab) {
         else {
             detailScreen.open(feedConfig.name, feedItem);
         }
-    }).on('scroll', function(widget){
-        var op = widget.get('opacity');
-        if( op < 1){
-            op = Math.min(1, op+0.02);
-            widget.set( {opacity: op} );
-        }
     }).on('refresh', function(widget){
         refreshNewsWidget( widget );
     });
+
+    //widget.on('scroll', function(widget){
+    //    var op = widget.get('opacity');
+    //    if( op < 1){
+    //        op = Math.min(1, op+0.02);
+    //        widget.set( {opacity: op} );
+    //    }
+    //});
     refreshNewsWidget(widget);
     return widget;
 }
