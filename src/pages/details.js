@@ -43,21 +43,28 @@ function addViewAction(page){
 
 function addRssItemWebView(page, feedItem , config){
 	var rssItemWebView = tabris.create('WebView', config || { left: 0, right: 0, top: 0, bottom: 0}).appendTo(page);
-	rssItemWebView.set("html", rssItemWebViewHTML(feedItem) );
+	rssItemWebView.set("url", rssItemWebViewHTML(feedItem) );
 	page.set('_rssItemWebView', rssItemWebView);
 }
 
 function rssItemWebViewHTML(feedItem){
-	return [
-		'<html>',
-		'<head>'+ WebViewInternalCSS() +'</head>',
-		'<body>',
-		'<h2>'+ feedItem.title +'</h2>',
-		'<h4 class="pubDate">'+ feedItem.pubDate +'</h4>',
-		feedItem.cleanContent,
-		'</body>',
-		'</html>'
-	].join('');
+	//console.log(feedItem.offers.offer[0].url);
+	return feedItem.offers.offer[0].url;
+	//if(feedItem && feedItem.offers && feedItem.offers.offer.length>0){
+	//	return feedItem.offers.offer[0]url;
+	//}
+	return '';
+
+	//return [
+	//	'<html>',
+	//	'<head>'+ WebViewInternalCSS() +'</head>',
+	//	'<body>',
+	//	'<h2>'+ feedItem.title +'</h2>',
+	//	'<h4 class="pubDate">'+ feedItem.pubDate +'</h4>',
+	//	feedItem.cleanContent,
+	//	'</body>',
+	//	'</html>'
+	//].join('');
 }
 
 

@@ -23,8 +23,8 @@ module.exports = function( feedConfig , tab) {
                 title     = tabris.create('TextView',  style.title).appendTo(container);
 
             cell.on("change:item", function(widget, item) {
-                title.set({text: item.title});
-                icon.set({image: item.image, opacity: selectedItem === item ? 1 : 1} );
+                title.set({text: item.name});
+                icon.set({image: item.image_url_large, opacity: selectedItem === item ? 1 : 1} );
                 overlay.set({opacity: selectedItem === item? 0.8 : 0.8} );
             });
         }
@@ -34,7 +34,7 @@ module.exports = function( feedConfig , tab) {
             //widget.animate({opacity: 1});
             selectedItem = feedItem;
             if(tab.get('_tabletHtmlContainer')){
-                tab.get('_tabletHtmlContainer').get('_rssItemWebView').set('html',detailScreen.rssItemWebViewHTML(feedItem));
+                tab.get('_tabletHtmlContainer').get('_rssItemWebView').set('url',detailScreen.rssItemWebViewHTML(feedItem));
             }
             else {
                 var qq = tabris.create("Composite", { left: "25%", right: 0, top: 0, bottom: 0 ,background: "white", elevation: 0}).appendTo(tab);
