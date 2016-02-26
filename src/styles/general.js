@@ -41,8 +41,8 @@ var platformStylingWebView = {
 
 	},
 	Android: {
-		font: 'font-size: 100%; ',
-		padding: 'padding: 10px 10px 0px 10px;',
+		font: 'font-size: 140%; ',
+		padding: 'padding: 30px 30px 30px 30px;',
 		img: 'max-width: 100%;'
 	}
 };

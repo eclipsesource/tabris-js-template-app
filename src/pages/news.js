@@ -7,7 +7,7 @@ function init() {
     var page = tabris.create("Page", { title: config.appName , topLevel : true}) ;
 
     // So we need a Tab Container
-    var TabFolder = tabris.create('TabFolder', { left: 0, top: 0, right: 0, bottom:0 , elevation: 8 , tabBarLocation: "top", paging: true} ).appendTo(page);
+    var TabFolder = tabris.create('TabFolder', { left: 0, top: 0, right: 0, bottom:0 , elevation: 10 , tabBarLocation: "top", paging: true} ).appendTo(page);
     page.set("_tabs", TabFolder);
 
     // Now we will create a tab per source and add to the container

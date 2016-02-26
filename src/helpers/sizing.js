@@ -17,4 +17,5 @@ exports.getListItemHeight = function() {
 	return   Math.floor( (tabris.device.get("screenHeight") - 50) / 2.5) ;
 }
 
-exports.isTabletLandscape = isTabletLandscape();
+exports.isTabletLandscape = isTabletLandscape;
+exports.isTablet = isTablet;
