@@ -36,4 +36,3 @@ module.exports = {
     init: init,
     open: open
 }
-

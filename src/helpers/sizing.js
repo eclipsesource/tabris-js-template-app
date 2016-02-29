@@ -14,8 +14,18 @@ function isTabletLandscape(){
 }
 
 exports.getListItemHeight = function() {
-	return   Math.floor( (tabris.device.get("screenHeight") - 50) / 2.5) ;
+	if(isTablet()){
+			return   Math.floor( (tabris.device.get("screenWidth")) * 0.5) ;
+	}
+	return   Math.floor( (tabris.device.get("screenWidth")) * 0.6) ;
+	// return   Math.floor( (tabris.device.get("screenHeight") - 50) / 2.5) ;
 }
+
+//
+// console.log("Width: "+tabris.device.get(""));
+// console.log("Height: "+tabris.device.get("screenHeight"));
+// console.log("scaleFactor: "+tabris.device.get("scaleFactor"));
+
 
 exports.isTabletLandscape = isTabletLandscape;
 exports.isTablet = isTablet;
