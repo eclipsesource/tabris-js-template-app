@@ -11,7 +11,7 @@ function getRssFeedItems(feedConfig){
 			keyword: "G-shock",
 			category: 1,
 			include_discounts: "true",
-			results_per_page: 100,
+			results_per_page: 20,
 			//price_min: 2000
 			//page: 1
 		}
