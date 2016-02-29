@@ -15,7 +15,7 @@ function isTabletLandscape(){
 
 exports.getListItemHeight = function() {
 	if(isTablet()){
-			return   Math.floor( (tabris.device.get("screenWidth")) * 0.5) ;
+			return   Math.floor( (tabris.device.get("screenWidth")) * 0.4) ;
 	}
 	return   Math.floor( (tabris.device.get("screenWidth")) * 0.6) ;
 	// return   Math.floor( (tabris.device.get("screenHeight") - 50) / 2.5) ;
