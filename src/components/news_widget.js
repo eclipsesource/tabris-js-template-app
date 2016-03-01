@@ -2,6 +2,7 @@ var getThemeRssItemStyle = require('./../styles/general').getThemeRssItemStyle;
 var detailScreen = require('./../pages/details');
 var getRssFeedItems = require('./../services/rss_fetch').getRssFeedItems;
 var sizing = require('./../helpers/sizing');
+var isTablet = sizing.isTablet();
 
 module.exports = function( feedConfig , tab) {
     var style = cellStyle(feedConfig);
@@ -9,10 +10,11 @@ module.exports = function( feedConfig , tab) {
     //tabris.create("Composite", { left: 0, right: "75%", top: 0, bottom: 0 ,background: "white", elevation: 10}).appendTo(tab);
 
     var widget = tabris.create("CollectionView", {
-        layoutData: {left: 0, top: 0, right: 0, bottom: 0},
+        layoutData: {left: 0,  top: 0,  bottom: 0},
         elevation: 20,
         items: [],
-        itemHeight: sizing.getListItemHeight(), //220,
+        right: isTablet? '75%':0,
+        itemHeight: isTablet? Math.floor(sizing.getListItemHeight()*0.5) : sizing.getListItemHeight(), //220,
         refreshEnabled: true,
         _rssFeed: feedConfig, // Save the rssConfig used by this widget so it can be used later.
         _tab: tab,
@@ -24,13 +26,13 @@ module.exports = function( feedConfig , tab) {
 
             cell.on("change:item", function(widget, item) {
                 title.set({text: item.title});
-                icon.set({image: item.image, opacity: selectedItem === item ? 1 : 1} );
-                overlay.set({opacity: selectedItem === item? 0.8 : 0.8} );
+                icon.set({image: item.image, opacity: item.watched ? 0.5 : 1} );
+                overlay.set({opacity: item.watched ? 0.5 : 0.8} );
             });
         }
     }).on("select", function(target, feedItem) {
+        feedItem.watched = true;
         if(sizing.isTablet()){
-            widget.set( {right:'75%',itemHeight:Math.floor(sizing.getListItemHeight()*0.7)} ).refresh();
             //widget.animate({opacity: 1});
             selectedItem = feedItem;
             if(tab.get('_tabletHtmlContainer')){
@@ -38,6 +40,8 @@ module.exports = function( feedConfig , tab) {
             }
             else {
                 var qq = tabris.create("Composite", { left: "25%", right: 0, top: 0, bottom: 0 ,background: "white", elevation: 0}).appendTo(tab);
+                // widget.set( {right:'75%',itemHeight:Math.floor(sizing.getListItemHeight()*0.5)} ).refresh();
+                // widget.refresh();
                 tab.set('_tabletHtmlContainer', qq);
                 detailScreen.addRssItemWebView(qq,feedItem);
                 // For iOS
