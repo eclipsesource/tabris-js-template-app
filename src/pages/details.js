@@ -15,7 +15,9 @@ function open(pageTitle, feedItem) {
 
 module.exports  = {
 	open: open,
-	init: init
+	init: init,
+	addRssItemWebView: addRssItemWebView,
+	rssItemWebViewHTML: rssItemWebViewHTML
 }
 
 /*************************
@@ -39,8 +41,8 @@ function addViewAction(page){
  * Add the webview with the feed content.
  **************************/
 
-function addRssItemWebView(page, feedItem){
-	var rssItemWebView = tabris.create('WebView', { left: 0, right: 0, top: 0, bottom: 0}).appendTo(page);
+function addRssItemWebView(page, feedItem , config){
+	var rssItemWebView = tabris.create('WebView', config || { left: 0, right: 0, top: 0, bottom: 0}).appendTo(page);
 	rssItemWebView.set("html", rssItemWebViewHTML(feedItem) );
 	page.set('_rssItemWebView', rssItemWebView);
 }
