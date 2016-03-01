@@ -70,7 +70,7 @@ module.exports = function( feedConfig , tab) {
 function cellStyle(feedConfig){
     var themeStyle = getThemeRssItemStyle(feedConfig.color);
     return {
-        container : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background},
+        container : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background , highlightOnTouch:true},
         image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: 'fill' , background: "rgb(220, 220, 220)"},
         // image: { left: 0, top: 1, scaleMode: 'fill' , background: "rgb(220, 220, 220)", width: tabris.device.get("screenWidth") , height: Math.floor( (tabris.device.get("screenWidth")) * 0.4)},
         overlay: { left: 0, right: 0, height: 46, bottom: 1 ,background: themeStyle.overlayBG, opacity: 0.8},
