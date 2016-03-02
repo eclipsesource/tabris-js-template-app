@@ -7,7 +7,7 @@
 var feedHelpers = require('./feed_helpers');
 var resizeImageURLByWidth = require('./../../helpers/img_resize').resizeImageURLByWidth;
 
-function getRssFeedItems(feedConfig){
+function getItems(feedConfig){
 	return new Promise(function(resolve, reject) {
 		fetch( feedConfig.feed ).then(function( res ){
 			return res.json();
@@ -24,5 +24,5 @@ function getRssFeedItems(feedConfig){
 }
 
 module.exports = {
-	getRssFeedItems: getRssFeedItems
+	getItems: getItems
 };

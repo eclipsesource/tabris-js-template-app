@@ -1,6 +1,6 @@
 var getThemeRssItemStyle = require('./../styles/general').getThemeRssItemStyle;
 var detailScreen = require('./../pages/details');
-var getRssFeedItems = require('./../services/rss/rss_fetch').getRssFeedItems;
+var getItems = require('./../services/rss/rss_fetch').getItems;
 var sizing = require('./../helpers/sizing');
 var isTablet = sizing.isTablet();
 
@@ -76,7 +76,7 @@ function cellStyle(feedConfig){
 
 function refreshNewsWidget( widget ) {
     updateWidgetLoading ( widget, true);
-    getRssFeedItems( widget.get('_rssFeed') ).then( function(items){
+    getItems( widget.get('_rssFeed') ).then( function(items){
         widget.set('items', items );
         updateWidgetLoading ( widget, false );
     }).catch(function(err){
