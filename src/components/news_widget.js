@@ -7,8 +7,7 @@ var isTablet = sizing.isTablet();
 module.exports = function( feedConfig , tab) {
     var style = cellStyle(feedConfig);
     tabris.create("Composite", { left: 0, right: "75%", top: 0, bottom: 0 ,background: "white", elevation: 10}).appendTo(tab);
-    //tabris.create("Composite", { left: 0, right: "75%", top: 0, bottom: 0 ,background: "white", elevation: 10}).appendTo(tab);
-
+    
     var widget = tabris.create("CollectionView", {
         layoutData: {left: 0,  top: 0,  bottom: 0},
         elevation: 20,
@@ -102,18 +101,19 @@ function updateWidgetLoading(widget,loading){
 function updateCellItemElements(feedItem){
   var elements = feedItem._elements;
   var imageUpdate = {opacity: feedItem.watched ? 0.5 : 1};
-  elements.title.set({text: feedItem.title});
-  elements.overlay.set({opacity: feedItem.watched ? 0.5 : 0.8} );
 
+  // Image update
   if(!feedItem.image || feedItem.image.length === 0) {
     imageUpdate.opacity = 0;
   }
-  else if(  !(elements.icon.get('image') && elements.icon.get('image').src === feedItem.image)  ){
-    imageUpdate.image =  feedItem.image;
+  else if(  !(elements.icon.get('image') && elements.icon.get('image').src === feedItem.image)){
+    imageUpdate.image =  {src: feedItem.image};
   }
   elements.icon.set( imageUpdate );
 
-
+  // Title + Overlay update
+  elements.title.set({text: feedItem.title});
+  elements.overlay.set({opacity: feedItem.watched ? 0.5 : 0.8} );
   if(!feedItem.image || feedItem.image.length === 0) {
     elements.overlay.set({ top: 1, height:undefined });
     elements.title.set({ maxLines: 5});
