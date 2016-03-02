@@ -18,7 +18,7 @@ module.exports = [
     //    		keyword: "G-shock",
     //  			category: 1,
     //  			include_discounts: "true",
-    //  			results_per_page: 100,
+    //  			results_per_page: 50,
     //  		},
     // },
     // {
@@ -30,7 +30,7 @@ module.exports = [
     //    		keyword: "Fossil Watch Men",
     //    		category: 1,
     //  			include_discounts: "true",
-    //  			results_per_page: 100,
+    //  			results_per_page: 50,
     //  		},
     // },
     // {
@@ -42,7 +42,7 @@ module.exports = [
     //    		keyword: "Men watch",
     //  			category: 1,
     //  			include_discounts: "true",
-    //  			results_per_page: 100,
+    //  			results_per_page: 50,
     //  			price_min: 1000
     //  		},
     // },
@@ -58,7 +58,7 @@ module.exports = [
        		keyword: "Flowers",
      			category: 1,
      			include_discounts: "true",
-     			results_per_page: 100,
+     			results_per_page: 50,
      		},
     },
     {
@@ -70,7 +70,7 @@ module.exports = [
        		keyword: "Chocolates",
        		category: 1,
      			include_discounts: "true",
-     			results_per_page: 100,
+     			results_per_page: 50,
      		},
     },
     {
@@ -82,7 +82,7 @@ module.exports = [
        		keyword: "Teddy bear",
      			category: 1,
      			include_discounts: "true",
-     			results_per_page: 100,
+     			results_per_page: 50,
      		},
     },
 ];

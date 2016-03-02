@@ -17,8 +17,8 @@ var config = {
     feeds: require('./services/rss/feeds'),
 
     // Shop feeds
-    dataService: require('./services/shop'),
-    feeds: require('./services/shop/feeds')
+    // dataService: require('./services/shop'),
+    // feeds: require('./services/shop/feeds')
 
 }
 
