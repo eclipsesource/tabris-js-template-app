@@ -1,3 +1,9 @@
+/***************************
+* For the most part, services are independent of the platform the are running on.
+* This means they could function similarly in a browser, or a node.js server.
+*
+****************************/
+
 var feedHelpers = require('./../helpers/feed_helpers');
 var resizeImageURLByWidth = require('./../helpers/img_resize').resizeImageURLByWidth;
 

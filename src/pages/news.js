@@ -3,7 +3,7 @@ var newsWidgetComponent = require('./../components/news_widget');
 var updateUIColors = require('./../styles/general').updateUIColors;
 
 function init() {
-    // Ok we need a page to contain all the crazy things we are going to create
+    // Ok we need a page to contain all the application UI
     var page = tabris.create("Page", { title: config.appName , topLevel : true}) ;
 
     // So we need a Tab Container
