@@ -24,17 +24,21 @@ module.exports = function( feedConfig , tab) {
                 overlay   = tabris.create('Composite', style.overlay).appendTo(container),
                 title     = tabris.create('TextView',  style.title).appendTo(container);
 
-            cell.on("change:item", function(widget, item) {
-                title.set({text: item.title});
-                icon.set({image: item.image, opacity: item.watched ? 0.5 : 1} );
-                overlay.set({opacity: item.watched ? 0.5 : 0.8} );
+            cell.on("change:item", function(widget, feedItem) {
+                feedItem._elements = {
+                  title: title,
+                  icon: icon,
+                  overlay: overlay,
+                  container: container
+                };
+                updateCellItemElements(feedItem);
             });
         }
     }).on("select", function(target, feedItem) {
         feedItem.watched = true;
+        updateCellItemElements(feedItem);
+
         if(sizing.isTablet()){
-            //widget.animate({opacity: 1});
-            selectedItem = feedItem;
             if(tab.get('_tabletHtmlContainer')){
                 tab.get('_tabletHtmlContainer').get('_rssItemWebView').set('html',detailScreen.rssItemWebViewHTML(feedItem));
             }
@@ -45,7 +49,7 @@ module.exports = function( feedConfig , tab) {
                 tab.set('_tabletHtmlContainer', qq);
                 detailScreen.addRssItemWebView(qq,feedItem);
                 // For iOS
-                //tabris.create("Composite", { left: 0, width: 1, top: 0, bottom: 0 ,background: style.overlay.background , opacity: 0.6}).appendTo(qq);
+                // tabris.create("Composite", { left: 0, width: 1, top: 0, bottom: 0 ,background: style.overlay.background , opacity: 0.6}).appendTo(qq);
             }
         }
         else {
@@ -55,13 +59,6 @@ module.exports = function( feedConfig , tab) {
         refreshNewsWidget( widget );
     });
 
-    //widget.on('scroll', function(widget){
-    //    var op = widget.get('opacity');
-    //    if( op < 1){
-    //        op = Math.min(1, op+0.02);
-    //        widget.set( {opacity: op} );
-    //    }
-    //});
     refreshNewsWidget(widget);
     return widget;
 }
@@ -102,4 +99,14 @@ function updateWidgetLoading(widget,loading){
     });
 }
 
-var selectedItem;
+function updateCellItemElements(feedItem){
+  var elements = feedItem._elements;
+  var imageUpdate = {opacity: feedItem.watched ? 0.5 : 1};
+  elements.title.set({text: feedItem.title});
+  elements.overlay.set({opacity: feedItem.watched ? 0.5 : 0.8} );
+
+  if(  !(elements.icon.get('image') && elements.icon.get('image').src === feedItem.image)  ){
+    imageUpdate.image =  feedItem.image;
+  }
+  elements.icon.set( imageUpdate );
+}
