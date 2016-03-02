@@ -10,23 +10,25 @@ function getItems(feedConfig){
 	return new Promise(function(resolve, reject) {
 
 
-    var qq = {
- 		  // catalog: "672oqm0oqpyrc4ullpfeclz66", // jewlerry
- 			catalog:"0135pruepnxsbh6gw2ve714rv", //flowers
- 			account:"bbhntrjt16yvunll9iyayufn4",
-   		// keyword: "Fossil Watch Men",
-   		// keyword: "G-shock",
- 			category: 1,
- 			include_discounts: "true",
- 			results_per_page: 100,
- 			//price_min: 2000
- 			//page: 1
- 		}
+    var targetFeed = feedConfig.config;
+
+    // var qq = {
+ 	// 	  // catalog: "672oqm0oqpyrc4ullpfeclz66", // jewlerry
+ 	// 		catalog:"0135pruepnxsbh6gw2ve714rv", //flowers
+ 	// 		account:"bbhntrjt16yvunll9iyayufn4",
+   // 		// keyword: "Fossil Watch Men",
+   // 		// keyword: "G-shock",
+ 	// 		category: 1,
+ 	// 		include_discounts: "true",
+ 	// 		results_per_page: 100,
+ 	// 		//price_min: 2000
+ 	// 		//page: 1
+ 	// 	}
 
  		var str = '';
  		var tmp = []
- 		for (var key in qq){
- 			tmp.push(key + "=" + encodeURIComponent(qq[key]));
+ 		for (var key in targetFeed){
+ 			tmp.push(key + "=" + encodeURIComponent(targetFeed[key]));
  		}
  		str = tmp.join("&");
  	// 	console.log("https://www.popshops.com/v3/products.json?" + str);

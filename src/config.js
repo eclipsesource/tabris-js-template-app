@@ -7,15 +7,19 @@ var config = {
      **********************************/
 
     appName: 'Tabris.js RSS Reader Example',
-    theme: 'normal',
+    // theme: 'normal',
     //theme: 'light',
     //theme: 'full',
-    //theme: tabris.device.get("platform") === "iOS" ? 'light' : 'full', // Define a certain theme for iOS and different for Android
+    theme: tabris.device.get("platform") === "iOS" ? 'light' : 'full', // Define a certain theme for iOS and different for Android
 
+    // RSS feeds
     dataService: require('./services/rss'),
-    // dataService: require('./services/shop'),
-    
-    feeds: require('./services/rss/feeds')
+    feeds: require('./services/rss/feeds'),
+
+    // Shop feeds
+    dataService: require('./services/shop'),
+    feeds: require('./services/shop/feeds')
+
 }
 
 
