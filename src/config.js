@@ -12,7 +12,8 @@ var config = {
     //theme: 'full',
     //theme: tabris.device.get("platform") === "iOS" ? 'light' : 'full', // Define a certain theme for iOS and different for Android
 
-    dataService: require('./services/rss'),
+    // dataService: require('./services/rss'),
+    dataService: require('./services/shop'),
     /******************************************
     *  Here, are some common technology RSS feeds, with their respective:
     *
@@ -49,6 +50,8 @@ var config = {
         //         return './images/notfound.png';
         //     }
         // },
+
+
 
         //{
         //    name: 'Fayerwayer',

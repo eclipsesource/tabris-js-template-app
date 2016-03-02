@@ -25,12 +25,11 @@ function getItems(feedConfig){
 
 
 
-function getItemDetails(item){
-	return rssItemWebViewHTML(item);
-	// return {
-	// 	type: 'html', // can be 'html', 'url', 'component'
-	// 	content: rssItemWebViewHTML(item)    //
-	// },
+function getItemDetails(item) {
+	return {
+		type: 'html', // can be 'html', 'url', 'component'
+		content: rssItemWebViewHTML(item)
+	}
 }
 
 

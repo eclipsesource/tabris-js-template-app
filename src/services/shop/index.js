@@ -39,7 +39,6 @@ function getItems(feedConfig){
 			itemsProcessed.forEach(function(item){
         item.title = item.name;
         item.image = resizeImageURLByWidth ( item.image_url_large );
-        item.url = item.offers.offer[0].url;
 			});
 			resolve(itemsProcessed);
 		}).catch(function (err){
@@ -48,6 +47,15 @@ function getItems(feedConfig){
 	});
 }
 
+
+function getItemDetails(item) {
+	return {
+		type: 'url', // can be 'html', 'url', 'component'
+		content: item.offers.offer[0].url
+	}
+}
+
 module.exports = {
-	getItems: getItems
+	getItems: getItems,
+  getItemDetails: getItemDetails
 };
