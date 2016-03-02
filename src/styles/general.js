@@ -34,7 +34,7 @@ function WebViewInternalCSS(){
 	return ['<style>',
 					// reset,
 					'body{background:transparent; '+styles.font + styles.padding+'}',
-					'html{ background: transparent; width: 200px; }',
+					'html{ background: transparent; }',
 					'img{ ' + styles.img + ' clear:both; } .pubDate{color:#5A5A5A}',
 					'h2{font-size: 180%;}',
 					'</style>'
