@@ -10,7 +10,7 @@ var config = {
     // theme: 'normal',
     //theme: 'light',
     //theme: 'full',
-    theme: tabris.device.get("platform") === "iOS" ? 'light' : 'full', // Define a certain theme for iOS and different for Android
+    theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
 
     // RSS feeds
     dataService: require('./services/rss'),
