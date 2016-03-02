@@ -4,8 +4,8 @@
 *
 ****************************/
 
-var feedHelpers = require('./../helpers/feed_helpers');
-var resizeImageURLByWidth = require('./../helpers/img_resize').resizeImageURLByWidth;
+var feedHelpers = require('./feed_helpers');
+var resizeImageURLByWidth = require('./../../helpers/img_resize').resizeImageURLByWidth;
 
 function getRssFeedItems(feedConfig){
 	return new Promise(function(resolve, reject) {

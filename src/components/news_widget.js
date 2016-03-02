@@ -1,6 +1,6 @@
 var getThemeRssItemStyle = require('./../styles/general').getThemeRssItemStyle;
 var detailScreen = require('./../pages/details');
-var getRssFeedItems = require('./../services/rss_fetch').getRssFeedItems;
+var getRssFeedItems = require('./../services/rss/rss_fetch').getRssFeedItems;
 var sizing = require('./../helpers/sizing');
 var isTablet = sizing.isTablet();
 
