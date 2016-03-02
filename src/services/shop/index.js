@@ -11,11 +11,11 @@ function getItems(feedConfig){
 
 
     var qq = {
- 			catalog: "672oqm0oqpyrc4ullpfeclz66", // jewlerry
- 			//catalog:"0135pruepnxsbh6gw2ve714rv", //flowers
+ 		// 	catalog: "672oqm0oqpyrc4ullpfeclz66", // jewlerry
+ 			catalog:"0135pruepnxsbh6gw2ve714rv", //flowers
  			account:"bbhntrjt16yvunll9iyayufn4",
- 			//keyword: "Fossil Watch Men",
- 			keyword: "G-shock",
+ 		// 	keyword: "Fossil Watch Men",
+ 		// 	keyword: "G-shock",
  			category: 1,
  			include_discounts: "true",
  			results_per_page: 100,
@@ -37,9 +37,9 @@ function getItems(feedConfig){
 		}).then(function( res ){
 			var itemsProcessed = res.results.products.product;
 			itemsProcessed.forEach(function(item){
-        console.log(item.title);
         item.title = item.name;
         item.image = resizeImageURLByWidth ( item.image_url_large );
+        item.url = item.offers.offer[0].url;
 			});
 			resolve(itemsProcessed);
 		}).catch(function (err){
