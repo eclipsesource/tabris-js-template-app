@@ -105,8 +105,21 @@ function updateCellItemElements(feedItem){
   elements.title.set({text: feedItem.title});
   elements.overlay.set({opacity: feedItem.watched ? 0.5 : 0.8} );
 
-  if(  !(elements.icon.get('image') && elements.icon.get('image').src === feedItem.image)  ){
+  if(!feedItem.image || feedItem.image.length === 0) {
+    imageUpdate.opacity = 0;
+  }
+  else if(  !(elements.icon.get('image') && elements.icon.get('image').src === feedItem.image)  ){
     imageUpdate.image =  feedItem.image;
   }
   elements.icon.set( imageUpdate );
+
+
+  if(!feedItem.image || feedItem.image.length === 0) {
+    elements.overlay.set({ top: 1, height:undefined });
+    elements.title.set({ maxLines: 5});
+  } else {
+    elements.overlay.set({ top: undefined, height:46 });
+    elements.title.set({ maxLines: 2});
+  }
+
 }
