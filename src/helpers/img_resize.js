@@ -3,10 +3,12 @@ var weservResize = 'https://images.weserv.nl/';
 
 
 function resizeImageURLByWidth(url){
-  // return googleResize+'?url='+encodeURIComponent(url)+'&resize_w='+ ( tabris.device.get("screenWidth") * tabris.device.get("scaleFactor") ) +'&container=focus';
   if(!url || url.length === 0 ){
     return url;
   }
+
+  // return googleResize+'?url='+encodeURIComponent(url)+'&resize_w='+ ( tabris.device.get("screenWidth") * tabris.device.get("scaleFactor") ) +'&container=focus';
+
   var newUrl;
   if(url.indexOf('https://') === 0){
     newUrl = url.slice(8);

@@ -11,18 +11,18 @@ function init() {
     page.set("_tabs", TabFolder);
 
     // Now we will create a tab per source and add to the container
-    config.rssFeeds.forEach(function( rssFeed ){
-        var tab = tabris.create( 'Tab', { title: rssFeed.name, background: 'white', _rssFeed: rssFeed} ).appendTo(TabFolder);
-        newsWidgetComponent( rssFeed , tab ).appendTo(tab);
+    config.feeds.forEach(function( feed ){
+        var tab = tabris.create( 'Tab', { title: feed.name, background: 'white', _feed: feed} ).appendTo(TabFolder);
+        newsWidgetComponent( feed , tab ).appendTo(tab);
     });
 
     // When the user change the tab we need to change the tab container background
     TabFolder.on("change:selection", function(widget, tab) {
-        updateUIColors(page, tab.get('_rssFeed').color);
+        updateUIColors(page, tab.get('_feed').color);
     });
 
     // We update the UI based on the theme and active tab.
-    updateUIColors(page, config.rssFeeds[0].color);
+    updateUIColors(page, config.feeds[0].color);
 
     return page;
 }

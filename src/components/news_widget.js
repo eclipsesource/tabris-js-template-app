@@ -1,6 +1,7 @@
 var getThemeRssItemStyle = require('./../styles/general').getThemeRssItemStyle;
 var detailScreen = require('./../pages/details');
-var getItems = require('./../services/rss').getItems;
+// var getItems = require('./../services/rss').getItems;
+var getItems = require('./../config.js').config.dataService.getItems;
 var sizing = require('./../helpers/sizing');
 var isTablet = sizing.isTablet();
 
@@ -39,17 +40,15 @@ module.exports = function( feedConfig , tab) {
 
         if(sizing.isTablet()){
             if(tab.get('_tabletHtmlContainer')){
-                tab.get('_tabletHtmlContainer').get('_rssItemWebView').set('html',detailScreen.rssItemWebViewHTML(feedItem));
+                tab.get('_tabletHtmlContainer').get('_rssItemWebView').dispose();
             }
             else {
-                var qq = tabris.create("Composite", { left: "25%", right: 0, top: 0, bottom: 0 ,background: "white", elevation: 0}).appendTo(tab);
-                // widget.set( {right:'75%',itemHeight:Math.floor(sizing.getListItemHeight()*0.5)} ).refresh();
-                // widget.refresh();
-                tab.set('_tabletHtmlContainer', qq);
-                detailScreen.addRssItemWebView(qq,feedItem);
-                // For iOS
-                // tabris.create("Composite", { left: 0, width: 1, top: 0, bottom: 0 ,background: style.overlay.background , opacity: 0.6}).appendTo(qq);
+                var tabletHtmlContainer = tabris.create("Composite", { left: "25%", right: 0, top: 0, bottom: 0 ,background: "white", elevation: 0}).appendTo(tab);
+                tab.set('_tabletHtmlContainer', tabletHtmlContainer);
+                // For iOS ?
+                // tabris.create("Composite", { left: 0, width: 1, top: 0, bottom: 0 ,background: style.overlay.background , opacity: 0.6}).appendTo(tabletHtmlContainer);
             }
+            detailScreen.addItemWebView(tab.get('_tabletHtmlContainer'),feedItem);
         }
         else {
             detailScreen.open(feedConfig.name, feedItem);
