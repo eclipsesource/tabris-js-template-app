@@ -7,7 +7,7 @@ var isTablet = sizing.isTablet();
 module.exports = function( feedConfig , tab) {
     var style = cellStyle(feedConfig);
     tabris.create("Composite", { left: 0, right: "75%", top: 0, bottom: 0 ,background: "white", elevation: 10}).appendTo(tab);
-    
+
     var widget = tabris.create("CollectionView", {
         layoutData: {left: 0,  top: 0,  bottom: 0},
         elevation: 20,
@@ -68,7 +68,6 @@ function cellStyle(feedConfig){
     return {
         container : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background},
         image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: 'fill' , background: "rgb(220, 220, 220)"},
-        // image: { left: 0, top: 1, scaleMode: 'fill' , background: "rgb(220, 220, 220)", width: tabris.device.get("screenWidth") , height: Math.floor( (tabris.device.get("screenWidth")) * 0.4)},
         overlay: { left: 0, right: 0, height: 46, bottom: 1 ,background: themeStyle.overlayBG, opacity: 0.8},
         title: { maxLines: 2, font: '16px', left: 10, right: 10, bottom: 5, textColor: themeStyle.textColor }
     }
