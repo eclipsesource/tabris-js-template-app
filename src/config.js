@@ -13,12 +13,16 @@ var config = {
     theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
 
     // RSS feeds
-    dataService: require('./services/rss'),
-    feeds: require('./services/rss/feeds'),
+    // dataService: require('./services/rss'),
+    // feeds: require('./services/rss/feeds'),
 
     // Shop feeds
     // dataService: require('./services/shop'),
     // feeds: require('./services/shop/feeds')
+
+    // RSS feeds
+    dataService: require('./services/wordpress_pets'),
+    feeds: require('./services/wordpress_pets/feeds'),
 
 }
 
