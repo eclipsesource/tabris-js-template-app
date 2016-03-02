@@ -1,4 +1,4 @@
-var getItemDetails = require('./../services/rss').getItemDetails;
+var getItemDetails = require('./../config.js').config.dataService.getItemDetails;
 
 function init(pageTitle, feedItem){
 	var page = tabris.create("Page", { title: pageTitle, topLevel: false, _feedItem: feedItem });

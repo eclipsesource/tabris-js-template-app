@@ -12,10 +12,7 @@ var config = {
     //theme: 'full',
     //theme: tabris.device.get("platform") === "iOS" ? 'light' : 'full', // Define a certain theme for iOS and different for Android
 
-    itemDetailView: {
-      type: 'html', // can be 'html', 'url', 'component'
-      handler: ''   //
-    },
+    dataService: require('./services/rss'),
     /******************************************
     *  Here, are some common technology RSS feeds, with their respective:
     *
