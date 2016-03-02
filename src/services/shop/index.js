@@ -11,11 +11,11 @@ function getItems(feedConfig){
 
 
     var qq = {
- 		// 	catalog: "672oqm0oqpyrc4ullpfeclz66", // jewlerry
+ 		  // catalog: "672oqm0oqpyrc4ullpfeclz66", // jewlerry
  			catalog:"0135pruepnxsbh6gw2ve714rv", //flowers
  			account:"bbhntrjt16yvunll9iyayufn4",
- 		// 	keyword: "Fossil Watch Men",
- 		// 	keyword: "G-shock",
+   		// keyword: "Fossil Watch Men",
+   		// keyword: "G-shock",
  			category: 1,
  			include_discounts: "true",
  			results_per_page: 100,
