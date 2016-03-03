@@ -40,6 +40,12 @@ module.exports = [
         }
     },
 
+    //{   // Needs work!
+    //    name: 'Eclipsesource',
+    //    color: '#207A93',
+    //    feed: rss2json('https://eclipsesource.com/blogs/feed/'),
+    //},
+
 
 
     //{

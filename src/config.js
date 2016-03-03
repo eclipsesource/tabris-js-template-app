@@ -7,10 +7,10 @@ var config = {
      **********************************/
 
     appName: 'Tabris.js RSS Reader Example',
-    // theme: 'normal',
+     theme: 'normal',
     //theme: 'light',
     //theme: 'full',
-    theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
+    //theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
 
     // RSS feeds
     // dataService: require('./services/rss'),
@@ -20,9 +20,13 @@ var config = {
     // dataService: require('./services/shop'),
     // feeds: require('./services/shop/feeds')
 
-    // RSS feeds
-    dataService: require('./services/wordpress_pets'),
-    feeds: require('./services/wordpress_pets/feeds'),
+    // Wordpress - pets
+    // dataService: require('./services/wordpress_pets'),
+    // feeds: require('./services/wordpress_pets/feeds'),
+
+    // Wordpress - Eclipsesource
+     dataService: require('./services/wordpress_eclipsesource'),
+     feeds: require('./services/wordpress_eclipsesource/feeds'),
 
 }
 
