@@ -1,6 +1,6 @@
 var config = require('./../../config.js').config;
 var newsWidgetComponent = require('./../components/item_list');
-var updateUIColors = require('./../styles/general').updateUIColors;
+var updateUIColors = require('./../styles/theme').updateUIColors;
 
 function init() {
     // Ok we need a page to contain all the application UI

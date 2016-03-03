@@ -31,6 +31,9 @@ var config = {
     // dataService: require('./services/wordpress_eclipsesource'),
     // feeds: require('./services/wordpress_eclipsesource/feeds'),
 
+
+    // TODO: Youtube / Vimeo ?
+
 }
 
 

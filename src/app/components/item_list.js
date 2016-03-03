@@ -1,4 +1,4 @@
-var getThemeRssItemStyle = require('./../styles/general').getThemeRssItemStyle;
+var getThemeRssItemStyle = require('./../styles/theme').getThemeRssItemStyle;
 var detailScreen = require('./../pages/item_details');
 var getItems = require('./../../config.js').config.dataService.getItems;
 var sizing = require('./../helpers/sizing');
@@ -6,13 +6,16 @@ var isTablet = sizing.isTablet;
 
 module.exports = function( feedConfig , tab) {
     var style = cellStyle(feedConfig);
-    tabris.create("Composite", { left: 0, right: "75%", top: 0, bottom: 0 ,background: "white", elevation: 10}).appendTo(tab);
+    if(isTablet){
+        // Create a left panel for tablets only.
+        tabris.create("Composite", { left: 0, right: "75%", top: 0, bottom: 0 ,background: "white", elevation: 10}).appendTo(tab);
+    }
 
     var widget = tabris.create("CollectionView", {
         layoutData: {left: 0,  top: 0,  bottom: 0},
         elevation: 20,
         items: [],
-        right: isTablet? '75%':0,
+        right: isTablet? '75%' : 0,
         itemHeight: isTablet? Math.floor(sizing.getListItemHeight()*0.5) : sizing.getListItemHeight(), //220,
         refreshEnabled: true,
         _rssFeed: feedConfig, // Save the rssConfig used by this widget so it can be used later.
@@ -53,10 +56,10 @@ module.exports = function( feedConfig , tab) {
             detailScreen.open(feedItem.title, feedItem);
         }
     }).on('refresh', function(widget){
-        refreshNewsWidget( widget );
+        refreshItems( widget );
     });
 
-    refreshNewsWidget(widget);
+    refreshItems(widget);
     return widget;
 }
 
@@ -72,7 +75,7 @@ function cellStyle(feedConfig){
 }
 
 
-function refreshNewsWidget( widget ) {
+function refreshItems( widget ) {
     updateWidgetLoading ( widget, true);
     getItems( widget.get('_rssFeed') ).then( function(items){
         widget.set('items', items );
