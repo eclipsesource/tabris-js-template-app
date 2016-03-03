@@ -13,8 +13,8 @@ var config = {
 
     // RSS feeds
     appName: 'Tabris.js RSS Reader Example',
-     dataService: require('./services/rss'),
-     feeds: require('./services/rss/feeds'),
+    dataService: require('./services/rss'),
+    feeds: require('./services/rss/feeds'),
 
     // Shop feeds
     //appName: 'Tabris.js Ecommerce example',
