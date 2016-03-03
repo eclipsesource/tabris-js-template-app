@@ -16,7 +16,6 @@ function getItems(feedConfig){
 			items.forEach(function(item){
 				item.title = item.title.rendered;
 				item.image = resizeImageURLByWidth ( feedHelpers.resolveImageForFeedItem(item) );
-				//item.image = resizeImageURLByWidth(item.featured_image ? (item.featured_image.source || item.featured_image.guid)  : null );
 			});
 			resolve(items);
 		}).catch(function (err){
