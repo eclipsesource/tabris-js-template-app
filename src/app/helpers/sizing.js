@@ -1,6 +1,3 @@
-//var appState = {
-//	activePage: null
-//};
 function isTablet(){
 	return (tabris.device.get("screenWidth") >= 800 &&  tabris.device.get("screenHeight") >= 600) || (tabris.device.get("screenHeight") >= 800 &&  tabris.device.get("screenWidth") >= 600);
 }
