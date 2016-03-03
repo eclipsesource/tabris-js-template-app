@@ -2,7 +2,7 @@ var googleResize = 'http://images1-focus-opensocial.googleusercontent.com/gadget
 var weservResize = 'https://images.weserv.nl/';
 
 
-function resizeImageURLByWidth(url){
+function resizeImageURLByWidth(url, width){
   if(!url || url.length === 0 ){
     return url;
   }
@@ -18,6 +18,13 @@ function resizeImageURLByWidth(url){
   }
   return weservResize+'?url='+encodeURIComponent(newUrl)+'&w='+ ( tabris.device.get("screenWidth") * tabris.device.get("scaleFactor") );
 }
+
+//handlers = {
+//  google : function(url, actualWidth){
+//    return googleResize+'?url='+encodeURIComponent(url)+'&resize_w='+ ( actualWidth ) +'&container=focus';
+//  }
+//}
+
 
 module.exports = {
   resizeImageURLByWidth: resizeImageURLByWidth
