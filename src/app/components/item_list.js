@@ -18,7 +18,7 @@ module.exports = function( feedConfig , tab) {
         right: isTablet? '75%' : 0,
         itemHeight: isTablet? Math.floor(sizing.getListItemHeight()*0.5) : sizing.getListItemHeight(), //220,
         refreshEnabled: true,
-        _rssFeed: feedConfig, // Save the rssConfig used by this widget so it can be used later.
+        _feed: feedConfig, // Save the rssConfig used by this widget so it can be used later.
         _tab: tab,
         initializeCell: function(cell){
             var container = tabris.create('Composite', style.container).appendTo(cell),
@@ -42,7 +42,7 @@ module.exports = function( feedConfig , tab) {
 
         if(sizing.isTablet){
             if(tab.get('_tabletHtmlContainer')){
-                tab.get('_tabletHtmlContainer').get('_rssItemWebView').dispose();
+                tab.get('_tabletHtmlContainer').get('_itemWebView').dispose();
             }
             else {
                 var tabletHtmlContainer = tabris.create("Composite", { left: "25%", right: 0, top: 0, bottom: 0 ,background: "white", elevation: 0}).appendTo(tab);
@@ -77,11 +77,11 @@ function cellStyle(feedConfig){
 
 function refreshItems( widget ) {
     updateWidgetLoading ( widget, true);
-    getItems( widget.get('_rssFeed') ).then( function(items){
+    getItems( widget.get('_feed') ).then( function(items){
         widget.set('items', items );
         updateWidgetLoading ( widget, false );
     }).catch(function(err){
-        console.log("Failed fetching rss items for: "+ widget.get('_rssFeed'));
+        console.log("Failed fetching items for: "+ widget.get('_feed'));
         console.log(err);
         try {
             console.log(JSON.stringify(err));

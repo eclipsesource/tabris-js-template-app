@@ -28,7 +28,7 @@ module.exports  = {
 // 		placementPriority: "high",
 // 		image: {src: "images/refresh.png", scale: 3}
 // 	}).on("select", function() {
-// 		page.get('_rssItemWebView').dispose();
+// 		page.get('_itemWebView').dispose();
 // 		tabris.create('WebView', { url: page.get('_feedItem').link, left: 0, right: 0, top: 0, bottom: 0}).appendTo(page);
 // 	});
 // 	page.on("disappear", function(){
@@ -42,7 +42,7 @@ module.exports  = {
 
 function addItemWebView(container, feedItem){
 	var itemWebView = tabris.create('WebView',{ left: 0, right: 0, top: 0, bottom: 0}).appendTo(container);
-	container.set('_rssItemWebView', itemWebView);
+	container.set('_itemWebView', itemWebView);
 
 	var itemDetails = getItemDetails(feedItem);
 	handlers[itemDetails.type] (itemWebView, itemDetails);
