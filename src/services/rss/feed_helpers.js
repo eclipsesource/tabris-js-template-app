@@ -42,7 +42,7 @@ function resolveImageForFeedItem(feedItem, customImageResolver) {
 		// Fallback, extract image from the content
 		img = extractFirstImageFromHtml(feedItem.cleanContent);
 	}
-	return img || '';//'./images/notfound.png';
+	return img || '';
 }
 
 module.exports = {
