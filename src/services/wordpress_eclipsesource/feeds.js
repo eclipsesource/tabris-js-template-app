@@ -14,6 +14,7 @@ module.exports = [
     //    color: '#207A93',
     //    feed: 'http://eclipsesource.com/blogs/wp-json/wp/v2/posts',
     //},
+
     {
         name: 'Releases',
         color: '#207A93',
@@ -46,6 +47,20 @@ module.exports = [
     //    feed: 'http://eclipsesource.com/blogs/wp-json/wp/v2/posts?tags=64',
     //},
 
-
+    //{
+    //    name: 'News',
+    //    color: '#207A93',
+    //    feed: 'http://eclipsesource.com/blogs/wp-json/wp/v2/posts?filter[cat]=7',
+    //},
+    //{
+    //    name: 'Tabris.js',
+    //    color: '#207A93',
+    //    feed: 'http://eclipsesource.com/blogs/wp-json/wp/v2/posts?filter[tag_id]=431',
+    //},
+    //{
+    //    name: 'RAP',
+    //    color: '#207A93',
+    //    feed: 'http://eclipsesource.com/blogs/wp-json/wp/v2/posts?filter[tag_id]=rap',
+    //},
 
 ];
