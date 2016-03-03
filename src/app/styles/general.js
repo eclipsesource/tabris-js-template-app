@@ -1,4 +1,4 @@
-var config = require('./../config').config;
+var config = require('./../../config').config;
 
 /*************************
 * refresh the ui styling based on the theme (and color passed).

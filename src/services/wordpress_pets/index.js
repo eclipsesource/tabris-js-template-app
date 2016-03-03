@@ -5,7 +5,7 @@
 ****************************/
 
 
-var resizeImageURLByWidth = require('./../../helpers/img_resize').resizeImageURLByWidth;
+var resizeImageURLByWidth = require('./.././img_resize').resizeImageURLByWidth;
 
 function getItems(feedConfig){
 	return new Promise(function(resolve, reject) {

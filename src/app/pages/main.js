@@ -1,4 +1,4 @@
-var config = require('./../config.js').config;
+var config = require('./../../config.js').config;
 var newsWidgetComponent = require('./../components/item_list');
 var updateUIColors = require('./../styles/general').updateUIColors;
 

@@ -12,4 +12,4 @@ Promise = require("promise");
 require("whatwg-fetch");
 
 // Run the first page
-require('./src/pages/main').open();
+require('./src/app/pages/main').open();

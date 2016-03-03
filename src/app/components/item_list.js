@@ -1,6 +1,6 @@
 var getThemeRssItemStyle = require('./../styles/general').getThemeRssItemStyle;
 var detailScreen = require('./../pages/item_details');
-var getItems = require('./../config.js').config.dataService.getItems;
+var getItems = require('./../../config.js').config.dataService.getItems;
 var sizing = require('./../helpers/sizing');
 var isTablet = sizing.isTablet();
 
@@ -50,7 +50,7 @@ module.exports = function( feedConfig , tab) {
             detailScreen.addItemWebView(tab.get('_tabletHtmlContainer'),feedItem);
         }
         else {
-            detailScreen.open(feedItem.name, feedItem);
+            detailScreen.open(feedItem.title, feedItem);
         }
     }).on('refresh', function(widget){
         refreshNewsWidget( widget );
