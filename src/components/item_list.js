@@ -1,5 +1,5 @@
 var getThemeRssItemStyle = require('./../styles/general').getThemeRssItemStyle;
-var detailScreen = require('./../pages/details');
+var detailScreen = require('./../pages/item_details');
 // var getItems = require('./../services/rss').getItems;
 var getItems = require('./../config.js').config.dataService.getItems;
 var sizing = require('./../helpers/sizing');

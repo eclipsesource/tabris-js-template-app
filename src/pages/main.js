@@ -1,5 +1,5 @@
 var config = require('./../config.js').config;
-var newsWidgetComponent = require('./../components/news_widget');
+var newsWidgetComponent = require('./../components/item_list');
 var updateUIColors = require('./../styles/general').updateUIColors;
 
 function init() {
