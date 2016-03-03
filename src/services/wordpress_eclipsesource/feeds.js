@@ -9,20 +9,43 @@
 
 
 module.exports = [
-    {
-        name: 'Eclipsesource',
-        color: '#207A93',
-        feed: 'http://eclipsesource.com/blogs/wp-json/wp/v2/posts',
-    },
     //{
-    //    name: 'Cats',
-    //    color: '#E53F2C',
-    //    feed: 'http://www.adoptapet.ie/wp-json/posts?type=cats', //TODO: & page=2
+    //    name: 'Eclipsesource',
+    //    color: '#207A93',
+    //    feed: 'http://eclipsesource.com/blogs/wp-json/wp/v2/posts',
     //},
+    {
+        name: 'Releases',
+        color: '#207A93',
+        feed: 'http://eclipsesource.com/blogs/wp-json/wp/v2/posts?search=release',
+    },
+    {
+        name: 'Tabris.js',
+        color: '#207A93',
+        feed: 'http://eclipsesource.com/blogs/wp-json/wp/v2/posts?search=tabris.js',
+    },
+    {
+        name: 'RAP',
+        color: '#207A93',
+        feed: 'http://eclipsesource.com/blogs/wp-json/wp/v2/posts?search=RAP',
+    },
+
     //{
     //    name: 'News',
-    //    color: '#333',
-    //    feed: 'http://www.adoptapet.ie/wp-json/posts',
+    //    color: '#207A93',
+    //    feed: 'http://eclipsesource.com/blogs/wp-json/wp/v2/posts?categories=7',
     //},
+    //{
+    //    name: 'Tabris.js',
+    //    color: '#207A93',
+    //    feed: 'http://eclipsesource.com/blogs/wp-json/wp/v2/posts?tags=431',
+    //},
+    //{
+    //    name: 'RAP',
+    //    color: '#207A93',
+    //    feed: 'http://eclipsesource.com/blogs/wp-json/wp/v2/posts?tags=64',
+    //},
+
+
 
 ];
