@@ -22,4 +22,4 @@ exports.getListItemHeight = function() {
 
 
 exports.isTabletLandscape = isTabletLandscape;
-exports.isTablet = isTablet;
+exports.isTablet = isTablet();

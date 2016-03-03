@@ -2,7 +2,7 @@ var getThemeRssItemStyle = require('./../styles/general').getThemeRssItemStyle;
 var detailScreen = require('./../pages/item_details');
 var getItems = require('./../../config.js').config.dataService.getItems;
 var sizing = require('./../helpers/sizing');
-var isTablet = sizing.isTablet();
+var isTablet = sizing.isTablet;
 
 module.exports = function( feedConfig , tab) {
     var style = cellStyle(feedConfig);
@@ -37,7 +37,7 @@ module.exports = function( feedConfig , tab) {
         feedItem.watched = true;
         updateCellItemElements(feedItem);
 
-        if(sizing.isTablet()){
+        if(sizing.isTablet){
             if(tab.get('_tabletHtmlContainer')){
                 tab.get('_tabletHtmlContainer').get('_rssItemWebView').dispose();
             }
