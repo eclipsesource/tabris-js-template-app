@@ -21,7 +21,7 @@ function init() {
         updateUIColors(page, tab.get('_feed').color);
     });
 
-    // We update the UI based on the theme and active tab.
+    // Update the UI based on the theme and active tab.
     updateUIColors(page, config.feeds[0].color);
 
     return page;
