@@ -16,7 +16,7 @@ function init() {
         newsWidgetComponent( feed , tab ).appendTo(tab);
     });
 
-    // When the user change the tab we need to change the tab container background
+    // When the user changes the tab, change the app visuals
     TabFolder.on("change:selection", function(widget, tab) {
         updateUIColors(page, tab.get('_feed').color);
     });
