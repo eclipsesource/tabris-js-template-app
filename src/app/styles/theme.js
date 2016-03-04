@@ -26,7 +26,7 @@ function updateUIColors(page, color){
  * How the rssItem cells look in each of the different themes.
  **************************/
 
-function getThemeRssItemStyle(color){
+function getThemeListItemStyle(color){
 	if (config.theme === 'light'){
 		return {
 			background: 'white',
@@ -53,5 +53,5 @@ function getThemeRssItemStyle(color){
 
 module.exports = {
 	updateUIColors: updateUIColors,
-	getThemeRssItemStyle:getThemeRssItemStyle
+	getThemeListItemStyle:getThemeListItemStyle
 };
