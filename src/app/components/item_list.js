@@ -1,10 +1,16 @@
 var getThemeRssItemStyle = require('./../styles/theme').getThemeRssItemStyle;
 var detailScreen = require('./../pages/item_details');
-var getItems = require('./../../config.js').config.dataService.getItems;
 var resizeImageURLByWidth = require('./../../app/helpers/img_resize').resizeImageURLByWidth;
-
 var sizing = require('./../helpers/sizing');
+
+
+var config = require('./../../config.js').config;
+var getItems = config.dataService.getItems;
+
 var isTablet = sizing.isTablet;
+var imageWidth = isTablet ? tabris.device.get("screenWidth") * 0.25 : tabris.device.get("screenWidth");
+var imageHeightRatio = isTablet ? config.imgSizeHeightToWidthRatio.tablet : config.imgSizeHeightToWidthRatio.phone;
+var imageHeight = Math.floor(imageHeightRatio * imageWidth);
 
 module.exports = function( feedConfig , tab) {
     var style = cellStyle(feedConfig);
@@ -18,9 +24,9 @@ module.exports = function( feedConfig , tab) {
         elevation: 20,
         items: [],
         right: isTablet? '75%' : 0,
-        itemHeight: isTablet? Math.floor(sizing.getListItemHeight()*0.5) : sizing.getListItemHeight(), //220,
+        itemHeight: imageHeight,
         refreshEnabled: true,
-        _feed: feedConfig, // Save the rssConfig used by this widget so it can be used later.
+        _feed: feedConfig, // Save the feed config used by this widget so it can be used later.
         _tab: tab,
         initializeCell: function(cell){
             var container = tabris.create('Composite', style.container).appendTo(cell),
@@ -103,7 +109,7 @@ function updateWidgetLoading(widget,loading){
 function updateCellItemElements(feedItem){
   var elements = feedItem._elements;
   var imageUpdate = {opacity: feedItem.watched ? 0.5 : 1};
-  var imageUrl =resizeImageURLByWidth(feedItem.image);
+  var imageUrl = resizeImageURLByWidth(feedItem.image, imageWidth);
   // Image update
 
   if(!imageUrl || imageUrl.length === 0) {

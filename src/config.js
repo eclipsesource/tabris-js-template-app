@@ -12,7 +12,10 @@ var config = {
     //theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
 
     imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
-
+    imgSizeHeightToWidthRatio: {
+        phone: 0.7,
+        tablet: 1,
+    },
 
     // RSS feeds
     //appName: 'Tabris.js RSS Reader Example',

@@ -10,13 +10,5 @@ function isTabletLandscape(){
 	return isLanscape() && isTablet();
 }
 
-exports.getListItemHeight = function() {
-	if(isTablet()){
-			return   Math.floor( (tabris.device.get("screenWidth")) * 0.4) ;
-	}
-	return   Math.floor( (tabris.device.get("screenWidth")) * 0.6) ;
-}
-
-
 exports.isTabletLandscape = isTabletLandscape;
 exports.isTablet = isTablet();

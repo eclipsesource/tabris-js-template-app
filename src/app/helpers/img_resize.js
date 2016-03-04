@@ -4,7 +4,7 @@ var imgResizeService = require('./../../config.js').config.imgResizeService;
 
 function resizeImageURLByWidth(url, width){
   var handler;
-  var actualWidth = ( tabris.device.get("screenWidth") * tabris.device.get("scaleFactor") );
+  var actualWidth = Math.floor( width * tabris.device.get("scaleFactor") );
   if(!url || url.length === 0 ){
     return url;
   }
