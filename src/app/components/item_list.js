@@ -1,6 +1,8 @@
 var getThemeRssItemStyle = require('./../styles/theme').getThemeRssItemStyle;
 var detailScreen = require('./../pages/item_details');
 var getItems = require('./../../config.js').config.dataService.getItems;
+var resizeImageURLByWidth = require('./../../app/helpers/img_resize').resizeImageURLByWidth;
+
 var sizing = require('./../helpers/sizing');
 var isTablet = sizing.isTablet;
 
@@ -101,20 +103,21 @@ function updateWidgetLoading(widget,loading){
 function updateCellItemElements(feedItem){
   var elements = feedItem._elements;
   var imageUpdate = {opacity: feedItem.watched ? 0.5 : 1};
-
+  var imageUrl =resizeImageURLByWidth(feedItem.image);
   // Image update
-  if(!feedItem.image || feedItem.image.length === 0) {
+
+  if(!imageUrl || imageUrl.length === 0) {
     imageUpdate.opacity = 0;
   }
-  else if(  !(elements.icon.get('image') && elements.icon.get('image').src === feedItem.image)){
-    imageUpdate.image =  {src: feedItem.image};
+  else if(  !(elements.icon.get('image') && elements.icon.get('image').src === imageUrl)){
+    imageUpdate.image =  {src: imageUrl};
   }
   elements.icon.set( imageUpdate );
 
   // Title + Overlay update
   elements.title.set({text: feedItem.title});
   elements.overlay.set({opacity: feedItem.watched ? 0.5 : 0.8} );
-  if(!feedItem.image || feedItem.image.length === 0) {
+  if(!imageUrl || imageUrl.length === 0) {
     elements.overlay.set({ top: 1, height:undefined });
     elements.title.set({ maxLines: 5});
   } else {

@@ -11,15 +11,18 @@ var config = {
     //theme: 'full',
     //theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
 
+    imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
+
+
     // RSS feeds
-    appName: 'Tabris.js RSS Reader Example',
-    dataService: require('./services/rss'),
-    feeds: require('./services/rss/feeds'),
+    //appName: 'Tabris.js RSS Reader Example',
+    //dataService: require('./services/rss'),
+    //feeds: require('./services/rss/feeds'),
 
     // Shop feeds
-    //appName: 'Tabris.js Ecommerce example',
-    //dataService: require('./services/shop'),
-    //feeds: require('./services/shop/feeds'),
+    appName: 'Tabris.js Ecommerce example',
+    dataService: require('./services/shop'),
+    feeds: require('./services/shop/feeds'),
 
     // Wordpress - pets
     //appName: 'Tabris.js Wordpress example',
