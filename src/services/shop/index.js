@@ -11,6 +11,9 @@ function getItems(feedConfig , overideConfig){
 		if(overideConfig){
 			targetFeed.page = overideConfig.page;
 		}
+		else {
+			targetFeed.page = 1;
+		}
 
  		var queryParamsStr = '';
  		var tmp = []
@@ -22,16 +25,19 @@ function getItems(feedConfig , overideConfig){
  		fetch( "https://www.popshops.com/v3/products.json?" + queryParamsStr ).then(function( res ){
 			return res.json();
 		}).then(function( res ){
-		    var itemsProcessed;
+		    var itemsProcessed, count;
 		    if(!res.results) {
 			    resolve([]);
 		    }
 		    else {
+
 			    itemsProcessed = res.results.products.product;
 			    itemsProcessed.forEach(function(item){
 				    item.title = item.name;
 				    item.image = item.image_url_large;
 			    });
+			    console.log("Total "  + res.results.products.count);
+			    //console.log("Fetched "  + ((targetFeed.page || 1) - 1) *  targetFeed.results_per_page + itemsProcessed.length );
 			    resolve(itemsProcessed);
 		    }
 		}).catch(function (err){

@@ -126,12 +126,13 @@ function refreshItems( widget ) {
 
 function loadMoreItems( widget ) {
     widget.set('_loadingNext', true);
-    getItems( widget.get('_feed') , {page: ( widget.get('_loadedPage')+1 )} ).then( function(items){
+    var newPage = widget.get('_loadedPage')+1
+    getItems( widget.get('_feed') , {page: newPage } ).then( function(items){
 
         // widget.remove(-1); //TODO: remove the loading animation at the end of feed.
 
         widget.insert(items, -1);
-        widget.set('_loadedPage', widget.get('_loadedPage')+1 );
+        widget.set('_loadedPage', newPage );
         widget.set('_loadingNext', false);
 
     }).catch(function(err){
