@@ -4,43 +4,36 @@
 *
 ****************************/
 
-function getItems(feedConfig){
+function getItems(feedConfig , overideConfig){
 	return new Promise(function(resolve, reject) {
 
+        var targetFeed = JSON.parse(JSON.stringify(feedConfig.config)); // Simple clone without dependencies.
+		if(overideConfig){
+			targetFeed.page = overideConfig.page;
+		}
 
-    var targetFeed = feedConfig.config;
-
-    // var qq = {
- 	// 	  // catalog: "672oqm0oqpyrc4ullpfeclz66", // jewlerry
- 	// 		catalog:"0135pruepnxsbh6gw2ve714rv", //flowers
- 	// 		account:"bbhntrjt16yvunll9iyayufn4",
-   // 		// keyword: "Fossil Watch Men",
-   // 		// keyword: "G-shock",
- 	// 		category: 1,
- 	// 		include_discounts: "true",
- 	// 		results_per_page: 100,
- 	// 		//price_min: 2000
- 	// 		//page: 1
- 	// 	}
-
- 		var str = '';
+ 		var queryParamsStr = '';
  		var tmp = []
  		for (var key in targetFeed){
- 			tmp.push(key + "=" + encodeURIComponent(targetFeed[key]));
+		    tmp.push(key + "=" + encodeURIComponent( targetFeed[key] ));
  		}
- 		str = tmp.join("&");
- 	// 	console.log("https://www.popshops.com/v3/products.json?" + str);
+ 		queryParamsStr = tmp.join("&");
 
-
- 		fetch( "https://www.popshops.com/v3/products.json?" + str ).then(function( res ){
+ 		fetch( "https://www.popshops.com/v3/products.json?" + queryParamsStr ).then(function( res ){
 			return res.json();
 		}).then(function( res ){
-			var itemsProcessed = res.results.products.product;
-			itemsProcessed.forEach(function(item){
-        item.title = item.name;
-        item.image = item.image_url_large;
-			});
-			resolve(itemsProcessed);
+		    var itemsProcessed;
+		    if(!res.results) {
+			    resolve([]);
+		    }
+		    else {
+			    itemsProcessed = res.results.products.product;
+			    itemsProcessed.forEach(function(item){
+				    item.title = item.name;
+				    item.image = item.image_url_large;
+			    });
+			    resolve(itemsProcessed);
+		    }
 		}).catch(function (err){
 			reject(err);
 		});
@@ -59,3 +52,18 @@ module.exports = {
 	getItems: getItems,
   getItemDetails: getItemDetails
 };
+
+
+
+// var qq = {
+// 	  // catalog: "672oqm0oqpyrc4ullpfeclz66", // jewlerry
+// 		catalog:"0135pruepnxsbh6gw2ve714rv", //flowers
+// 		account:"bbhntrjt16yvunll9iyayufn4",
+// 		// keyword: "Fossil Watch Men",
+// 		// keyword: "G-shock",
+// 		category: 1,
+// 		include_discounts: "true",
+// 		results_per_page: 100,
+// 		//price_min: 2000
+// 		//page: 1
+// 	}

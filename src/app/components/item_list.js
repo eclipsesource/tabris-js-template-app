@@ -72,6 +72,15 @@ module.exports = function( feedConfig , tab) {
         else {
             detailScreen.open(feedItem.title, feedItem);
         }
+    }).on("scroll", function(widget, scroll) {
+        if( widget.get('_loadingNext') ) { return; }
+        if (scroll.deltaY > 0) {
+            var remaining = widget.get("items").length - widget.get("lastVisibleIndex");
+            if (remaining < 20) {
+                loadMoreItems(widget);
+            }
+
+        }
     }).on('refresh', function(widget){
         refreshItems( widget );
     });
@@ -95,8 +104,13 @@ function cellStyle(feedConfig){
 function refreshItems( widget ) {
     updateWidgetLoading ( widget, true);
     getItems( widget.get('_feed') ).then( function(items){
-        widget.set('items', items );
+        var arr = [].concat(items).concat({loadingNext:true});
+        widget.set('items', arr );
+        widget.set('_loadedPage', 1);
+
+        //widget.set('items', items );
         updateWidgetLoading ( widget, false );
+
     }).catch(function(err){
         console.log("Failed fetching items for: "+ widget.get('_feed'));
         console.log(err);
@@ -107,6 +121,30 @@ function refreshItems( widget ) {
         }
     });
 }
+
+
+
+function loadMoreItems( widget ) {
+    widget.set('_loadingNext', true);
+    getItems( widget.get('_feed') , {page: ( widget.get('_loadedPage')+1 )} ).then( function(items){
+
+        // widget.remove(-1); //TODO: remove the loading animation at the end of feed.
+
+        widget.insert(items, -1);
+        widget.set('_loadedPage', widget.get('_loadedPage')+1 );
+        widget.set('_loadingNext', false);
+
+    }).catch(function(err){
+        console.log("Failed fetching items for: "+ widget.get('_feed'));
+        console.log(err);
+        try {
+            console.log(JSON.stringify(err));
+        } catch (e){
+
+        }
+    });
+}
+
 
 function updateWidgetLoading(widget,loading){
     widget.set({
@@ -119,8 +157,8 @@ function updateCellItemElements(feedItem){
   var elements = feedItem._elements;
   var imageUpdate = {opacity: feedItem.watched ? 0.5 : 1};
   var imageUrl = resizeImageURLByWidth(feedItem.image, imageWidth);
-  // Image update
 
+  // Image update
   if(!imageUrl || imageUrl.length === 0) {
     imageUpdate.opacity = 0;
   }
@@ -139,5 +177,11 @@ function updateCellItemElements(feedItem){
     elements.overlay.set({ top: undefined, height:46 });
     elements.title.set({ maxLines: 2});
   }
+
+    // Loading next.
+    if(feedItem.loadingNext){
+        elements.title.set({text: "SHOULD LOAD NEXT!"});
+        //TODO: remove the loading animation at the end of feed.
+    }
 
 }
