@@ -5,7 +5,6 @@
 ****************************/
 
 var feedHelpers = require('./feed_helpers');
-var resizeImageURLByWidth = require('./../../app/helpers/img_resize').resizeImageURLByWidth;
 
 function getItems(feedConfig){
 	return new Promise(function(resolve, reject) {
@@ -14,7 +13,7 @@ function getItems(feedConfig){
 		}).then(function( res ){
 			var itemsProcessed = feedHelpers.sanitizeFeedItems (res.items , feedConfig.contentSanitizer);
 			itemsProcessed.forEach(function(item){
-				item.image = resizeImageURLByWidth ( feedHelpers.resolveImageForFeedItem(item ,feedConfig.imageResolver) );
+				item.image = feedHelpers.resolveImageForFeedItem(item ,feedConfig.imageResolver);
 			});
 			resolve(itemsProcessed);
 		}).catch(function (err){
