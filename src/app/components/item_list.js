@@ -7,23 +7,32 @@ var sizing = require('./../helpers/sizing');
 var config = require('./../../config.js').config;
 var getItems = config.dataService.getItems;
 
+var tabletWidthRatio = 0.3;
+var tabletColumnLeft = ''+tabletWidthRatio*100+'%';
+var tabletColumnRight = ''+ (100-tabletWidthRatio*100) +'%';
+
+
 var isTablet = sizing.isTablet;
-var imageWidth = isTablet ? tabris.device.get("screenWidth") * 0.25 : tabris.device.get("screenWidth");
+var imageWidth = isTablet ? tabris.device.get("screenWidth") * tabletWidthRatio : tabris.device.get("screenWidth");
 var imageHeightRatio = isTablet ? config.imgSizeHeightToWidthRatio.tablet : config.imgSizeHeightToWidthRatio.phone;
 var imageHeight = Math.floor(imageHeightRatio * imageWidth);
+
+
+
+
 
 module.exports = function( feedConfig , tab) {
     var style = cellStyle(feedConfig);
     if(isTablet){
         // Create a left panel for tablets only.
-        tabris.create("Composite", { left: 0, right: "75%", top: 0, bottom: 0 ,background: "white", elevation: 10}).appendTo(tab);
+        tabris.create("Composite", { left: 0, right: tabletColumnRight, top: 0, bottom: 0 ,background: "white", elevation: 10}).appendTo(tab);
     }
 
     var widget = tabris.create("CollectionView", {
         layoutData: {left: 0,  top: 0,  bottom: 0},
         elevation: 20,
         items: [],
-        right: isTablet? '75%' : 0,
+        right: isTablet? tabletColumnRight : 0,
         itemHeight: imageHeight,
         refreshEnabled: true,
         _feed: feedConfig, // Save the feed config used by this widget so it can be used later.
@@ -53,7 +62,7 @@ module.exports = function( feedConfig , tab) {
                 tab.get('_tabletHtmlContainer').get('_itemWebView').dispose();
             }
             else {
-                var tabletHtmlContainer = tabris.create("Composite", { left: "25%", right: 0, top: 0, bottom: 0 ,background: "white", elevation: 0}).appendTo(tab);
+                var tabletHtmlContainer = tabris.create("Composite", { left: tabletColumnLeft, right: 0, top: 0, bottom: 0 ,background: "white", elevation: 0}).appendTo(tab);
                 tab.set('_tabletHtmlContainer', tabletHtmlContainer);
                 // For iOS ?
                 // tabris.create("Composite", { left: 0, width: 1, top: 0, bottom: 0 ,background: style.overlay.background , opacity: 0.6}).appendTo(tabletHtmlContainer);
