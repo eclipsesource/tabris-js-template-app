@@ -34,7 +34,7 @@ module.exports = function( feedConfig , tab) {
         items: [],
         right: isTablet? tabletColumnRight : 0,
         itemHeight: imageHeight,
-        refreshEnabled: true,
+        refreshEnabled: config.pullToRefresh,
         _feed: feedConfig, // Save the feed config used by this widget so it can be used later.
         _tab: tab,
         initializeCell: function(cell){
@@ -81,9 +81,12 @@ module.exports = function( feedConfig , tab) {
             }
 
         }
-    }).on('refresh', function(widget){
-        refreshItems( widget );
     });
+    if (config.pullToRefresh ){
+      widget.on('refresh', function(widget){
+          refreshItems( widget );
+      })
+    }
 
     refreshItems(widget);
     return widget;
@@ -105,7 +108,7 @@ function refreshItems( widget ) {
     updateWidgetLoading ( widget, true);
     getItems( widget.get('_feed') ).then( function(results){
         var arr = [].concat(results.items);
-        if (results.state.hasMore) {
+        if (results.state && results.state.hasMore) {
             arr = arr.concat({loadingNext: true});
             widget.set('_loadedAll', false);
         }
@@ -134,21 +137,19 @@ function refreshItems( widget ) {
 
 function loadMoreItems( widget ) {
     widget.set('_loadingNext', true);
-    var newPage = widget.get('_loadedPage')+1
+    var newPage = widget.get('_loadedPage')+1;
     getItems( widget.get('_feed') , {page: newPage } ).then( function(results){
-
-
 
         widget.insert(results.items, -1);
         widget.set('_loadedPage', newPage );
         widget.set('_loadingNext', false);
 
-        if (!results.state.hasMore){
-            widget.remove(-1); //TODO: remove the loading animation at the end of feed.
-            widget.set('_loadedAll', true);
+        if (results.state && results.state.hasMore) {
+            widget.set('_loadedAll', false);
         }
         else {
-            widget.set('_loadedAll', false);
+            widget.set('_loadedAll', true);
+            widget.remove(-1); //TODO: remove the loading animation at the end of feed.
         }
     }).catch(function(err){
         console.log("Failed fetching items for: "+ widget.get('_feed'));

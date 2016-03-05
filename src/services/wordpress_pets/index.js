@@ -5,8 +5,6 @@
 ****************************/
 
 
-var resizeImageURLByWidth = require('./../../app/helpers/img_resize').resizeImageURLByWidth;
-
 function getItems(feedConfig){
 	return new Promise(function(resolve, reject) {
 		fetch( feedConfig.feed ).then(function( res ){
@@ -15,9 +13,9 @@ function getItems(feedConfig){
 			var items = res;
 			items.forEach(function(item){
 				item.name = item.title;
-				item.image = resizeImageURLByWidth(item.featured_image ? (item.featured_image.source || item.featured_image.guid)  : null );
+				item.image = item.featured_image ? (item.featured_image.source || item.featured_image.guid)  : null ;
 			});
-			resolve(items);
+			resolve({items:items});
 		}).catch(function (err){
 			reject(err);
 		});

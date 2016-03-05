@@ -36,9 +36,9 @@ function getItems(feedConfig , overideConfig){
 				    item.title = item.name;
 				    item.image = item.image_url_large;
 			    });
-			    console.log("Total "  + res.results.products.count);
-			    console.log("Fetched "  + itemsProcessed.length);
-			    console.log("Fetched Total"  + (((targetFeed.page - 1) *  targetFeed.results_per_page) + itemsProcessed.length) );
+			    //console.log("Total "  + res.results.products.count);
+			    //console.log("Fetched "  + itemsProcessed.length);
+			    //console.log("Fetched Total"  + (((targetFeed.page - 1) *  targetFeed.results_per_page) + itemsProcessed.length) );
 
 			    state.count = res.results.products.count;
 			    state.fetched = (((targetFeed.page - 1) *  targetFeed.results_per_page) + itemsProcessed.length);

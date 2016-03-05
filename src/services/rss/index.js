@@ -15,7 +15,7 @@ function getItems(feedConfig){
 			itemsProcessed.forEach(function(item){
 				item.image = feedHelpers.resolveImageForFeedItem(item ,feedConfig.imageResolver);
 			});
-			resolve(itemsProcessed);
+			resolve({items:itemsProcessed});
 		}).catch(function (err){
 			reject(err);
 		});

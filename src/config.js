@@ -17,25 +17,30 @@ var config = {
         tablet: 1,
     },
 
+
     // RSS feeds
     //appName: 'Tabris.js RSS Reader Example',
     //dataService: require('./services/rss'),
     //feeds: require('./services/rss/feeds'),
+    //pullToRefresh:true,
 
     // Shop feeds
     appName: 'Tabris.js Ecommerce example',
     dataService: require('./services/shop'),
     feeds: require('./services/shop/feeds'),
+    pullToRefresh:false,
 
     // Wordpress - pets
     //appName: 'Tabris.js Wordpress example',
     // dataService: require('./services/wordpress_pets'),
     // feeds: require('./services/wordpress_pets/feeds'),
+    //pullToRefresh:false,
 
     // Wordpress - Eclipsesource
     //appName: 'Tabris.js Wordpress example',
     // dataService: require('./services/wordpress_eclipsesource'),
     // feeds: require('./services/wordpress_eclipsesource/feeds'),
+    //pullToRefresh:true,
 
 
     // TODO: Youtube / Vimeo ?
