@@ -36,31 +36,31 @@ module.exports = [
       			results_per_page: 50,
       		},
      },
-     {
-         name: 'Fossil',
-         color: '#05A9D6',
-         config: {
-      		  catalog: "672oqm0oqpyrc4ullpfeclz66",
-      			account:"bbhntrjt16yvunll9iyayufn4",
-        		keyword: "Fossil Watch Men",
-        		category: 1,
-      			include_discounts: "true",
-      			results_per_page: 50,
-      		},
-     },
-     {
-         name: 'Premium',
-         color: '#8f0d10',
-         config: {
-      		  catalog: "672oqm0oqpyrc4ullpfeclz66",
-      			account:"bbhntrjt16yvunll9iyayufn4",
-        		keyword: "Men watch",
-      			category: 1,
-      			include_discounts: "true",
-      			results_per_page: 50,
-      			price_min: 1000
-      		},
-     },
+     //{
+     //    name: 'Fossil',
+     //    color: '#05A9D6',
+     //    config: {
+     // 		  catalog: "672oqm0oqpyrc4ullpfeclz66",
+     // 			account:"bbhntrjt16yvunll9iyayufn4",
+     //   		keyword: "Fossil Watch Men",
+     //   		category: 1,
+     // 			include_discounts: "true",
+     // 			results_per_page: 50,
+     // 		},
+     //},
+     //{
+     //    name: 'Premium',
+     //    color: '#8f0d10',
+     //    config: {
+     // 		  catalog: "672oqm0oqpyrc4ullpfeclz66",
+     // 			account:"bbhntrjt16yvunll9iyayufn4",
+     //   		keyword: "Men watch",
+     // 			category: 1,
+     // 			include_discounts: "true",
+     // 			results_per_page: 50,
+     // 			price_min: 1000
+     // 		},
+     //},
 
 
     // Gifts
