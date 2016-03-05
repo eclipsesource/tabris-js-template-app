@@ -73,10 +73,10 @@ module.exports = function( feedConfig , tab) {
             detailScreen.open(feedItem.title, feedItem);
         }
     }).on("scroll", function(widget, scroll) {
-        if( widget.get('_loadingNext') ) { return; }
+        if( widget.get('_loadingNext') || widget.get('_loadedAll') ) { return; }
         if (scroll.deltaY > 0) {
             var remaining = widget.get("items").length - widget.get("lastVisibleIndex");
-            if (remaining < 20) {
+            if (remaining < 10) {
                 loadMoreItems(widget);
             }
 
@@ -103,10 +103,18 @@ function cellStyle(feedConfig){
 
 function refreshItems( widget ) {
     updateWidgetLoading ( widget, true);
-    getItems( widget.get('_feed') ).then( function(items){
-        var arr = [].concat(items).concat({loadingNext:true});
+    getItems( widget.get('_feed') ).then( function(results){
+        var arr = [].concat(results.items);
+        if (results.state.hasMore) {
+            arr = arr.concat({loadingNext: true});
+            widget.set('_loadedAll', false);
+        }
+        else {
+            widget.set('_loadedAll', true);
+        }
         widget.set('items', arr );
         widget.set('_loadedPage', 1);
+
 
         //widget.set('items', items );
         updateWidgetLoading ( widget, false );
@@ -127,14 +135,21 @@ function refreshItems( widget ) {
 function loadMoreItems( widget ) {
     widget.set('_loadingNext', true);
     var newPage = widget.get('_loadedPage')+1
-    getItems( widget.get('_feed') , {page: newPage } ).then( function(items){
+    getItems( widget.get('_feed') , {page: newPage } ).then( function(results){
 
-        // widget.remove(-1); //TODO: remove the loading animation at the end of feed.
 
-        widget.insert(items, -1);
+
+        widget.insert(results.items, -1);
         widget.set('_loadedPage', newPage );
         widget.set('_loadingNext', false);
 
+        if (!results.state.hasMore){
+            widget.remove(-1); //TODO: remove the loading animation at the end of feed.
+            widget.set('_loadedAll', true);
+        }
+        else {
+            widget.set('_loadedAll', false);
+        }
     }).catch(function(err){
         console.log("Failed fetching items for: "+ widget.get('_feed'));
         console.log(err);

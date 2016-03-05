@@ -25,7 +25,7 @@ function getItems(feedConfig , overideConfig){
  		fetch( "https://www.popshops.com/v3/products.json?" + queryParamsStr ).then(function( res ){
 			return res.json();
 		}).then(function( res ){
-		    var itemsProcessed, count;
+		    var itemsProcessed, state = {};
 		    if(!res.results) {
 			    resolve([]);
 		    }
@@ -37,8 +37,13 @@ function getItems(feedConfig , overideConfig){
 				    item.image = item.image_url_large;
 			    });
 			    console.log("Total "  + res.results.products.count);
-			    //console.log("Fetched "  + ((targetFeed.page || 1) - 1) *  targetFeed.results_per_page + itemsProcessed.length );
-			    resolve(itemsProcessed);
+			    console.log("Fetched "  + itemsProcessed.length);
+			    console.log("Fetched Total"  + (((targetFeed.page - 1) *  targetFeed.results_per_page) + itemsProcessed.length) );
+
+			    state.count = res.results.products.count;
+			    state.fetched = (((targetFeed.page - 1) *  targetFeed.results_per_page) + itemsProcessed.length);
+			    state.hasMore = state.count > state.fetched;
+			    resolve({items:itemsProcessed, state: state});
 		    }
 		}).catch(function (err){
 			reject(err);

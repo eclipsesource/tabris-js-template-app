@@ -11,31 +11,31 @@ module.exports = [
     // Watches
 
 
-	{
-		name: 'G-shock',
-		color: '#333',
-		config: {
-			catalog: "672oqm0oqpyrc4ullpfeclz66",
-			account:"bbhntrjt16yvunll9iyayufn4",
-			keyword: "JBW",
-			category: 1,
-			include_discounts: "true",
-			results_per_page: 20,
-		},
-	},
+	//{
+	//	name: 'G-shock',
+	//	color: '#333',
+	//	config: {
+	//		catalog: "672oqm0oqpyrc4ullpfeclz66",
+	//		account:"bbhntrjt16yvunll9iyayufn4",
+	//		keyword: "JBW",
+	//		category: 1,
+	//		include_discounts: "true",
+	//		results_per_page: 100,
+	//	},
+	//},
 
-     //{
-     //    name: 'G-shock',
-     //    color: '#333',
-     //    config: {
-     // 		  catalog: "672oqm0oqpyrc4ullpfeclz66",
-     // 			account:"bbhntrjt16yvunll9iyayufn4",
-     //   		keyword: "G-shock",
-     // 			category: 1,
-     // 			include_discounts: "true",
-     // 			results_per_page: 50,
-     // 		},
-     //},
+     {
+         name: 'G-shock',
+         color: '#333',
+         config: {
+      		  catalog: "672oqm0oqpyrc4ullpfeclz66",
+      			account:"bbhntrjt16yvunll9iyayufn4",
+        		keyword: "G-shock",
+      			category: 1,
+      			include_discounts: "true",
+      			results_per_page: 50,
+      		},
+     },
      //{
      //    name: 'Fossil',
      //    color: '#05A9D6',

@@ -6,10 +6,10 @@ var config = {
      *  theme    - TRY THIS! Theme accepts 'normal', 'light', 'full' ... anything else will just stick to system defaults.
      **********************************/
 
-     theme: 'normal',
+     //theme: 'normal',
     //theme: 'light',
     //theme: 'full',
-    //theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
+    theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
 
     imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
     imgSizeHeightToWidthRatio: {
