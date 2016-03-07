@@ -13,7 +13,7 @@ var config = {
 
     imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
     imgSizeHeightToWidthRatio: {
-        phone: 0.7,
+        phone: 1,
         tablet: 1,
     },
 

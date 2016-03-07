@@ -35,6 +35,7 @@ function getItems(feedConfig , overideConfig){
 			    itemsProcessed.forEach(function(item){
 				    item.title = item.name;
 				    item.image = item.image_url_large;
+				    item.price = item.price_min;
 			    });
 			    //console.log("Total "  + res.results.products.count);
 			    //console.log("Fetched "  + itemsProcessed.length);
