@@ -197,7 +197,7 @@ function updateCellItemElements(feedItem){
 
     // Loading next.
     if(feedItem.loadingNext){
-        elements.title.set({text: "SHOULD LOAD NEXT!"});
+        elements.title.set({text: "Loading more items..."});
         //TODO: remove the loading animation at the end of feed.
     }
 
