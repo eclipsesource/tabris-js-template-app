@@ -142,7 +142,8 @@ function refreshItems( widget ) {
 		if(results.state.count){
 			var comp = tabris.create('Composite', { left: ["prev()", 10], width: 160, top: 0, bottom: 0 }).appendTo(widget);
 			var comp2 = tabris.create('Composite', { left: 20, right: 20, top: 20, bottom: 30, background: feedConfig.color}).appendTo(comp);
-			tabris.create('TextView', { text: ''+ '' + "See more<br/>'" +feedConfig.name +"'"  , maxLines: 2, font: '16px', left: 0, right: 0, bottom: 0, top: 0, textColor: "white",  alignment:'center', markupEnabled:true}).appendTo(comp2);
+			tabris.create('TextView', { text: ''+ '' + "See more<br/>'" +feedConfig.name +"'"  , maxLines: 2, font: '16px', left: 0, right: 20, bottom: 0, top: 0, textColor: "white",  alignment:'center', markupEnabled:true}).appendTo(comp2);
+			tabris.create('TextView', { text: '>'  , maxLines: 1, font: '20px', width: 14, right: 6, bottom: 0, top: 0, textColor: "white",  alignment:'center'}).appendTo(comp2);
 		}
 
 
