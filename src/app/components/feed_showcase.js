@@ -109,7 +109,8 @@ function cellStyle(feedConfig){
 
 function refreshItems( widget ) {
 	updateWidgetLoading ( widget, true);
-	getItems( widget.get('_feed') ).then( function(results){
+	var feedConfig = widget.get('_feed');
+	getItems( feedConfig ).then( function(results){
 		var arr = [].concat(results.items);
 		//if (results.state && results.state.hasMore) {
 		//	arr = arr.concat({loadingNext: true});
@@ -122,9 +123,11 @@ function refreshItems( widget ) {
 			if(index< 15){
 				var imageUrl = resizeImageURLByWidth(feedItem.image, 120);
 				if(imageUrl){
-					var comp = tabris.create('Composite', { image:imageUrl,left: ["prev()", 10], width: 90, top: 0, bottom: 0}).appendTo(widget);
+					var comp = tabris.create('Composite', { left: ["prev()", 10], width: 90, top: 0, bottom: 0}).appendTo(widget);
 					tabris.create('ImageView', { image:imageUrl,left: 0, right: 0, top: 0, height: 120, scaleMode: 'fill' , background: "rgb(220, 220, 220)"}).appendTo(comp);
-					tabris.create('TextView', { text: '$'+Math.round(feedItem.price),left: 0, right: 0, bottom: 0, height: 30, textColor: "#aaa",  alignment:'center'}).appendTo(comp);
+					if(feedItem.price){
+						tabris.create('TextView', { text: '$'+Math.round(feedItem.price),left: 0, right: 0, bottom: 0, height: 30, textColor: "#aaa",  alignment:'center'}).appendTo(comp);
+					}
 
 					comp.on('tap',function(){
 						detailScreen.open(feedItem.title, feedItem);
@@ -133,6 +136,18 @@ function refreshItems( widget ) {
 
 			}
 		});
+
+
+
+		if(results.state.count){
+			var comp = tabris.create('Composite', { left: ["prev()", 10], width: 160, top: 0, bottom: 0 }).appendTo(widget);
+			var comp2 = tabris.create('Composite', { left: 20, right: 20, top: 20, bottom: 30, background: feedConfig.color}).appendTo(comp);
+			tabris.create('TextView', { text: ''+ '' + "See more<br/>'" +feedConfig.name +"'"  , maxLines: 2, font: '16px', left: 0, right: 0, bottom: 0, top: 0, textColor: "white",  alignment:'center', markupEnabled:true}).appendTo(comp2);
+		}
+
+
+
+
 
 		//widget.set('items', arr );
 		//widget.set('_loadedPage', 1);
