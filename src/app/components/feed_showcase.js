@@ -38,6 +38,10 @@ module.exports = function( feedConfig , tab) {
 	}).appendTo(container);
 
 
+	var widgetHider = tabris.create("Composite", {
+		layoutData: {left: 0,  height:8,  bottom: 0, right: 0},
+		background: "white"
+	}).appendTo(container);
 
 	//initializeCell: function(cell){
 	//	var container = tabris.create('Composite', style.container).appendTo(cell),
@@ -126,7 +130,7 @@ function refreshItems( widget ) {
 					var comp = tabris.create('Composite', { left: ["prev()", 10], width: 90, top: 0, bottom: 0}).appendTo(widget);
 					tabris.create('ImageView', { image:imageUrl,left: 0, right: 0, top: 0, height: 120, scaleMode: 'fill' , background: "rgb(220, 220, 220)"}).appendTo(comp);
 					if(feedItem.price){
-						tabris.create('TextView', { text: '$'+Math.round(feedItem.price),left: 0, right: 0, bottom: 0, height: 30, textColor: "#aaa",  alignment:'center'}).appendTo(comp);
+						tabris.create('TextView', { text: '$'+Math.round(feedItem.price),left: 0, right: 0, bottom: 3, height: 30, textColor: "#aaa",  alignment:'center'}).appendTo(comp);
 					}
 
 					comp.on('tap',function(){
