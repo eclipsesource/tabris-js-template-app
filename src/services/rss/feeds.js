@@ -40,38 +40,37 @@ module.exports = [
         }
     },
 
-    //{   // Needs work!
-    //    name: 'Eclipsesource',
-    //    color: '#207A93',
-    //    feed: rss2json('https://eclipsesource.com/blogs/feed/'),
-    //},
 
+    {
+        name: 'Fayerwayer',
+        color: '#333',
+        feed: rss2json('http://feeds.feedburner.com/fayerwayer'),
+        imageResolver: function(feedItem){
+            if(feedItem.enclosure && feedItem.enclosure.link){
+                // TODO: device width!
+                return feedItem.enclosure.link.replace('https://', 'http://').replace('.jpg', '-320x210.jpg')
+            }
+            return './images/notfound.png';
+        }
+    },
 
+    {   // GOOD
+        name: 'Gizmodo',
+        color: '#333',
+        feed: rss2json('http://gizmodo.com/rss'),
+    },
 
-    //{
-    //    name: 'Fayerwayer',
-    //    color: '#333',
-    //    feed: rss2json('http://feeds.feedburner.com/fayerwayer'),
-    //    imageResolver: function(feedItem){
-    //        if(feedItem.enclosure && feedItem.enclosure.link){
-    //            // TODO: device width!
-    //            return feedItem.enclosure.link.replace('https://', 'http://').replace('.jpg', '-320x210.jpg')
-    //        }
-    //        return './images/notfound.png';
-    //    }
-    //},
-    //
-    //{   // GOOD
-    //    name: 'Gizmodo',
-    //    color: '#333',
-    //    feed: rss2json('http://gizmodo.com/rss'),
-    //},
-    //
-    //{   // Good
-    //    name: 'SmashingMagazine',
-    //    color: '#E53F2C',
-    //    feed: rss2json('http://www.smashingmagazine.com/feed'),
-    //},
+    {   // Good
+        name: 'SmashingMagazine',
+        color: '#E53F2C',
+        feed: rss2json('http://www.smashingmagazine.com/feed'),
+    },
+
+    {   // Good (but small)
+        name: 'SpeckyBoy',
+        color: '#658DB5',
+        feed: rss2json('http://speckyboy.com/feed'),
+    },
 
     //
     //{   // no images..
@@ -86,20 +85,20 @@ module.exports = [
     //    feed: rss2json('http://www.pcworld.com/index.rss'),
     //},
 
-    {   // Good (but small)
-        name: 'SpeckyBoy',
-        color: '#658DB5',
-        feed: rss2json('http://speckyboy.com/feed'),
-    },
+    //{   // Needs work!
+    //    name: 'Eclipsesource',
+    //    color: '#207A93',
+    //    feed: rss2json('https://eclipsesource.com/blogs/feed/'),
+    //},
 
     //{   // no images..
     //    name: 'Economist',
     //    color: '#8f0d10',
     //    feed: rss2json('http://www.economist.com/topics/computer-technology/index.xml'),
     //},
-    {
-        name: 'React Native',
-        color: '#05A9D6',
-        feed: rss2json('http://www.reactnative.com/rss/'),
-    },
+    //{
+    //    name: 'React Native',
+    //    color: '#05A9D6',
+    //    feed: rss2json('http://www.reactnative.com/rss/'),
+    //},
 ];

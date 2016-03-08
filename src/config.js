@@ -9,9 +9,12 @@ var config = {
     //theme: 'normal',
     //theme: 'light',
     //theme: 'full',
-    theme: tabris.device.get("platform") === "iOS" ? 'light' : 'full', // Define a certain theme for iOS and different for Android
+    theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
+
+    mainPage: "showcase", // can be "showcase" or "tabs"
 
     imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
+
     imgSizeHeightToWidthRatio: {
         phone: 0.7,
         tablet: 1,
@@ -27,7 +30,7 @@ var config = {
         tablet: 0.5,
     },
 
-    mainPage: "tabs", // can be "showcase" or "tabs"
+
 
 
     // RSS feeds
