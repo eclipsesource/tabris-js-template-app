@@ -104,7 +104,7 @@ function cellStyle(feedConfig){
 
 function refreshItems( widget ) {
     updateWidgetLoading ( widget, true);
-    getItems( widget.get('_feed') ).then( function(results){
+    getItems( widget.get('_feed') , {overideConfig: true} ).then( function(results){
         var arr = [].concat(results.items);
         if (results.state && results.state.hasMore) {
             arr = arr.concat({loadingNext: true});

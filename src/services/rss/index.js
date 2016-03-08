@@ -6,19 +6,33 @@
 
 var feedHelpers = require('./feed_helpers');
 
-function getItems(feedConfig){
+function getItems(feedConfig, overideConfig){
+	overideConfig = overideConfig ? overideConfig : {};
 	return new Promise(function(resolve, reject) {
-		fetch( feedConfig.feed ).then(function( res ){
-			return res.json();
-		}).then(function( res ){
-			var itemsProcessed = feedHelpers.sanitizeFeedItems (res.items , feedConfig.contentSanitizer);
-			itemsProcessed.forEach(function(item){
-				item.image = feedHelpers.resolveImageForFeedItem(item ,feedConfig.imageResolver);
+		if(requestCache[feedConfig.feed] && !overideConfig.forceFetch){
+			// This has been requested before
+			setTimeout(function(){
+				resolve(JSON.parse(JSON.stringify(requestCache[feedConfig.feed])));
+			},1);
+		}
+		else {
+			fetch(feedConfig.feed).then(function (res) {
+				return res.json();
+			}).then(function (res) {
+				var finalResult;
+				var itemsProcessed = feedHelpers.sanitizeFeedItems(res.items, feedConfig.contentSanitizer);
+				itemsProcessed.forEach(function (item) {
+					item.image = feedHelpers.resolveImageForFeedItem(item, feedConfig.imageResolver);
+				});
+
+				finalResult = {items: itemsProcessed};
+				requestCache[feedConfig.feed] = finalResult;
+				resolve(JSON.parse(JSON.stringify(finalResult)));
+
+			}).catch(function (err) {
+				reject(err);
 			});
-			resolve({items:itemsProcessed});
-		}).catch(function (err){
-			reject(err);
-		});
+		}
 	});
 }
 
@@ -76,6 +90,8 @@ function rssItemWebViewHTML(feedItem){
 		'</html>'
 	].join('');
 }
+
+var requestCache = {};
 
 module.exports = {
 	getItems: getItems,

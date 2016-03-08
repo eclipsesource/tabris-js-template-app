@@ -13,7 +13,7 @@ var config = {
 
     imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
     imgSizeHeightToWidthRatio: {
-        phone: 1,
+        phone: 0.7,
         tablet: 1,
     },
 
@@ -31,24 +31,28 @@ var config = {
 
 
     // RSS feeds
-    //appName: 'Tabris.js RSS Reader Example',
-    //dataService: require('./services/rss'),
-    //feeds: require('./services/rss/feeds'),
-    //pullToRefresh:true,
+    appName: 'Tabris.js RSS Reader Example',
+    dataService: require('./services/rss'),
+    feeds: require('./services/rss/feeds'),
+    pullToRefresh:true,
 
     // Shop feeds
-    appName: 'Tabris.js Ecommerce example',
-    dataService: require('./services/shop'),
-    feeds: require('./services/shop/feeds'),
-    pullToRefresh:false,
-    imgShowcaseSizeHeightToWidthRatio: {
-        phone: 1.3,
-        tablet: 1.1,
-    },
-    imgShowcaseScreenWidthRatio: {
-        phone: 0.25,
-        tablet: 0.16,
-    },
+    //appName: 'Tabris.js Ecommerce example',
+    //dataService: require('./services/shop'),
+    //feeds: require('./services/shop/feeds'),
+    //pullToRefresh:false,
+    //imgSizeHeightToWidthRatio: {
+    //    phone: 1,
+    //    tablet: 1,
+    //},
+    //imgShowcaseSizeHeightToWidthRatio: {
+    //    phone: 1.3,
+    //    tablet: 1.1,
+    //},
+    //imgShowcaseScreenWidthRatio: {
+    //    phone: 0.25,
+    //    tablet: 0.16,
+    //},
 
 
     // Wordpress - pets
