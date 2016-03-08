@@ -61,12 +61,9 @@ module.exports = [
       			price_min: 1000
       		},
      },
-
-
-
 	{
 		name: 'Breitling',
-		color: '#333',
+		color: '#24BF7A',
 		config: {
 			catalog: "672oqm0oqpyrc4ullpfeclz66",
 			account:"bbhntrjt16yvunll9iyayufn4",
@@ -78,7 +75,7 @@ module.exports = [
 	},
 	{
 		name: 'Rolex',
-		color: '#05A9D6',
+		color: '#161269',
 		config: {
 			catalog: "672oqm0oqpyrc4ullpfeclz66",
 			account:"bbhntrjt16yvunll9iyayufn4",
