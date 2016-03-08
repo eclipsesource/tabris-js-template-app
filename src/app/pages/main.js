@@ -27,7 +27,7 @@ function init() {
     //});
 
     // Update the UI based on the theme and active tab.
-    //updateUIColors(page, config.feeds[0].color);
+    // updateUIColors(page, config.feeds[0].color);
 
     return page;
 }

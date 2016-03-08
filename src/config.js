@@ -8,13 +8,17 @@ var config = {
 
      //theme: 'normal',
     //theme: 'light',
-    theme: 'full',
-    //theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
+    //theme: 'full',
+    theme: tabris.device.get("platform") === "iOS" ? 'light' : 'full', // Define a certain theme for iOS and different for Android
 
     imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
     imgSizeHeightToWidthRatio: {
         phone: 1,
         tablet: 1,
+    },
+    imgShowcaseSizeHeightToWidthRatio: {
+        phone: 1.3,
+        tablet: 1.1,
     },
 
 
@@ -29,6 +33,7 @@ var config = {
     dataService: require('./services/shop'),
     feeds: require('./services/shop/feeds'),
     pullToRefresh:false,
+
 
     // Wordpress - pets
     //appName: 'Tabris.js Wordpress example',

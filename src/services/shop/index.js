@@ -22,33 +22,46 @@ function getItems(feedConfig , overideConfig){
  		}
  		queryParamsStr = tmp.join("&");
 
- 		fetch( "https://www.popshops.com/v3/products.json?" + queryParamsStr ).then(function( res ){
-			return res.json();
-		}).then(function( res ){
-		    var itemsProcessed, state = {};
-		    if(!res.results) {
-			    resolve([]);
-		    }
-		    else {
+		if(requestCache[queryParamsStr]){
+			// This has been requested before
+			setTimeout(function(){
+				resolve(JSON.parse(JSON.stringify(requestCache[queryParamsStr])));
+			},1);
+		}
+		else {
+			fetch( "https://www.popshops.com/v3/products.json?" + queryParamsStr ).then(function( res ){
+				return res.json();
+			}).then(function( res ){
+				var itemsProcessed, state = {};
+				var finalResult;
+				if(!res.results) {
+					resolve([]);
+				}
+				else {
 
-			    itemsProcessed = res.results.products.product;
-			    itemsProcessed.forEach(function(item){
-				    item.title = item.name;
-				    item.image = item.image_url_large;
-				    item.price = item.price_min;
-			    });
-			    //console.log("Total "  + res.results.products.count);
-			    //console.log("Fetched "  + itemsProcessed.length);
-			    //console.log("Fetched Total"  + (((targetFeed.page - 1) *  targetFeed.results_per_page) + itemsProcessed.length) );
+					itemsProcessed = res.results.products.product;
+					itemsProcessed.forEach(function(item){
+						item.title = item.name;
+						item.image = item.image_url_large;
+						item.price = item.price_min;
+					});
+					//console.log("Total "  + res.results.products.count);
+					//console.log("Fetched "  + itemsProcessed.length);
+					//console.log("Fetched Total"  + (((targetFeed.page - 1) *  targetFeed.results_per_page) + itemsProcessed.length) );
 
-			    state.count = res.results.products.count;
-			    state.fetched = (((targetFeed.page - 1) *  targetFeed.results_per_page) + itemsProcessed.length);
-			    state.hasMore = state.count > state.fetched;
-			    resolve({items:itemsProcessed, state: state});
-		    }
-		}).catch(function (err){
-			reject(err);
-		});
+					state.count = res.results.products.count;
+					state.fetched = (((targetFeed.page - 1) *  targetFeed.results_per_page) + itemsProcessed.length);
+					state.hasMore = state.count > state.fetched;
+
+					finalResult = {items:itemsProcessed, state: state};
+					requestCache[queryParamsStr] = finalResult;
+					resolve(JSON.parse(JSON.stringify(finalResult)));
+				}
+			}).catch(function (err){
+				reject(err);
+			});
+		}
+
 	});
 }
 
@@ -59,6 +72,9 @@ function getItemDetails(item) {
 		content: item.offers.offer[0].url
 	}
 }
+
+
+var requestCache = {};
 
 module.exports = {
 	getItems: getItems,
