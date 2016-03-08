@@ -1,4 +1,4 @@
-var getThemeListItemStyle = require('./../styles/theme').getThemeListItemStyle;
+var getThemeStyle = require('./../styles/theme').getThemeStyle;
 var detailScreen = require('./../pages/item_details');
 var itemListPage = require('./../pages/item_list');
 var resizeImageURLByWidth = require('./../../app/helpers/img_resize').resizeImageURLByWidth;
@@ -40,7 +40,7 @@ module.exports = function( feedConfig , tab) {
 
 
 function cellStyle(feedConfig){
-	var themeStyle = getThemeListItemStyle(feedConfig.color);
+	var themeStyle = getThemeStyle(feedConfig.color);
 	return {
 		itemShowcaseScrollHider: { layoutData: {left: 0,  height:8,  bottom: 0, right: 0},  background: "white"},
 		itemShowcase: { layoutData: {left: 0,  top:42,  bottom: 0, right: 0}, direction: "horizontal", _feed: feedConfig},

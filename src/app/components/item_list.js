@@ -1,4 +1,4 @@
-var getThemeListItemStyle = require('./../styles/theme').getThemeListItemStyle;
+var getThemeStyle = require('./../styles/theme').getThemeStyle;
 var detailScreen = require('./../pages/item_details');
 var resizeImageURLByWidth = require('./../../app/helpers/img_resize').resizeImageURLByWidth;
 var sizing = require('./../helpers/sizing');
@@ -92,7 +92,7 @@ module.exports = function( feedConfig , tab) {
 
 
 function cellStyle(feedConfig){
-    var themeStyle = getThemeListItemStyle(feedConfig.color);
+    var themeStyle = getThemeStyle(feedConfig.color);
     return {
         container : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background},
         image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: 'fill' , background: "rgb(220, 220, 220)"},
