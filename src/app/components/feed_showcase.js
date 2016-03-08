@@ -25,8 +25,9 @@ module.exports = function( feedConfig , tab) {
 	var style = cellStyle(feedConfig);
 
 	var container = tabris.create("Composite", { left: 0, right: 0, top: "prev()", height: 200}).appendTo(tab);
+	var header = tabris.create("Composite", style.header ).appendTo(container);
 
-	tabris.create('TextView',  style.header).appendTo(container);
+	tabris.create('TextView',  style.headerText).appendTo(header);
 	var itemShowcase = tabris.create("ScrollView", style.itemShowcase).appendTo(container);
 	tabris.create("Composite", style.itemShowcaseScrollHider).appendTo(container);
 
@@ -39,8 +40,9 @@ function cellStyle(feedConfig){
 	var themeStyle = getThemeListItemStyle(feedConfig.color);
 	return {
 		itemShowcaseScrollHider: { layoutData: {left: 0,  height:8,  bottom: 0, right: 0},  background: "white"},
-		itemShowcase: { layoutData: {left: 0,  top:45,  bottom: 0, right: 0}, direction: "horizontal", _feed: feedConfig},
-		header: { maxLines: 1, font: 'bold 16px', left: 0, right: 0, height: 30, top:0, text:feedConfig.name, background: themeStyle.showcase.background ,textColor: themeStyle.showcase.textColor , alignment:'center' }
+		itemShowcase: { layoutData: {left: 0,  top:42,  bottom: 0, right: 0}, direction: "horizontal", _feed: feedConfig},
+		header: {left: 0, right: 0, height: 30, top:0, background: themeStyle.showcase.background},
+		headerText: { maxLines: 1, font: 'bold 16px', left: 10, right: 0, bottom: 5, top:5, text:feedConfig.name, textColor: themeStyle.showcase.textColor , alignment:'left' }
 	}
 }
 
@@ -53,15 +55,6 @@ function refreshItems( widget ) {
 
 	getItems( feedConfig ).then( function(results){
 		var arr = [].concat(results.items);
-		//if (results.state && results.state.hasMore) {
-		//	arr = arr.concat({loadingNext: true});
-		//	widget.set('_loadedAll', false);
-		//}
-		//else {
-		//	widget.set('_loadedAll', true);
-		//}
-
-
 
 		arr.forEach(function(feedItem, index){
 			if(index< 15){

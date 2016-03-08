@@ -30,7 +30,7 @@ module.exports = [
          config: {
       		  catalog: "672oqm0oqpyrc4ullpfeclz66",
       			account:"bbhntrjt16yvunll9iyayufn4",
-        		keyword: "G-shock",
+        		keyword: "G-shock watch",
       			category: 1,
       			include_discounts: "true",
       			results_per_page: 50,
@@ -70,7 +70,7 @@ module.exports = [
 		config: {
 			catalog: "672oqm0oqpyrc4ullpfeclz66",
 			account:"bbhntrjt16yvunll9iyayufn4",
-			keyword: "Breitling",
+			keyword: "Breitling watch",
 			category: 1,
 			include_discounts: "true",
 			results_per_page: 50,
