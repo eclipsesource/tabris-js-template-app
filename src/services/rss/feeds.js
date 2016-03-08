@@ -67,7 +67,7 @@ module.exports = [
     //    feed: rss2json('http://gizmodo.com/rss'),
     //},
     //
-    //{   // Good (performance issues?)
+    //{   // Good
     //    name: 'SmashingMagazine',
     //    color: '#E53F2C',
     //    feed: rss2json('http://www.smashingmagazine.com/feed'),
@@ -86,20 +86,20 @@ module.exports = [
     //    feed: rss2json('http://www.pcworld.com/index.rss'),
     //},
 
-    //{   // Good (but small)
-    //    name: 'SpeckyBoy',
-    //    color: '#658DB5',
-    //    feed: rss2json('http://speckyboy.com/feed'),
-    //},
+    {   // Good (but small)
+        name: 'SpeckyBoy',
+        color: '#658DB5',
+        feed: rss2json('http://speckyboy.com/feed'),
+    },
 
     //{   // no images..
     //    name: 'Economist',
     //    color: '#8f0d10',
     //    feed: rss2json('http://www.economist.com/topics/computer-technology/index.xml'),
     //},
-    //{
-    //    name: 'React',
-    //    color: '#05A9D6',
-    //    feed: rss2json('http://www.reactnative.com/rss/'),
-    //},
+    {
+        name: 'React Native',
+        color: '#05A9D6',
+        feed: rss2json('http://www.reactnative.com/rss/'),
+    },
 ];

@@ -6,19 +6,25 @@ var config = {
      *  theme    - TRY THIS! Theme accepts 'normal', 'light', 'full' ... anything else will just stick to system defaults.
      **********************************/
 
-     //theme: 'normal',
+    //theme: 'normal',
     //theme: 'light',
     //theme: 'full',
-    theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
+    theme: tabris.device.get("platform") === "iOS" ? 'light' : 'full', // Define a certain theme for iOS and different for Android
 
     imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
     imgSizeHeightToWidthRatio: {
         phone: 1,
         tablet: 1,
     },
+
+    imgShowcaseScreenWidthRatio: {
+        phone: 0.6,
+        tablet: 0.4,
+    },
+
     imgShowcaseSizeHeightToWidthRatio: {
-        phone: 1.3,
-        tablet: 1.1,
+        phone: 0.4,
+        tablet: 0.5,
     },
 
     mainPage: "tabs", // can be "showcase" or "tabs"
@@ -35,6 +41,14 @@ var config = {
     dataService: require('./services/shop'),
     feeds: require('./services/shop/feeds'),
     pullToRefresh:false,
+    imgShowcaseSizeHeightToWidthRatio: {
+        phone: 1.3,
+        tablet: 1.1,
+    },
+    imgShowcaseScreenWidthRatio: {
+        phone: 0.25,
+        tablet: 0.16,
+    },
 
 
     // Wordpress - pets
