@@ -37,7 +37,6 @@ function getItems(feedConfig, overideConfig){
 }
 
 
-
 function getItemDetails(item) {
 	return {
 		type: 'html', // can be 'html', 'url', 'component'

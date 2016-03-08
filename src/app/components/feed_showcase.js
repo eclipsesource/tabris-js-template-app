@@ -17,9 +17,6 @@ var imageHeight = Math.floor(imageHeightRatio * imageWidth);
 
 module.exports = function( feedConfig , tab) {
 	var style = cellStyle(feedConfig);
-	//console.log("imageWidth: "+imageWidth);
-	//console.log("imageHeight: "+imageHeight);
-
 	var container = tabris.create("Composite", { left: 0, right: 0, top: "prev()", height: ( 90 + imageHeight )}).appendTo(tab);
 
 	// Showcase header
@@ -65,9 +62,7 @@ function refreshItems( widget ) {
 			}
 		});
 
-		//if(results.state && results.state.count){
-			appendSeeAllBox(widget);
-		//}
+		appendSeeAllBox(widget);
 
 	}).catch(function(err){
 		console.log("Failed fetching items for: "+ widget.get('_feed'));
