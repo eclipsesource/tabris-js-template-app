@@ -31,21 +31,33 @@ function getThemeListItemStyle(color){
 		return {
 			background: 'white',
 			overlayBG: 'white',
-			textColor: color
+			textColor: color,
+			showcase: {
+				background: 'white',
+				textColor: color,
+			}
 		}
 	}
 	else if (config.theme === 'normal'){
 		return {
 			background: 'white',
 			overlayBG: color,
-			textColor: 'white'
+			textColor: 'white',
+			showcase: {
+				background: 'white',
+				textColor: color,
+			}
 		}
 	}
 	else if (config.theme === 'full'){
 		return {
 			background: color,
 			overlayBG: color,
-			textColor: 'white'
+			textColor: 'white',
+			showcase: {
+				background: color,
+				textColor: 'white',
+			}
 		}
 	}
 }

@@ -6,8 +6,8 @@ var config = {
      *  theme    - TRY THIS! Theme accepts 'normal', 'light', 'full' ... anything else will just stick to system defaults.
      **********************************/
 
-     theme: 'normal',
-    //theme: 'light',
+     //theme: 'normal',
+    theme: 'light',
     //theme: 'full',
     //theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
 
