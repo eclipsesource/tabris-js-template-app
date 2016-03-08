@@ -16,14 +16,10 @@ function init() {
     //var TabFolder = tabris.create('TabFolder', { left: 0, top: 0, right: 0, bottom:0 , elevation: 8 , tabBarLocation: "top", paging: true} ).appendTo(page);
     //page.set("_tabs", TabFolder);
     //
-    //
-    ////var container = tabris.create("ScrollView", { left: 0, right: 0, top: 0, bottom: 0 , direction:"vertical"}).appendTo(page);
-    //
     //// Now we will create a tab per source and add to the container
     //config.feeds.forEach(function( feed ){
     //    var tab = tabris.create( 'Tab', { title: feed.name, background: 'white', _feed: feed} ).appendTo(TabFolder);
     //    itemListComponent( feed , tab ).appendTo(tab);
-    //    //feedShowcase( feed , container ).appendTo(container);
     //});
     //
     //// When the user changes the tab, change the app visuals
