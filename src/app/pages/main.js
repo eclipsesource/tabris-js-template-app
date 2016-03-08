@@ -1,5 +1,5 @@
 var config = require('./../../config.js').config;
-var newsWidgetComponent = require('./../components/item_list');
+var itemListComponent = require('./../components/item_list');
 var feedShowcase = require('./../components/feed_showcase');
 var updateUIColors = require('./../styles/theme').updateUIColors;
 
@@ -17,7 +17,7 @@ function init() {
     // Now we will create a tab per source and add to the container
     config.feeds.forEach(function( feed ){
         //var tab = tabris.create( 'Tab', { title: feed.name, background: 'white', _feed: feed} ).appendTo(TabFolder);
-        //newsWidgetComponent( feed , page ).appendTo(page);
+        //itemListComponent( feed , page ).appendTo(page);
         feedShowcase( feed , container ).appendTo(container);
     });
 

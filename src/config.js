@@ -7,8 +7,8 @@ var config = {
      **********************************/
 
      //theme: 'normal',
-    theme: 'light',
-    //theme: 'full',
+    //theme: 'light',
+    theme: 'full',
     //theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
 
     imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.

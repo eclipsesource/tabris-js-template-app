@@ -1,7 +1,9 @@
 var getThemeListItemStyle = require('./../styles/theme').getThemeListItemStyle;
 var detailScreen = require('./../pages/item_details');
+var itemListPage = require('./../pages/item_list');
 var resizeImageURLByWidth = require('./../../app/helpers/img_resize').resizeImageURLByWidth;
 var sizing = require('./../helpers/sizing');
+
 
 
 var config = require('./../../config.js').config;
@@ -27,7 +29,7 @@ module.exports = function( feedConfig , tab) {
 	tabris.create('TextView',  style.headerText).appendTo(header);
 	tabris.create('TextView',  style.headerSeeAll).appendTo(header);
 	header.on('tap',function(){
-		console.log("See all");
+		itemListPage.open(feedConfig.name,feedConfig);
 	});
 
 
@@ -111,7 +113,7 @@ function appendSeeAllBox(widget){
 	tabris.create('TextView', { text: '>'  , maxLines: 1, font: '20px', width: 14, right: 6, bottom: 0, top: 0, textColor: "white",  alignment:'center'}).appendTo(seeAllBox);
 
 	seeAllBox.on('tap',function(){
-		console.log("See all");
+		itemListPage.open(feedConfig.name,feedConfig);
 	});
 }
 

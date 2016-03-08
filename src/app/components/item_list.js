@@ -19,8 +19,6 @@ var imageHeight = Math.floor(imageHeightRatio * imageWidth);
 
 
 
-
-
 module.exports = function( feedConfig , tab) {
     var style = cellStyle(feedConfig);
     if(isTablet){
