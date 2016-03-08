@@ -8,7 +8,7 @@ function getItems(feedConfig , overideConfig){
 	return new Promise(function(resolve, reject) {
 
         var targetFeed = JSON.parse(JSON.stringify(feedConfig.config)); // Simple clone without dependencies.
-		if(overideConfig){
+		if(overideConfig && overideConfig.page){
 			targetFeed.page = overideConfig.page;
 		}
 		else {

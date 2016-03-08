@@ -82,7 +82,7 @@ module.exports = function( feedConfig , tab) {
     });
     if (config.pullToRefresh ){
       widget.on('refresh', function(widget){
-          refreshItems( widget );
+          refreshItems( widget , true);
       })
     }
 
@@ -102,9 +102,9 @@ function cellStyle(feedConfig){
 }
 
 
-function refreshItems( widget ) {
+function refreshItems( widget , forceFetch) {
     updateWidgetLoading ( widget, true);
-    getItems( widget.get('_feed') , {overideConfig: true} ).then( function(results){
+    getItems( widget.get('_feed') , {forceFetch: forceFetch} ).then( function(results){
         var arr = [].concat(results.items);
         if (results.state && results.state.hasMore) {
             arr = arr.concat({loadingNext: true});

@@ -11,9 +11,16 @@ var config = {
     //theme: 'full',
     theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal', // Define a certain theme for iOS and different for Android
 
-    mainPage: "showcase", // can be "showcase" or "tabs"
+    mainPage: "tabs", // can be "showcase" or "tabs"
+    //mainPage: "showcase", // can be "showcase" or "tabs"
 
     imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
+
+    // RSS feeds
+    appName: 'Tabris.js RSS Reader Example',
+    dataService: require('./services/rss'),
+    feeds: require('./services/rss/feeds'),
+    pullToRefresh:true,
 
     imgSizeHeightToWidthRatio: {
         phone: 0.7,
@@ -29,15 +36,6 @@ var config = {
         phone: 0.4,
         tablet: 0.5,
     },
-
-
-
-
-    // RSS feeds
-    appName: 'Tabris.js RSS Reader Example',
-    dataService: require('./services/rss'),
-    feeds: require('./services/rss/feeds'),
-    pullToRefresh:true,
 
     // Shop feeds
     //appName: 'Tabris.js Ecommerce example',

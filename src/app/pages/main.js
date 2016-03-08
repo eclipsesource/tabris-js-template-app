@@ -4,8 +4,7 @@ var feedShowcase = require('./../components/feed_showcase');
 var updateUIColors = require('./../styles/theme').updateUIColors;
 var getThemeStyle = require('./../styles/theme').getThemeStyle;
 
-
-
+// Sizing helpers.
 var sizing = require('./../helpers/sizing');
 var isTablet = sizing.isTablet;
 var imageWidth = Math.floor( isTablet ? tabris.device.get("screenWidth") * config.imgShowcaseScreenWidthRatio.tablet : tabris.device.get("screenWidth") * config.imgShowcaseScreenWidthRatio.phone );

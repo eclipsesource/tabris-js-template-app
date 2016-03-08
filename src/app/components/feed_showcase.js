@@ -2,6 +2,7 @@ var getThemeStyle = require('./../styles/theme').getThemeStyle;
 var detailScreen = require('./../pages/item_details');
 var itemListPage = require('./../pages/item_list');
 var resizeImageURLByWidth = require('./../../app/helpers/img_resize').resizeImageURLByWidth;
+var updateUIColors = require('./../styles/theme').updateUIColors;
 var sizing = require('./../helpers/sizing');
 
 var config = require('./../../config.js').config;
@@ -95,7 +96,9 @@ function appendItemBox(widget , feedItem){
 
 		}
 		boxContainer.on('tap',function(){
+			updateUIColors(widget.get('_feed').color);
 			detailScreen.open(feedItem.title, feedItem);
+
 		});
 	}
 }
