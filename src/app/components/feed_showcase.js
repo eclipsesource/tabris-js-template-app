@@ -25,71 +25,19 @@ module.exports = function( feedConfig , tab) {
 	var style = cellStyle(feedConfig);
 
 	var container = tabris.create("Composite", { left: 0, right: 0, top: "prev()", height: 200}).appendTo(tab);
-	tabris.create('TextView',  { maxLines: 1, font: '16px', left: 0, right: 0, height: 30, top:10, text:feedConfig.name, background:feedConfig.color ,textColor: 'white' , alignment:'center' }).appendTo(container);
+	//tabris.create('TextView',  { maxLines: 1, font: '16px', left: 0, right: 0, height: 30, top:10, text:feedConfig.name, background:feedConfig.color ,textColor: 'white' , alignment:'center' }).appendTo(container);
 
-	//var Composite2 = tabris.create("Composite", { left: 0, right: 0, top: "prev()", height: 200 , background:"blue"}).appendTo(container);
-	//tabris.create('TextView',  { maxLines: 1, font: '16px', left: 10, right: 10, height: 30, top:"prev()", text:feedConfig.name, textColor: feedConfig.color }).appendTo(Composite2);
 
 
 	var widget = tabris.create("ScrollView", {
-		layoutData: {left: 0,  top:50,  bottom: 0, right: 0},
+		layoutData: {left: 0,  top:0,  bottom: 0, right: 0},
 		direction: "horizontal",
 		_feed: feedConfig,
 	}).appendTo(container);
 
 
 
-	//initializeCell: function(cell){
-	//	var container = tabris.create('Composite', style.container).appendTo(cell),
-	//		icon      = tabris.create('ImageView', style.image).appendTo(container),
-	//		overlay   = tabris.create('Composite', style.overlay).appendTo(container),
-	//		title     = tabris.create('TextView',  style.title).appendTo(container);
-	//
-	//	cell.on("change:item", function(widget, feedItem) {
-	//		feedItem._elements = {
-	//			title: title,
-	//			icon: icon,
-	//			overlay: overlay,
-	//			container: container
-	//		};
-	//		updateCellItemElements(feedItem);
-	//	});
-	//}
-	//
-	//).on("select", function(target, feedItem) {
-	//	feedItem.watched = true;
-	//	updateCellItemElements(feedItem);
-	//
-	//	if(sizing.isTablet){
-	//		if(tab.get('_tabletHtmlContainer')){
-	//			tab.get('_tabletHtmlContainer').get('_itemWebView').dispose();
-	//		}
-	//		else {
-	//			var tabletHtmlContainer = tabris.create("Composite", { left: tabletColumnLeft, right: 0, top: 0, bottom: 0 ,background: "white", elevation: 0}).appendTo(tab);
-	//			tab.set('_tabletHtmlContainer', tabletHtmlContainer);
-	//			// For iOS ?
-	//			// tabris.create("Composite", { left: 0, width: 1, top: 0, bottom: 0 ,background: style.overlay.background , opacity: 0.6}).appendTo(tabletHtmlContainer);
-	//		}
-	//		detailScreen.addItemWebView(tab.get('_tabletHtmlContainer'),feedItem);
-	//	}
-	//	else {
-	//		detailScreen.open(feedItem.title, feedItem);
-	//	}
-	//}).on("scroll", function(widget, scroll) {
-	//	if( widget.get('_loadingNext') || widget.get('_loadedAll') ) { return; }
-	//	if (scroll.deltaY > 0) {
-	//		var remaining = widget.get("items").length - widget.get("lastVisibleIndex");
-	//		if (remaining < 10) {
-	//			loadMoreItems(widget);
-	//		}
-	//
-	//	}
-	//});
-	//if (config.pullToRefresh ){
-	//	widget.on('refresh', function(widget){
-	//		refreshItems( widget );
-	//	})
-	//}
+
 
 	refreshItems(widget);
 	return container;
@@ -112,21 +60,19 @@ function refreshItems( widget ) {
 	var feedConfig = widget.get('_feed');
 	getItems( feedConfig ).then( function(results){
 		var arr = [].concat(results.items);
-		//if (results.state && results.state.hasMore) {
-		//	arr = arr.concat({loadingNext: true});
-		//	widget.set('_loadedAll', false);
-		//}
-		//else {
-		//	widget.set('_loadedAll', true);
-		//}
+
 		arr.forEach(function(feedItem, index){
-			if(index< 15){
+			if(index< 5){
 				var imageUrl = resizeImageURLByWidth(feedItem.image, 120);
 				if(imageUrl){
 					var comp = tabris.create('Composite', { left: ["prev()", 10], width: 90, top: 0, bottom: 0}).appendTo(widget);
-					tabris.create('ImageView', { image:imageUrl,left: 0, right: 0, top: 0, height: 120, scaleMode: 'fill' , background: "rgb(220, 220, 220)"}).appendTo(comp);
+					tabris.create('ImageView', { image:imageUrl,left: 0, right: 0, top: 20, height: 120, scaleMode: 'fill' , background: "rgb(220, 220, 220)"}).appendTo(comp);
 					if(feedItem.price){
-						tabris.create('TextView', { text: '$'+Math.round(feedItem.price),left: 0, right: 0, bottom: 0, height: 30, textColor: "#aaa",  alignment:'center'}).appendTo(comp);
+						tabris.create('TextView', { text: '$'+Math.round(feedItem.price),left: 0, right: 0, bottom: 30, height: 30, textColor: "#aaa",  alignment:'center'}).appendTo(comp);
+
+						//tabris.create('TextView', { text: '$',left: 0, bottom: 0, height: 30, textColor: "#aaa",  markupEnabled:true}).appendTo(comp);
+						//tabris.create('TextView', { text: Math.round(feedItem.price),left: "prev()", bottom: 0, height: 30, textColor: "#333",  alignment:'center', markupEnabled:true}).appendTo(comp);
+						//tabris.create('TextView', { text: "⁴⁵",left: "prev()", bottom: 0, height: 30, textColor: "#aaa",  alignment:'center', markupEnabled:true}).appendTo(comp);
 					}
 
 					comp.on('tap',function(){
@@ -141,21 +87,11 @@ function refreshItems( widget ) {
 
 		if(results.state.count){
 			var comp = tabris.create('Composite', { left: ["prev()", 10], width: 160, top: 0, bottom: 0 }).appendTo(widget);
-			var comp2 = tabris.create('Composite', { left: 20, right: 20, top: 20, bottom: 30, background: feedConfig.color}).appendTo(comp);
+			var comp2 = tabris.create('Composite', { left: 20, right: 20, top: 20, bottom: 30, background: feedConfig.color , opacity: 0.85}).appendTo(comp);
 			tabris.create('TextView', { text: ''+ '' + "See more<br/>'" +feedConfig.name +"'"  , maxLines: 2, font: '16px', left: 0, right: 20, bottom: 0, top: 0, textColor: "white",  alignment:'center', markupEnabled:true}).appendTo(comp2);
 			tabris.create('TextView', { text: '>'  , maxLines: 1, font: '20px', width: 14, right: 6, bottom: 0, top: 0, textColor: "white",  alignment:'center'}).appendTo(comp2);
 		}
 
-
-
-
-
-		//widget.set('items', arr );
-		//widget.set('_loadedPage', 1);
-
-
-		//widget.set('items', items );
-		//updateWidgetLoading ( widget, false );
 
 	}).catch(function(err){
 		console.log("Failed fetching items for: "+ widget.get('_feed'));
