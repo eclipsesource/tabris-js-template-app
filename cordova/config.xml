@@ -9,7 +9,12 @@
     </author>
     <access origin="*" />
     <plugin name="cordova-plugin-x-socialsharing" />
-
+    <plugin name="cordova-plugin-camera" />
+    <plugin name="cordova-plugin-x-toast" />
+    <plugin name="cordova-plugin-dialogs" />
+    <plugin name="cordova-plugin-contacts" />
+    <plugin name="cordova-plugin-actionsheet" />
+    
     <platform name="android">
         <icon src="res/android/mipmap-ldpi/ic_launcher.png" density="ldpi" />
         <icon src="res/android/mipmap-mdpi/ic_launcher.png" density="mdpi" />
