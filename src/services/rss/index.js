@@ -18,6 +18,7 @@ var platformStylingWebView = {
 		img: 'max-width: 100%;'
 	}
 };
+var _ = require("lodash");
 var requestCache = {};
 
 function getItems(feedConfig, overideConfig){
