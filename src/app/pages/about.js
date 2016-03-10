@@ -2,7 +2,7 @@ var getItemDetails = require('./../../config.js').config.dataService.getItemDeta
 
 function init(){
 	var page = tabris.create("Page", { title: "Built with Tabris.js", topLevel: false});
-	tabris.create("TextView",{text:"hi"}).appendTo(page);
+	createTabrisJsAttribution().appendTo(page);
 
 	return page;
 }
@@ -15,36 +15,24 @@ function open(pageTitle, feedItem) {
 module.exports  = {
 	open: open,
 	init: init,
-	addItemWebView: addItemWebView,
 }
 
 /*************************
  * Add the webview with the feed content.
  **************************/
 
-function addItemWebView(container, feedItem, titleOnLoad){
-	var itemWebView = tabris.create('WebView',{ left: 0, right: 0, top: 0, bottom: 0}).appendTo(container);
-	container.set('_itemWebView', itemWebView);
-
-	var itemDetails = getItemDetails(feedItem);
-	handlers[itemDetails.type] (itemWebView, itemDetails, container, titleOnLoad);
-
+function createTabrisJsAttribution() {
+	var tabrisJsAttribution = tabris.create("Composite", {left: 0, top: "28%", right: 0});
+	var container = tabris.create("Composite", {centerX: 0, top: 0, height: 48}).appendTo(tabrisJsAttribution);
+	tabris.create("ImageView", {
+		left: 0, top: 0, width: 48, height: 48,
+		image: {src: "images/tabrisjs_logo@3x.png"}
+	}).appendTo(container);
+	tabris.create("TextView", {
+		left: "prev()", centerY: 0,
+		textColor: "#222",
+		text: "Built with Tabris.js"
+	}).appendTo(container);
+	//Link.create({left: "prev()", centerY: 0, url: "http://www.tabrisjs.com", text: "Tabris.js"}).appendTo(container);
+	return tabrisJsAttribution;
 }
-
-
-handlers = {
-	html : function(webView, itemDetails, container, titleOnLoad){
-		webView.set("html", itemDetails.content );
-		if(titleOnLoad){
-			container.set({title:titleOnLoad});
-		}
-	},
-	url : function(webView, itemDetails, container, titleOnLoad){
-		webView.set("url", itemDetails.content );
-		if(titleOnLoad){
-			webView.on("load",function(){
-				container.set({title:titleOnLoad});
-			});
-		}
-	},
-};
