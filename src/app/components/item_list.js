@@ -1,4 +1,4 @@
-var getThemeListItemStyle = require('./../styles/theme').getThemeListItemStyle;
+var getThemeStyle = require('./../styles/theme').getThemeStyle;
 var detailScreen = require('./../pages/item_details');
 var resizeImageURLByWidth = require('./../../app/helpers/img_resize').resizeImageURLByWidth;
 var sizing = require('./../helpers/sizing');
@@ -16,8 +16,6 @@ var isTablet = sizing.isTablet;
 var imageWidth = isTablet ? tabris.device.get("screenWidth") * tabletWidthRatio : tabris.device.get("screenWidth");
 var imageHeightRatio = isTablet ? config.imgSizeHeightToWidthRatio.tablet : config.imgSizeHeightToWidthRatio.phone;
 var imageHeight = Math.floor(imageHeightRatio * imageWidth);
-
-
 
 
 
@@ -84,7 +82,7 @@ module.exports = function( feedConfig , tab) {
     });
     if (config.pullToRefresh ){
       widget.on('refresh', function(widget){
-          refreshItems( widget );
+          refreshItems( widget , true);
       })
     }
 
@@ -94,7 +92,7 @@ module.exports = function( feedConfig , tab) {
 
 
 function cellStyle(feedConfig){
-    var themeStyle = getThemeListItemStyle(feedConfig.color);
+    var themeStyle = getThemeStyle(feedConfig.color);
     return {
         container : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background},
         image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: 'fill' , background: "rgb(220, 220, 220)"},
@@ -104,9 +102,9 @@ function cellStyle(feedConfig){
 }
 
 
-function refreshItems( widget ) {
+function refreshItems( widget , forceFetch) {
     updateWidgetLoading ( widget, true);
-    getItems( widget.get('_feed') ).then( function(results){
+    getItems( widget.get('_feed') , {forceFetch: forceFetch} ).then( function(results){
         var arr = [].concat(results.items);
         if (results.state && results.state.hasMore) {
             arr = arr.concat({loadingNext: true});
@@ -123,7 +121,7 @@ function refreshItems( widget ) {
         updateWidgetLoading ( widget, false );
 
     }).catch(function(err){
-        console.log("Failed fetching items for: "+ widget.get('_feed'));
+        console.log("Failed fetching items for: "+ widget.get('_feed').name);
         console.log(err);
         try {
             console.log(JSON.stringify(err));
@@ -152,7 +150,7 @@ function loadMoreItems( widget ) {
             widget.remove(-1); //TODO: remove the loading animation at the end of feed.
         }
     }).catch(function(err){
-        console.log("Failed fetching items for: "+ widget.get('_feed'));
+        console.log("Failed fetching items for: "+ widget.get('_feed').name);
         console.log(err);
         try {
             console.log(JSON.stringify(err));

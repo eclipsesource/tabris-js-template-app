@@ -11,5 +11,13 @@
 Promise = require("promise");
 require("whatwg-fetch");
 
+// Add applauncher
+tabris.registerWidget("AppLauncher", {
+	_type: "tabris.AppLauncher",
+	openUrl: function(url) {
+		this._nativeCall("openUrl", {url: url});
+	}
+});
+
 // Run the first page
 require('./src/app/pages/main').open();

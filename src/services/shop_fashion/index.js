@@ -3,6 +3,7 @@
 * This means they could function similarly in a browser, or a node.js server.
 *
 ****************************/
+var pageSize = 50;
 
 function getItems(feedConfig , overideConfig){
 	return new Promise(function(resolve, reject) {
@@ -15,12 +16,12 @@ function getItems(feedConfig , overideConfig){
 			targetFeed.page = 1;
 		}
 
- 		var queryParamsStr = '';
+ 		var queryParamsStr = "limit="+pageSize+"&offset="+ (pageSize* (targetFeed.page-1)) +"&";
  		var tmp = []
  		for (var key in targetFeed){
 		    tmp.push(key + "=" + encodeURIComponent( targetFeed[key] ));
  		}
- 		queryParamsStr = tmp.join("&");
+ 		queryParamsStr += tmp.join("&");
 
 		if(requestCache[queryParamsStr]){
 			// This has been requested before
@@ -29,28 +30,25 @@ function getItems(feedConfig , overideConfig){
 			},1);
 		}
 		else {
-			fetch( "https://www.popshops.com/v3/products.json?" + queryParamsStr ).then(function( res ){
+			fetch( "http://api.shopstyle.com/api/v2/products?pid=uid4961-26577031-68&" + queryParamsStr ).then(function( res ){
 				return res.json();
+
 			}).then(function( res ){
 				var itemsProcessed, state = {};
 				var finalResult;
-				if(!res.results) {
+
+				if(!res.products) {
 					resolve([]);
 				}
 				else {
-
-					itemsProcessed = res.results.products.product;
+					itemsProcessed = res.products;
 					itemsProcessed.forEach(function(item){
 						item.title = item.name;
-						item.image = item.image_url_large;
-						item.price = item.price_min;
+						item.image = item.image.sizes.Original.url;
 					});
-					//console.log("Total "  + res.results.products.count);
-					//console.log("Fetched "  + itemsProcessed.length);
-					//console.log("Fetched Total"  + (((targetFeed.page - 1) *  targetFeed.results_per_page) + itemsProcessed.length) );
 
-					state.count = res.results.products.count;
-					state.fetched = (((targetFeed.page - 1) *  targetFeed.results_per_page) + itemsProcessed.length);
+					state.count = res.metadata.total;
+					state.fetched = (((targetFeed.page - 1) *  pageSize) + itemsProcessed.length);
 					state.hasMore = state.count > state.fetched;
 
 					finalResult = {items:itemsProcessed, state: state};
@@ -69,7 +67,7 @@ function getItems(feedConfig , overideConfig){
 function getItemDetails(item) {
 	return {
 		type: 'url', // can be 'html', 'url', 'component'
-		content: item.offers.offer[0].url
+		content: item.clickUrl
 	}
 }
 
@@ -80,18 +78,3 @@ module.exports = {
 	getItems: getItems,
   getItemDetails: getItemDetails
 };
-
-
-
-// var qq = {
-// 	  // catalog: "672oqm0oqpyrc4ullpfeclz66", // jewlerry
-// 		catalog:"0135pruepnxsbh6gw2ve714rv", //flowers
-// 		account:"bbhntrjt16yvunll9iyayufn4",
-// 		// keyword: "Fossil Watch Men",
-// 		// keyword: "G-shock",
-// 		category: 1,
-// 		include_discounts: "true",
-// 		results_per_page: 100,
-// 		//price_min: 2000
-// 		//page: 1
-// 	}
