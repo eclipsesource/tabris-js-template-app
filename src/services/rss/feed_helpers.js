@@ -9,7 +9,7 @@ function sanitizeFeedItems(feedItems, customContentSanitizer){
 			delete item.content;
 			results.push(item);
 		}
-	})
+	});
 	return results;
 }
 
@@ -17,7 +17,7 @@ function sanitizeHTMLfromFeedBloat(html){
 	var tmp = html.replace(/<a href="http:\/\/feeds.feedburner.com.*?<\/a>/ig,'') // remove feedburner crap
 		.replace(/<img src="http:\/\/feeds.feedburner.com.*?>/ig,'') // remove feedburner crap
 		.replace(/<img src="http:\/\/rss.buysellads.*?>/ig,'')// remove speckboy tracking pixels.
-		.replace(/<table width="650".*?<\/table>/igm,'')   // ads in table (smashing magazine)
+		.replace(/<table width="650".*?<\/table>/igm,'');   // ads in table (smashing magazine)
 	return tmp;
 
 }
@@ -50,4 +50,4 @@ module.exports = {
 	sanitizeHTMLfromFeedBloat: sanitizeHTMLfromFeedBloat,
 	extractFirstImageFromHtml: extractFirstImageFromHtml,
 	resolveImageForFeedItem: resolveImageForFeedItem
-}
+};

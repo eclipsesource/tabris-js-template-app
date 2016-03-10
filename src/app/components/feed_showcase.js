@@ -33,7 +33,7 @@ module.exports = function( feedConfig , tab) {
 	refreshItems(itemShowcase);
 
 	return container;
-}
+};
 
 
 function cellStyle(feedConfig){
@@ -44,7 +44,7 @@ function cellStyle(feedConfig){
 		header: {left: 0, right: 0, height: 30, top:0, background: themeStyle.showcase.background},
 		headerText: { maxLines: 1, font: 'bold 16px', left: 10, right: 0, bottom: 5, top:5, text:feedConfig.name, textColor: themeStyle.showcase.textColor , alignment:'left' },
 		headerSeeAll: { maxLines: 1, font: '12px', width: 100, right: 10, bottom: 5, top:5, text: "See all >", textColor: themeStyle.showcase.textColor , alignment:'right' }
-	}
+	};
 }
 
 

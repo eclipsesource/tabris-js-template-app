@@ -28,7 +28,7 @@ function getItemDetails(item) {
 	return {
 		type: 'url', // can be 'html', 'url', 'component'
 		content: item.link
-	}
+	};
 }
 
 

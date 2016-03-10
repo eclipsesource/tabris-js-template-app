@@ -5,7 +5,7 @@ var config = require('./../../config').config;
 **************************/
 
 function updateUIColors(color){
-	var style = getThemeStyle(color)
+	var style = getThemeStyle(color);
 	if(style.ui){
 		tabris.ui.set(style.ui);
 	}
@@ -35,7 +35,7 @@ function getThemeStyle(color){
 				background: 'white',
 				textColor: color
 			},
-		}
+		};
 	}
 	else if (config.theme === 'normal'){
 		return {
@@ -54,7 +54,7 @@ function getThemeStyle(color){
 				background: 'white',
 				textColor: color
 			},
-		}
+		};
 	}
 	else if (config.theme === 'full'){
 		return {
@@ -73,7 +73,7 @@ function getThemeStyle(color){
 				background: color,
 				textColor: 'white'
 			},
-		}
+		};
 	}
 	return {};
 }

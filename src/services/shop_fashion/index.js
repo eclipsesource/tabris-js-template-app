@@ -4,6 +4,7 @@
 *
 ****************************/
 var pageSize = 50;
+var requestCache = {};
 
 function getItems(feedConfig , overideConfig){
 	return new Promise(function(resolve, reject) {
@@ -17,7 +18,7 @@ function getItems(feedConfig , overideConfig){
 		}
 
  		var queryParamsStr = "limit="+pageSize+"&offset="+ (pageSize* (targetFeed.page-1)) +"&";
- 		var tmp = []
+ 		var tmp = [];
  		for (var key in targetFeed){
 		    tmp.push(key + "=" + encodeURIComponent( targetFeed[key] ));
  		}
@@ -68,11 +69,9 @@ function getItemDetails(item) {
 	return {
 		type: 'url', // can be 'html', 'url', 'component'
 		content: item.clickUrl
-	}
+	};
 }
 
-
-var requestCache = {};
 
 module.exports = {
 	getItems: getItems,

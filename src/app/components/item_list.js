@@ -83,12 +83,12 @@ module.exports = function( feedConfig , tab) {
     if (config.pullToRefresh ){
       widget.on('refresh', function(widget){
           refreshItems( widget , true);
-      })
+      });
     }
 
     refreshItems(widget);
     return widget;
-}
+};
 
 
 function cellStyle(feedConfig){
@@ -98,7 +98,7 @@ function cellStyle(feedConfig){
         image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: 'fill' , background: "rgb(220, 220, 220)"},
         overlay: { left: 0, right: 0, height: 46, bottom: 1 ,background: themeStyle.overlayBG, opacity: 0.8},
         title: { maxLines: 2, font: '16px', left: 10, right: 10, bottom: 5, textColor: themeStyle.textColor }
-    }
+    };
 }
 
 

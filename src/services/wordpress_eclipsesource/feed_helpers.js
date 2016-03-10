@@ -11,7 +11,7 @@ function extractFirstImageFromHtml(html) {
 	return null;
 }
 
-function resolveImageForFeedItem(feedItem, customImageResolver) {
+function resolveImageForFeedItem(feedItem) {
 	var img = extractFirstImageFromHtml(feedItem.content.rendered);
 	return img || '';
 }
@@ -19,4 +19,4 @@ function resolveImageForFeedItem(feedItem, customImageResolver) {
 module.exports = {
 	extractFirstImageFromHtml: extractFirstImageFromHtml,
 	resolveImageForFeedItem: resolveImageForFeedItem
-}
+};

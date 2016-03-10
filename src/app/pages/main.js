@@ -85,7 +85,7 @@ function open(){
 module.exports = {
     init: init,
     open: open
-}
+};
 
 
 function colorUpdates(color,  TabFolder){

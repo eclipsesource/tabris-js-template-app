@@ -9,11 +9,11 @@ function init(pageTitle, feedConfig){
 }
 
 function open(pageTitle, feedItem) {
-	var p = init(pageTitle, feedItem)
+	var p = init(pageTitle, feedItem);
 	return p.open();
 }
 
 module.exports  = {
 	open: open,
 	init: init,
-}
+};

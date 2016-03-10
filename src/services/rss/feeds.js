@@ -34,7 +34,7 @@ module.exports = [
         imageResolver: function(feedItem){
             if(feedItem.enclosure && feedItem.enclosure.link){
                 // TODO: device width!
-                return feedItem.enclosure.link + '?w=' + ( tabris.device.get("screenWidth") * tabris.device.get("scaleFactor") ) //request a custom size of img. Supported only on techcrunch
+                return feedItem.enclosure.link + '?w=' + ( tabris.device.get("screenWidth") * tabris.device.get("scaleFactor") ); //request a custom size of img. Supported only on techcrunch
             }
             return './images/notfound.png';
         }
