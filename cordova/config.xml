@@ -8,6 +8,8 @@
         EclipseSource
     </author>
     <access origin="*" />
+    <plugin name="cordova-plugin-x-socialsharing" />
+
     <platform name="android">
         <icon src="res/android/mipmap-ldpi/ic_launcher.png" density="ldpi" />
         <icon src="res/android/mipmap-mdpi/ic_launcher.png" density="mdpi" />
@@ -56,4 +58,6 @@
         <!--<splash src="res/ios/screen/Default-736h.png" width="1242" height="2208"/>-->
         <!--<splash src="res/ios/screen/Default-Landscape-736h.png" width="2208" height="1242"/>-->
     </platform>
+
+
 </widget>
