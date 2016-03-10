@@ -121,7 +121,7 @@ function refreshItems( widget , forceFetch) {
         updateWidgetLoading ( widget, false );
 
     }).catch(function(err){
-        console.log("Failed fetching items for: "+ widget.get('_feed'));
+        console.log("Failed fetching items for: "+ widget.get('_feed').name);
         console.log(err);
         try {
             console.log(JSON.stringify(err));
@@ -150,7 +150,7 @@ function loadMoreItems( widget ) {
             widget.remove(-1); //TODO: remove the loading animation at the end of feed.
         }
     }).catch(function(err){
-        console.log("Failed fetching items for: "+ widget.get('_feed'));
+        console.log("Failed fetching items for: "+ widget.get('_feed').name);
         console.log(err);
         try {
             console.log(JSON.stringify(err));

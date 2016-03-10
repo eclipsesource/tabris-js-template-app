@@ -22,67 +22,67 @@ module.exports = [
       			results_per_page: 50,
       		},
      },
-     {
-         name: 'Fossil',
-         color: '#05A9D6',
-         config: {
-      		  catalog: "672oqm0oqpyrc4ullpfeclz66",
-      			account:"bbhntrjt16yvunll9iyayufn4",
-        		keyword: "Fossil Watch Men",
-        		category: 1,
-      			include_discounts: "true",
-      			results_per_page: 50,
-      		},
-     },
-     {
-         name: 'Premium',
-         color: '#8f0d10',
-         config: {
-      		  catalog: "672oqm0oqpyrc4ullpfeclz66",
-      			account:"bbhntrjt16yvunll9iyayufn4",
-        		keyword: "Men watch",
-      			category: 1,
-      			include_discounts: "true",
-      			results_per_page: 50,
-      			price_min: 1000
-      		},
-     },
-	{
-		name: 'Breitling',
-		color: '#24BF7A',
-		config: {
-			catalog: "672oqm0oqpyrc4ullpfeclz66",
-			account:"bbhntrjt16yvunll9iyayufn4",
-			keyword: "Breitling watch",
-			category: 1,
-			include_discounts: "true",
-			results_per_page: 50,
-		},
-	},
-	{
-		name: 'Rolex',
-		color: '#161269',
-		config: {
-			catalog: "672oqm0oqpyrc4ullpfeclz66",
-			account:"bbhntrjt16yvunll9iyayufn4",
-			keyword: "Rolex Watch Men",
-			category: 1,
-			include_discounts: "true",
-			results_per_page: 50,
-		},
-	},
-	{
-		name: 'Pink',
-		color: '#E05AE6',
-		config: {
-			catalog: "672oqm0oqpyrc4ullpfeclz66",
-			account:"bbhntrjt16yvunll9iyayufn4",
-			keyword: "Pink watch",
-			category: 1,
-			include_discounts: "true",
-			results_per_page: 50,
-		},
-	},
+     //{
+     //    name: 'Fossil',
+     //    color: '#333',
+     //    config: {
+     // 		  catalog: "672oqm0oqpyrc4ullpfeclz66",
+     // 			account:"bbhntrjt16yvunll9iyayufn4",
+     //   		keyword: "Fossil Watch Men",
+     //   		category: 1,
+     // 			include_discounts: "true",
+     // 			results_per_page: 50,
+     // 		},
+     //},
+     //{
+     //    name: 'Premium',
+     //    color: '#333',
+     //    config: {
+     // 		  catalog: "672oqm0oqpyrc4ullpfeclz66",
+     // 			account:"bbhntrjt16yvunll9iyayufn4",
+     //   		keyword: "Men watch",
+     // 			category: 1,
+     // 			include_discounts: "true",
+     // 			results_per_page: 50,
+     // 			price_min: 1000
+     // 		},
+     //},
+	//{
+	//	name: 'Breitling',
+	//	color: '#333',
+	//	config: {
+	//		catalog: "672oqm0oqpyrc4ullpfeclz66",
+	//		account:"bbhntrjt16yvunll9iyayufn4",
+	//		keyword: "Breitling watch",
+	//		category: 1,
+	//		include_discounts: "true",
+	//		results_per_page: 50,
+	//	},
+	//},
+	//{
+	//	name: 'Rolex',
+	//	color: '#333',
+	//	config: {
+	//		catalog: "672oqm0oqpyrc4ullpfeclz66",
+	//		account:"bbhntrjt16yvunll9iyayufn4",
+	//		keyword: "Rolex Watch Men",
+	//		category: 1,
+	//		include_discounts: "true",
+	//		results_per_page: 50,
+	//	},
+	//},
+	//{
+	//	name: 'Pink',
+	//	color: '#333',
+	//	config: {
+	//		catalog: "672oqm0oqpyrc4ullpfeclz66",
+	//		account:"bbhntrjt16yvunll9iyayufn4",
+	//		keyword: "Pink watch",
+	//		category: 1,
+	//		include_discounts: "true",
+	//		results_per_page: 50,
+	//	},
+	//},
 
 
 

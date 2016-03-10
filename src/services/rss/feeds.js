@@ -40,6 +40,24 @@ module.exports = [
         }
     },
 
+    {   // GOOD
+        name: 'Gizmodo',
+        color: '#333',
+        feed: rss2json('http://gizmodo.com/rss'),
+    },
+
+    {   // Good
+        name: 'SmashingMagazine',
+        color: '#E53F2C',
+        feed: rss2json('http://www.smashingmagazine.com/feed'),
+    },
+
+    {   // Good (but small)
+        name: 'SpeckyBoy',
+        color: '#658DB5',
+        feed: rss2json('http://speckyboy.com/feed'),
+    },
+
 
     //{
     //    name: 'Fayerwayer',
@@ -53,25 +71,6 @@ module.exports = [
     //        return './images/notfound.png';
     //    }
     //},
-    //
-    //{   // GOOD
-    //    name: 'Gizmodo',
-    //    color: '#333',
-    //    feed: rss2json('http://gizmodo.com/rss'),
-    //},
-    //
-    //{   // Good
-    //    name: 'SmashingMagazine',
-    //    color: '#E53F2C',
-    //    feed: rss2json('http://www.smashingmagazine.com/feed'),
-    //},
-    //
-    //{   // Good (but small)
-    //    name: 'SpeckyBoy',
-    //    color: '#658DB5',
-    //    feed: rss2json('http://speckyboy.com/feed'),
-    //},
-
     //
     //{   // no images..
     //    name: 'ScienceDaily',
