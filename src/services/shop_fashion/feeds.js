@@ -47,20 +47,20 @@ module.exports = [
 	},
 
 	// Just watches
-     //{
-     //    name: 'G-shock',
-     //    color: '#333',
-     //    config: {
-     // 		  fts: "G-shock watch",
-     // 		},
-     //},
-     //{
-     //    name: 'Fossil',
-     //    color: '#333',
-     //    config: {
-     // 		  	fts: "Fossil Watch Men",
-     // 		},
-     //},
+	 //{
+	 //    name: 'G-shock',
+	 //    color: '#333',
+	 //    config: {
+	 // 		  fts: "G-shock watch",
+	 // 		},
+	 //},
+	 //{
+	 //    name: 'Fossil',
+	 //    color: '#333',
+	 //    config: {
+	 // 		  	fts: "Fossil Watch Men",
+	 // 		},
+	 //},
 	//{
 	//	name: 'Breitling',
 	//	color: '#333',

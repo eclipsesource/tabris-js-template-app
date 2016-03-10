@@ -35,14 +35,12 @@ function addItemWebView(container, feedItem, titleOnLoad){
 
 	var itemDetails = getItemDetails(feedItem);
 	handlers[itemDetails.type] (itemWebView, itemDetails, container, titleOnLoad);
-
 }
 
 function open(pageTitle, feedItem) {
 	var p = init(pageTitle, feedItem);
 	return p.open();
 }
-
 
 module.exports  = {
 	open: open,

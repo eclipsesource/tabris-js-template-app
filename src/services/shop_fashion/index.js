@@ -1,9 +1,12 @@
 /***************************
+* Shopstyle Collective Api
 * For the most part, services are independent of the platform the are running on.
 * This means they could function similarly in a browser, or a node.js server.
 *
 ****************************/
-var pageSize = 50;
+var API_KEY = 'uid4961-26577031-68' ;
+var PAGESIZE = 50;
+
 var requestCache = {};
 
 function getItems(feedConfig , overideConfig){
@@ -17,7 +20,7 @@ function getItems(feedConfig , overideConfig){
 			targetFeed.page = 1;
 		}
 
- 		var queryParamsStr = "limit="+pageSize+"&offset="+ (pageSize* (targetFeed.page-1)) +"&";
+ 		var queryParamsStr = "limit="+ PAGESIZE +"&offset="+ ( PAGESIZE * (targetFeed.page-1) ) +"&";
  		var tmp = [];
  		for (var key in targetFeed){
 		    tmp.push(key + "=" + encodeURIComponent( targetFeed[key] ));
@@ -31,7 +34,7 @@ function getItems(feedConfig , overideConfig){
 			},1);
 		}
 		else {
-			fetch( "http://api.shopstyle.com/api/v2/products?pid=uid4961-26577031-68&" + queryParamsStr ).then(function( res ){
+			fetch( "http://api.shopstyle.com/api/v2/products?pid="+ API_KEY +"&" + queryParamsStr ).then(function( res ){
 				return res.json();
 
 			}).then(function( res ){
@@ -49,7 +52,7 @@ function getItems(feedConfig , overideConfig){
 					});
 
 					state.count = res.metadata.total;
-					state.fetched = (((targetFeed.page - 1) *  pageSize) + itemsProcessed.length);
+					state.fetched = (((targetFeed.page - 1) *  PAGESIZE) + itemsProcessed.length);
 					state.hasMore = state.count > state.fetched;
 
 					finalResult = {items:itemsProcessed, state: state};

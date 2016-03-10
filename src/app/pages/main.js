@@ -61,9 +61,6 @@ function init() {
     }
 
 
-
-
-
     /*************************
      * Add an action to the nav bar
      **************************/
