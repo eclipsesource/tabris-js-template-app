@@ -15,7 +15,6 @@ var imageHeightRatio = isTablet ? config.imgShowcaseSizeHeightToWidthRatio.table
 var imageHeight = Math.floor(imageHeightRatio * imageWidth);
 
 
-
 module.exports = function( feedConfig , tab) {
 	var style = cellStyle(feedConfig);
 	var container = tabris.create("Composite", { left: 0, right: 0, top: "prev()", height: ( 90 + imageHeight )}).appendTo(tab);

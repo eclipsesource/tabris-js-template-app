@@ -2,7 +2,6 @@ var getItemDetails = require('./../../config.js').config.dataService.getItemDeta
 
 function init(pageTitle, feedItem){
 	var page = tabris.create("Page", { title: "Loading...", topLevel: false, _feedItem: feedItem });
-	// addViewAction(page);
 	addItemWebView(page,feedItem, pageTitle);
 
 	return page;
@@ -18,23 +17,6 @@ module.exports  = {
 	init: init,
 	addItemWebView: addItemWebView,
 }
-
-/*************************
- * Add an action to the nav bar
- **************************/
-
-// function addViewAction(page){
-// 	var openLinkAction = tabris.create("Action", {
-// 		placementPriority: "high",
-// 		image: {src: "images/refresh.png", scale: 3}
-// 	}).on("select", function() {
-// 		page.get('_itemWebView').dispose();
-// 		tabris.create('WebView', { url: page.get('_feedItem').link, left: 0, right: 0, top: 0, bottom: 0}).appendTo(page);
-// 	});
-// 	page.on("disappear", function(){
-// 		openLinkAction.dispose();
-// 	});
-// }
 
 /*************************
  * Add the webview with the feed content.

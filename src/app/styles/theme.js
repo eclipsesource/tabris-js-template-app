@@ -75,6 +75,7 @@ function getThemeStyle(color){
 			},
 		}
 	}
+	return {};
 }
 
 

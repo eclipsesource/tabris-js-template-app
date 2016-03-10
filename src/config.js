@@ -50,6 +50,26 @@ var apps = {
             tablet: 0.16,
         },
     },
+    shop_fashion: {
+        appName: 'Tabris.js Ecommerce example',
+        dataService: require('./services/shop_fashion'),
+        feeds: require('./services/shop_fashion/feeds'),
+        mainPage: "showcase",
+        // Overrides...
+        pullToRefresh:false,
+        imgSizeHeightToWidthRatio: {
+            phone: 1.3,
+            tablet: 1,
+        },
+        imgShowcaseSizeHeightToWidthRatio: {
+            phone: 1.3,
+            tablet: 1.1,
+        },
+        imgShowcaseScreenWidthRatio: {
+            phone: 0.25,
+            tablet: 0.16,
+        },
+    },
     wordpress_pets: {
         appName: 'Tabris.js Wordpress example',
         dataService: require('./services/wordpress_pets'),
@@ -67,10 +87,20 @@ var apps = {
 
 var baseConfig = {
     /******************************************
-     *  Here, are some common technology RSS feeds, with their respective:
+     *  This project comes with some starter apps That show off different abilities:
+     *
+     *  rss,
+     *  rss_showcase,
+     *  shop,
+     *  shop_showcase,
+     *  shop_fashion,
+     *  wordpress_pets,
+     *  wordpress_eclipsesource,
+     *
      *
      *  appName  - The title of the tab and more...
-     *  theme    - TRY THIS! Theme accepts 'normal', 'light', 'full' ... anything else will just stick to system defaults.
+     *  theme    - TRY THIS! Theme accepts 'normal', 'light', 'full'
+     *  mainPage - Can be 'tabs' view or 'showcase'
      **********************************/
 
     //theme: 'normal',
@@ -79,13 +109,11 @@ var baseConfig = {
     theme: tabris.device.get("platform") === "iOS" ? 'light' : 'full', // Define a certain theme for iOS and different for Android
 
     mainPage: "tabs", // can be "showcase" or "tabs"
-    //mainPage: "showcase", // can be "showcase" or "tabs"
 
     imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
-    app: 'shop', // can be 'rss', 'shop', 'wordpress_pets', 'wordpress_eclipsesource'
+    app: apps.shop_fashion , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
 
     pullToRefresh:true,
-
     imgSizeHeightToWidthRatio: {
         phone: 0.7,
         tablet: 1,
@@ -104,7 +132,7 @@ var baseConfig = {
 
 function buildConfig(){
     var config = JSON.parse(JSON.stringify(baseConfig));
-    var app = apps[baseConfig.app];
+    var app = baseConfig.app;
     for (var prop in app){
         config[prop] = app[prop];
     }
@@ -112,3 +140,5 @@ function buildConfig(){
 }
 
 exports.config = buildConfig();
+
+
