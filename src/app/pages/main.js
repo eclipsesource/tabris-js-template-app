@@ -3,6 +3,8 @@ var itemListComponent = require('./../components/item_list');
 var feedShowcase = require('./../components/feed_showcase');
 var updateUIColors = require('./../styles/theme').updateUIColors;
 var getThemeStyle = require('./../styles/theme').getThemeStyle;
+var aboutPage = require('./about.js');
+
 
 // Sizing helpers.
 var sizing = require('./../helpers/sizing');
@@ -58,6 +60,20 @@ function init() {
         colorUpdates (config.feeds[0].color);
     }
 
+
+
+
+
+    /*************************
+     * Add an action to the nav bar
+     **************************/
+    page.on("appear", function(){
+        addViewAction(page);
+    })
+    .on("disappear", function(){
+        page.get('_openLinkAction').dispose();
+    });
+
     return page;
 }
 
@@ -78,4 +94,15 @@ function colorUpdates(color,  TabFolder){
     if(TabFolder){
         TabFolder.set(styles.tabs);
     }
+}
+
+function addViewAction(page){
+    var openLinkAction = tabris.create("Action", {
+        placementPriority: "high",
+        title: "?",
+        //image: {src: "images/refresh.png", scale: 3}
+    }).on("select", function() {
+        aboutPage.open();
+    });
+    page.set('_openLinkAction',openLinkAction);
 }
