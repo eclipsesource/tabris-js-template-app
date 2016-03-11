@@ -17,12 +17,12 @@
 
 
 
-    <plugin name="cordova-plugin-statusbar" />
-    <!--<plugin name="cordova-plugin-admobpro" />-->
-    <!--<plugin name="cordova-plugin-network-information" />-->
+    <!--<plugin name="cordova-plugin-statusbar" />-->
+    <plugin name="cordova-plugin-local-notifications" />
+    <plugin name="cordova-plugin-spinner-dialog" />
     <!--<plugin name="cordova-plugin-native-transitions" />-->
     <!--<plugin name="cordova-sms-plugin" />-->
-    <plugin name="cordova-plugin-progressindicator" />
+    <!--<plugin name="cordova-plugin-progressindicator" />-->
 
 
     <platform name="android">
