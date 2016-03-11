@@ -14,7 +14,18 @@
     <plugin name="cordova-plugin-dialogs" />
     <plugin name="cordova-plugin-contacts" />
     <plugin name="cordova-plugin-actionsheet" />
-    
+
+
+
+    <plugin name="cordova-plugin-statusbar" />
+    <plugin name="cordova-plugin-admobpro" />
+    <plugin name="cordova-plugin-network-information" />
+    <plugin name="cordova-plugin-native-transitions" />
+    <plugin name="cordova-sms-plugin" />
+    <plugin name="cordova-plugin-progressindicator" />
+    <plugin name="com.lampa.startapp" />
+
+
     <platform name="android">
         <icon src="res/android/mipmap-ldpi/ic_launcher.png" density="ldpi" />
         <icon src="res/android/mipmap-mdpi/ic_launcher.png" density="mdpi" />

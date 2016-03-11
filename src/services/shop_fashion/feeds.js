@@ -28,7 +28,7 @@ module.exports = [
 		name: 'Hats',
 		color: '#333',
 		config: {
-			fts: "hat",
+			fts: "summer hat",
 		},
 	},
 	{
