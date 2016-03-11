@@ -1,6 +1,6 @@
 # Tabris.js example / starter apps
 
-Tabris.js is an amazing way to create native mobile apps in the new age. It combines native platform widgets – performance plus look & feel, and device capabilities with the simplicity, elegance, and power of a single JavaScript codebase for iOS, Android and Windows (coming soon). These advantages make a very strong use case for JavaScript runtime platforms like Tabris.js, React Native and NativeScript, rather than HTML-based hybrid platforms like Ionic. We will certainly be seeing more and more apps built in JavaScript without HTML in the years to come.
+([*Tabris.js*](https://tabrisjs.com) is an amazing way to create native mobile apps in the new age. It combines native platform widgets – performance plus look & feel, and device capabilities with the simplicity, elegance, and power of a single JavaScript codebase for iOS, Android and Windows (coming soon). These advantages make a very strong use case for JavaScript runtime platforms like Tabris.js, React Native and NativeScript, rather than HTML-based hybrid platforms like Ionic. We will certainly be seeing more and more apps built in JavaScript without HTML in the years to come.
 
 Moreover, Tabris.js also offers some unique advantages to developers, like a cloud build service and developer apps for iOS and Android. This means you can develop iOS apps without owning a Mac or installing Xcode (but need an iPhone / iPad). Likewise, you can develop Android apps without downloading Android studio and the Android SDKs (but need an Android phone / tablet).
 
