@@ -40,7 +40,7 @@ function init() {
         // Update the UI based on the theme and active tab.
         colorUpdates (config.feeds[0].color , TabFolder);
     }
-    else if(config.mainPage === "showcase" || true){ // fallback
+    else if(config.mainPage === "showcase" || true){
         /**********************
          *   Showcase
          ******************/

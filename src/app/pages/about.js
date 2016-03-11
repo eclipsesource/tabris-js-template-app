@@ -39,7 +39,7 @@ function createTabrisJsAttribution() {
 function createProjectAttribution() {
 	var projectAttribution = tabris.create("Composite", {
 		id: "projectAttribution",
-		left: MARGIN_LARGE, bottom: [0, MARGIN_LARGE*3], height: 50, right: MARGIN_LARGE,
+		left: MARGIN_LARGE, top: ["prev()", MARGIN_LARGE*2], height: 50, right: MARGIN_LARGE,
 	});
 	var firstLine = tabris.create("TextView", {
 		left: 0, top: 0, right: 0,
