@@ -27,7 +27,7 @@ function getItems(feedConfig, overideConfig){
 		if(requestCache[feedConfig.feed] && !overideConfig.forceFetch){
 			// This has been requested before
 			setTimeout(function(){
-				resolve(JSON.parse(JSON.stringify(requestCache[feedConfig.feed])));
+				resolve(_.cloneDeep(requestCache[feedConfig.feed]));
 			},1);
 		}
 		else {
@@ -42,7 +42,7 @@ function getItems(feedConfig, overideConfig){
 
 				finalResult = {items: itemsProcessed};
 				requestCache[feedConfig.feed] = finalResult;
-				resolve(JSON.parse(JSON.stringify(finalResult)));
+				resolve(_.cloneDeep(finalResult));
 
 			}).catch(function (err) {
 				reject(err);

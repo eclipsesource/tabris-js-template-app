@@ -1,5 +1,6 @@
 /***************************
 * Shopstyle Collective Api
+ *
 * For the most part, services are independent of the platform the are running on.
 * This means they could function similarly in a browser, or a node.js server.
 *
@@ -8,11 +9,12 @@ var API_KEY = 'uid4961-26577031-68' ;
 var PAGESIZE = 50;
 
 var requestCache = {};
+var _ = require("lodash");
 
 function getItems(feedConfig , overideConfig){
 	return new Promise(function(resolve, reject) {
 
-        var targetFeed = JSON.parse(JSON.stringify(feedConfig.config)); // Simple clone without dependencies.
+        var targetFeed = _.cloneDeep(feedConfig.config);
 		if(overideConfig && overideConfig.page){
 			targetFeed.page = overideConfig.page;
 		}
@@ -30,7 +32,7 @@ function getItems(feedConfig , overideConfig){
 		if(requestCache[queryParamsStr]){
 			// This has been requested before
 			setTimeout(function(){
-				resolve(JSON.parse(JSON.stringify(requestCache[queryParamsStr])));
+				resolve(_.cloneDeep(requestCache[queryParamsStr]));
 			},1);
 		}
 		else {
@@ -57,7 +59,7 @@ function getItems(feedConfig , overideConfig){
 
 					finalResult = {items:itemsProcessed, state: state};
 					requestCache[queryParamsStr] = finalResult;
-					resolve(JSON.parse(JSON.stringify(finalResult)));
+					resolve(_.cloneDeep(finalResult));
 				}
 			}).catch(function (err){
 				reject(err);
@@ -78,5 +80,5 @@ function getItemDetails(item) {
 
 module.exports = {
 	getItems: getItems,
-  getItemDetails: getItemDetails
+    getItemDetails: getItemDetails
 };

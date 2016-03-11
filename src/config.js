@@ -83,7 +83,7 @@ var apps = {
     }
     // TODO: Youtube / Vimeo ?
 };
-
+var _ = require("lodash");
 
 var baseConfig = {
     /******************************************
@@ -100,7 +100,7 @@ var baseConfig = {
      *
      *  appName  - The title of the tab and more...
      *  theme    - TRY THIS! Theme accepts 'normal', 'light', 'full'
-     *  mainPage - Can be 'tabs' view or 'showcase'
+     *  mainPage - Can be 'tabs' view or 'showcase' - overriden by some app definitions.
      **********************************/
 
     //theme: 'normal',
@@ -131,7 +131,7 @@ var baseConfig = {
 };
 
 function buildConfig(){
-    var config = JSON.parse(JSON.stringify(baseConfig));
+    var config = _.cloneDeep(baseConfig);
     var app = baseConfig.app;
     for (var prop in app){
         config[prop] = app[prop];

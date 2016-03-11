@@ -96,8 +96,7 @@ function colorUpdates(color,  TabFolder){
 function addViewAction(page){
     var openLinkAction = tabris.create("Action", {
         placementPriority: "high",
-        title: "?",
-        //image: {src: "images/refresh.png", scale: 3}
+        title: "?", //TODO: i icon?
     }).on("select", function() {
         aboutPage.open();
     });
