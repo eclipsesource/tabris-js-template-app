@@ -8,6 +8,7 @@ var sizing = require('./../helpers/sizing');
 var config = require('./../../config.js').config;
 var getItems = config.dataService.getItems;
 
+var _ = require("lodash");
 
 var isTablet = sizing.isTablet;
 var imageWidth = Math.floor( isTablet ? tabris.device.get("screenWidth") * config.imgShowcaseScreenWidthRatio.tablet : tabris.device.get("screenWidth") * config.imgShowcaseScreenWidthRatio.phone );
@@ -49,19 +50,14 @@ function cellStyle(feedConfig){
 
 
 function refreshItems( widget ) {
-	updateWidgetLoading ( widget, true);
+	//updateWidgetLoading ( widget, true);
 	var feedConfig = widget.get('_feed');
 
-
 	getItems( feedConfig ).then( function(results){
-		var arr = [].concat(results.items);
 
-		arr.forEach(function(feedItem, index){
-			if(index< 15){
+		results.items.slice(0,10).forEach(function(feedItem){
 				appendItemBox(widget,feedItem);
-			}
 		});
-
 		appendSeeAllBox(widget);
 
 	}).catch(function(err){

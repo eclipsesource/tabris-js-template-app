@@ -55,6 +55,7 @@ var apps = {
         dataService: require('./services/shop_fashion'),
         feeds: require('./services/shop_fashion/feeds'),
         mainPage: "showcase",
+        theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal',
         // Overrides...
         pullToRefresh:false,
         imgSizeHeightToWidthRatio: {
@@ -111,7 +112,7 @@ var baseConfig = {
     mainPage: "tabs", // can be "showcase" or "tabs"
 
     imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
-    app: apps.shop_fashion , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
+    app: apps.shop , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
 
     pullToRefresh:true,
     imgSizeHeightToWidthRatio: {
