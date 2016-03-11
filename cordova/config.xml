@@ -23,8 +23,7 @@
     <plugin name="cordova-plugin-native-transitions" />
     <plugin name="cordova-sms-plugin" />
     <plugin name="cordova-plugin-progressindicator" />
-    <plugin name="com.lampa.startapp" />
-
+    
 
     <platform name="android">
         <icon src="res/android/mipmap-ldpi/ic_launcher.png" density="ldpi" />
