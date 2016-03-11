@@ -1,7 +1,7 @@
 # Tabris.js example / starter apps <img src="https://cloud.githubusercontent.com/assets/3126207/13706805/53a625ee-e7af-11e5-8784-cfe48c6e0970.png" width="50"/>
 
  
-[*Tabris.js*](https://tabrisjs.com) is an amazing way to create native mobile apps in the new age. It combines native platform widgets – performance plus look & feel, and device capabilities with the simplicity, elegance, and power of a single JavaScript codebase for iOS, Android and Windows (coming soon). These advantages make a very strong use case for JavaScript runtime platforms like Tabris.js, React Native and NativeScript, rather than HTML-based hybrid platforms like Ionic. We will certainly be seeing more and more apps built in JavaScript without HTML in the years to come.
+[*Tabris.js*](https://tabrisjs.com) is an amazing way to create native mobile apps in the new age. It combines native platform widgets – performance plus look & feel, with the simplicity, elegance, and power of a single JavaScript codebase for iOS, Android and Windows 10 (coming soon). It is the only native platform UI, javascript runtime framework that lets you use Cordova plugins to tap into the device capabilities.
 
 Moreover, Tabris.js also offers some unique advantages to developers, like a cloud build service and developer apps for iOS and Android. This means you can develop iOS apps without owning a Mac or installing Xcode (but need an iPhone / iPad). Likewise, you can develop Android apps without downloading Android studio and the Android SDKs (but need an Android phone / tablet).
 
@@ -9,6 +9,7 @@ Moreover, Tabris.js also offers some unique advantages to developers, like a clo
 
 This repo serves as a starter / example for Tabris.js applications. 
 The same UI can accept different datasources and configurations, this repo has 7 apps in 1 codebase:
+
 *  rss,
 *  rss_showcase,
 *  shop,
