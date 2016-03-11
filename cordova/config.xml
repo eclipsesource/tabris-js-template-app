@@ -9,21 +9,8 @@
     </author>
     <access origin="*" />
     <plugin name="cordova-plugin-x-socialsharing" />
-    <plugin name="cordova-plugin-camera" />
-    <plugin name="cordova-plugin-x-toast" />
     <plugin name="cordova-plugin-dialogs" />
-    <plugin name="cordova-plugin-contacts" />
     <plugin name="cordova-plugin-actionsheet" />
-
-
-
-    <!--<plugin name="cordova-plugin-statusbar" />-->
-    <plugin name="cordova-plugin-local-notifications" />
-    <!--<plugin name="cordova-plugin-spinner-dialog" />-->
-    <!--<plugin name="cordova-plugin-native-transitions" />-->
-    <!--<plugin name="cordova-sms-plugin" />-->
-    <!--<plugin name="cordova-plugin-progressindicator" />-->
-
 
     <platform name="android">
         <icon src="res/android/mipmap-ldpi/ic_launcher.png" density="ldpi" />
