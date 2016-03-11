@@ -19,8 +19,8 @@ Expect many updates and improvements soon!
 Screenshots:
 
 <p>
-  <img src="http://i63.tinypic.com/x58rut.png" width="350"/>
-  <img src="http://i66.tinypic.com/2lazua9.png" width="350"/>
+  
+  <img src="https://cloud.githubusercontent.com/assets/3126207/13705259/b9d0849c-e7a8-11e5-9d35-bd7743fd02fc.gif"/>
 </p>
 
 # Setup
