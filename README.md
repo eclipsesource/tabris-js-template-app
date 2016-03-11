@@ -4,6 +4,8 @@
 
 Moreover, Tabris.js also offers some unique advantages to developers, like a cloud build service and developer apps for iOS and Android. This means you can develop iOS apps without owning a Mac or installing Xcode (but need an iPhone / iPad). Likewise, you can develop Android apps without downloading Android studio and the Android SDKs (but need an Android phone / tablet).
 
+# About
+
 This repo serves as a starter / example for Tabris.js applications. 
 The same UI can accept different datasources and configurations, this repo has 7 apps in 1 codebase:
 *  rss,
@@ -16,7 +18,7 @@ The same UI can accept different datasources and configurations, this repo has 7
 
 Expect many updates and improvements soon!
 
-Screenshots:
+Examples:
 
 <p>
   
