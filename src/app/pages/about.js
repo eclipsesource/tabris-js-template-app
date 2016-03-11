@@ -53,6 +53,6 @@ function createProjectAttribution() {
 		textColor: "#222",
 		text: "Fork it on "
 	}).appendTo(secondLine);
-	Link.create({text: "GitHub", url: "http://www.tabrisjs.com", left: seeSourceText, top: 0}).appendTo(secondLine);
+	Link.create({text: "GitHub", url: "https://github.com/eclipsesource/tabris-js-starter-apps", left: seeSourceText, top: 0}).appendTo(secondLine);
 	return projectAttribution;
 }
