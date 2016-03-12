@@ -18,12 +18,32 @@ function init() {
     // Ok we need a page to contain all the application UI
     var page = tabris.create("Page", { title: config.appName , topLevel : true}) ;
 
+    var Navigation = tabris.create('TabFolder', { left: 0, top: 0, right: 0, bottom:0 , elevation: 8 , tabBarLocation: "bottom", paging:  false,  textColor: "#111",}).appendTo(page);
+    page.set("_navigation", Navigation);
+
+    // Now we will create a tab per source and add to the container
+
+    var HomeTab = tabris.create( 'Tab', { title: "Home", background: 'white', image: {src: "images/home@2x.png", scale: 4}, } ).appendTo(Navigation);
+    //tabris.create( 'Tab', { title: "Discover", background: 'white', image: {src: "images/compass@2x.png", scale: 4}, } ).appendTo(Navigation);
+    tabris.create( 'Tab', { title: "Search", background: 'white', image: {src: "images/search@2x.png", scale: 4}, } ).appendTo(Navigation);
+    tabris.create( 'Tab', { title: "Favourites", background: 'white', image: {src: "images/like@2x.png", scale: 4}, } ).appendTo(Navigation);
+    tabris.create( 'Tab', { title: "My account", background: 'white', image: {src: "images/user@2x.png", scale: 4}, } ).appendTo(Navigation);
+    tabris.create( 'Tab', { title: "More", background: 'white', image: {src: "images/more@2x.png", scale: 4}, } ).appendTo(Navigation);
+
+    // When the user changes the tab, change the app visuals
+    Navigation.on("change:selection", function(widget, tab) {
+        //colorUpdates (tab.get('_feed').color );
+        console.log("navigated away");
+    });
+
+    var HometabContent = tabris.create('Composite', { left: 0, top: 0, right: 0, bottom:0}).appendTo(HomeTab);
+
     if(config.mainPage === "tabs"){
         /**********************
          *   Tabs
          ******************/
         // So we need a Tab Container
-        var TabFolder = tabris.create('TabFolder', { left: 0, top: 0, right: 0, bottom:0 , elevation: 8 , tabBarLocation: "top", paging: tabris.device.get("platform") === "iOS" ? false : true} ).appendTo(page);
+        var TabFolder = tabris.create('TabFolder', { left: 0, top: 0, right: 0, bottom:0 , elevation: 8 , tabBarLocation: "top", paging: tabris.device.get("platform") === "iOS" ? false : true} ).appendTo(HometabContent);
         page.set("_tabs", TabFolder);
 
         // Now we will create a tab per source and add to the container
@@ -44,7 +64,7 @@ function init() {
         /**********************
          *   Showcase
          ******************/
-        var container = tabris.create("ScrollView", { left: 0, right: 0, top: 0, bottom: 0 , direction:"vertical"}).appendTo(page);
+        var container = tabris.create("ScrollView", { left: 0, right: 0, top: 0, bottom: 0 , direction:"vertical"}).appendTo(HometabContent);
 
         // Now we will create a tab per source and add to the container
         config.feeds.forEach(function( feed ){
