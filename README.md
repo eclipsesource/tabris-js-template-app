@@ -27,9 +27,7 @@ Examples:
   <img src="https://cloud.githubusercontent.com/assets/3126207/13744360/f4933fae-e9ef-11e5-8ba4-08ce0a3295da.gif" height="450"/>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <img src="https://cloud.githubusercontent.com/assets/3126207/13710436/29f065a8-e7c2-11e5-9ece-f57242378ebe.gif" height="450"/>
   
   
-  
-  
-  
+  <br/><br/><br/><br/>
   
   <h2>Ecommerce Example:</h3>
   <img src="https://cloud.githubusercontent.com/assets/3126207/13705259/b9d0849c-e7a8-11e5-9d35-bd7743fd02fc.gif" height="450"/>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <img src="https://cloud.githubusercontent.com/assets/3126207/13710436/29f065a8-e7c2-11e5-9ece-f57242378ebe.gif" height="450"/>
