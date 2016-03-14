@@ -33,7 +33,7 @@ Examples:
 Seting up is really easy (you just node node installed):
 
 ```shell
-$ git clone git@github.com:eclipsesource/tabris-js-rss-example.git
+$ git clone git@github.com:eclipsesource/tabris-js-starter-apps.git
 $ cd tabris-js-rss-example
 $ npm install
 $ npm install -g http-server
