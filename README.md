@@ -20,11 +20,11 @@ The same UI can accept different datasources and configurations, this repo has 7
 
 Expect many updates and improvements soon!
 
-Examples:
+The examples apps work in phones and tablets - both for iOS and Android. The example visuals are with and iPhone 6s and a 10" Android tablet:
 
 <p>
   <h3>RSS Example:</h3>
-  <img src="https://cloud.githubusercontent.com/assets/3126207/13744360/f4933fae-e9ef-11e5-8ba4-08ce0a3295da.gif" height="450"/>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <img src="https://cloud.githubusercontent.com/assets/3126207/13710436/29f065a8-e7c2-11e5-9ece-f57242378ebe.gif" height="450"/>
+  <img src="https://cloud.githubusercontent.com/assets/3126207/13744360/f4933fae-e9ef-11e5-8ba4-08ce0a3295da.gif" height="450"/>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <img src="https://cloud.githubusercontent.com/assets/3126207/13744727/57867340-e9f2-11e5-95f7-fc8075509e6e.gif" height="450"/>
   
   
   <br/><br/><br/><br/>
