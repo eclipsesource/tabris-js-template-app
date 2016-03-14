@@ -10,41 +10,41 @@
 module.exports = [
     // Watches
 
-	{
-		name: 'Jeans',
-		color: '#333',
-		config: {
-			fts: "Jeans",
-		},
-	},
-	{
-		name: 'Dresses',
-		color: '#333',
-		config: {
-			fts: "Dress",
-		},
-	},
-	{
-		name: 'Hats',
-		color: '#333',
-		config: {
-			fts: "summer hat",
-		},
-	},
-	{
-		name: 'watches',
-		color: '#333',
-		config: {
-			fts: "watch",
-		},
-	},
-	{
-		name: 'Bags',
-		color: '#333',
-		config: {
-			fts: "bag",
-		},
-	},
+	//{
+	//	name: 'Jeans',
+	//	color: '#333',
+	//	config: {
+	//		fts: "Jeans",
+	//	},
+	//},
+	//{
+	//	name: 'Dresses',
+	//	color: '#333',
+	//	config: {
+	//		fts: "Dress",
+	//	},
+	//},
+	//{
+	//	name: 'Hats',
+	//	color: '#333',
+	//	config: {
+	//		fts: "summer hat",
+	//	},
+	//},
+	//{
+	//	name: 'watches',
+	//	color: '#333',
+	//	config: {
+	//		fts: "watch",
+	//	},
+	//},
+	//{
+	//	name: 'Bags',
+	//	color: '#333',
+	//	config: {
+	//		fts: "bag",
+	//	},
+	//},
 
 	// Just watches
 	 //{
@@ -83,6 +83,40 @@ module.exports = [
 	//	},
 	//},
 
-
+	{
+		name: 'Earrings',
+		color: '#333',
+		config: {
+			fts: "Earrings",
+		},
+	},
+	{
+		name: 'Necklaces',
+		color: '#333',
+		config: {
+			fts: "Necklace",
+		},
+	},
+	{
+		name: 'Rings',
+		color: '#333',
+		config: {
+			fts: "ring",
+		},
+	},
+	//{
+	//	name: 'watches',
+	//	color: '#333',
+	//	config: {
+	//		fts: "watch",
+	//	},
+	//},
+	//{
+	//	name: 'Bags',
+	//	color: '#333',
+	//	config: {
+	//		fts: "bag",
+	//	},
+	//},
 
 ];
