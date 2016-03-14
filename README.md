@@ -36,7 +36,7 @@ The examples apps work in phones and tablets - both for iOS and Android. The exa
 </p>
 
 # Setup
-Seting up is really easy (you just node node installed):
+Seting up is really easy (you just need node installed):
 
 ```shell
 $ git clone git@github.com:eclipsesource/tabris-js-starter-apps.git
