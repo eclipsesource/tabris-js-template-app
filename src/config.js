@@ -112,7 +112,11 @@ var baseConfig = {
     mainPage: "tabs", // can be "showcase" or "tabs"
 
     imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
-    app: apps.rss , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
+
+	/****************************
+     * IMPORTANT: Change this value to uncover 7 different apps  :)
+     ****************************/
+    app: apps.shop_fashion , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
 
     pullToRefresh:true,
     imgSizeHeightToWidthRatio: {

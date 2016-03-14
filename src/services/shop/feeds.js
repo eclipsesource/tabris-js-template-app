@@ -10,79 +10,79 @@
 module.exports = [
     // Watches
 
-     //{
-     //    name: 'G-shock',
-     //    color: '#333',
-     //    config: {
-     // 		  catalog: "672oqm0oqpyrc4ullpfeclz66",
-     // 			account:"bbhntrjt16yvunll9iyayufn4",
-     //   		keyword: "G-shock watch",
-     // 			category: 1,
-     // 			include_discounts: "true",
-     // 			results_per_page: 50,
-     // 		},
-     //},
-     //{
-     //    name: 'Fossil',
-     //    color: '#333',
-     //    config: {
-     // 		  catalog: "672oqm0oqpyrc4ullpfeclz66",
-     // 			account:"bbhntrjt16yvunll9iyayufn4",
-     //   		keyword: "Fossil Watch Men",
-     //   		category: 1,
-     // 			include_discounts: "true",
-     // 			results_per_page: 50,
-     // 		},
-     //},
-     //{
-     //    name: 'Premium',
-     //    color: '#333',
-     //    config: {
-     // 		  catalog: "672oqm0oqpyrc4ullpfeclz66",
-     // 			account:"bbhntrjt16yvunll9iyayufn4",
-     //   		keyword: "Men watch",
-     // 			category: 1,
-     // 			include_discounts: "true",
-     // 			results_per_page: 50,
-     // 			price_min: 1000
-     // 		},
-     //},
-	//{
-	//	name: 'Breitling',
-	//	color: '#333',
-	//	config: {
-	//		catalog: "672oqm0oqpyrc4ullpfeclz66",
-	//		account:"bbhntrjt16yvunll9iyayufn4",
-	//		keyword: "Breitling watch",
-	//		category: 1,
-	//		include_discounts: "true",
-	//		results_per_page: 50,
-	//	},
-	//},
-	//{
-	//	name: 'Rolex',
-	//	color: '#333',
-	//	config: {
-	//		catalog: "672oqm0oqpyrc4ullpfeclz66",
-	//		account:"bbhntrjt16yvunll9iyayufn4",
-	//		keyword: "Rolex Watch Men",
-	//		category: 1,
-	//		include_discounts: "true",
-	//		results_per_page: 50,
-	//	},
-	//},
-	//{
-	//	name: 'Pink',
-	//	color: '#333',
-	//	config: {
-	//		catalog: "672oqm0oqpyrc4ullpfeclz66",
-	//		account:"bbhntrjt16yvunll9iyayufn4",
-	//		keyword: "Pink watch",
-	//		category: 1,
-	//		include_discounts: "true",
-	//		results_per_page: 50,
-	//	},
-	//},
+     {
+         name: 'G-shock',
+         color: '#333',
+         config: {
+      		  catalog: "672oqm0oqpyrc4ullpfeclz66",
+      			account:"bbhntrjt16yvunll9iyayufn4",
+        		keyword: "G-shock watch",
+      			category: 1,
+      			include_discounts: "true",
+      			results_per_page: 50,
+      		},
+     },
+     {
+         name: 'Fossil',
+         color: '#333',
+         config: {
+      		  catalog: "672oqm0oqpyrc4ullpfeclz66",
+      			account:"bbhntrjt16yvunll9iyayufn4",
+        		keyword: "Fossil Watch Men",
+        		category: 1,
+      			include_discounts: "true",
+      			results_per_page: 50,
+      		},
+     },
+     {
+         name: 'Premium',
+         color: '#333',
+         config: {
+      		  catalog: "672oqm0oqpyrc4ullpfeclz66",
+      			account:"bbhntrjt16yvunll9iyayufn4",
+        		keyword: "Men watch",
+      			category: 1,
+      			include_discounts: "true",
+      			results_per_page: 50,
+      			price_min: 1000
+      		},
+     },
+	{
+		name: 'Breitling',
+		color: '#333',
+		config: {
+			catalog: "672oqm0oqpyrc4ullpfeclz66",
+			account:"bbhntrjt16yvunll9iyayufn4",
+			keyword: "Breitling watch",
+			category: 1,
+			include_discounts: "true",
+			results_per_page: 50,
+		},
+	},
+	{
+		name: 'Rolex',
+		color: '#333',
+		config: {
+			catalog: "672oqm0oqpyrc4ullpfeclz66",
+			account:"bbhntrjt16yvunll9iyayufn4",
+			keyword: "Rolex Watch Men",
+			category: 1,
+			include_discounts: "true",
+			results_per_page: 50,
+		},
+	},
+	{
+		name: 'Pink',
+		color: '#333',
+		config: {
+			catalog: "672oqm0oqpyrc4ullpfeclz66",
+			account:"bbhntrjt16yvunll9iyayufn4",
+			keyword: "Pink watch",
+			category: 1,
+			include_discounts: "true",
+			results_per_page: 50,
+		},
+	},
 
 
 
@@ -127,42 +127,42 @@ module.exports = [
     //},
 
 
-	{
-		name: 'Hammers',
-		color: '#333',
-		config: {
-			catalog: "09ljxn1kvf6w57ess6smd6xcq",
-			account:"bbhntrjt16yvunll9iyayufn4",
-			keyword: "hammer",
-			category: 1,
-			include_discounts: "true",
-			results_per_page: 50,
-		},
-	},
-
-	{
-		name: 'Wrenches',
-		color: '#333',
-		config: {
-			catalog: "09ljxn1kvf6w57ess6smd6xcq",
-			account:"bbhntrjt16yvunll9iyayufn4",
-			keyword: "Wrench",
-			category: 1,
-			include_discounts: "true",
-			results_per_page: 50,
-		},
-	},
-
-	{
-		name: 'Saw',
-		color: '#333',
-		config: {
-			catalog: "09ljxn1kvf6w57ess6smd6xcq",
-			account:"bbhntrjt16yvunll9iyayufn4",
-			keyword: "chainsaw",
-			category: 1,
-			include_discounts: "true",
-			results_per_page: 50,
-		},
-	},
+	//{
+	//	name: 'Hammers',
+	//	color: '#333',
+	//	config: {
+	//		catalog: "09ljxn1kvf6w57ess6smd6xcq",
+	//		account:"bbhntrjt16yvunll9iyayufn4",
+	//		keyword: "hammer",
+	//		category: 1,
+	//		include_discounts: "true",
+	//		results_per_page: 50,
+	//	},
+	//},
+	//
+	//{
+	//	name: 'Wrenches',
+	//	color: '#333',
+	//	config: {
+	//		catalog: "09ljxn1kvf6w57ess6smd6xcq",
+	//		account:"bbhntrjt16yvunll9iyayufn4",
+	//		keyword: "Wrench",
+	//		category: 1,
+	//		include_discounts: "true",
+	//		results_per_page: 50,
+	//	},
+	//},
+	//
+	//{
+	//	name: 'Saw',
+	//	color: '#333',
+	//	config: {
+	//		catalog: "09ljxn1kvf6w57ess6smd6xcq",
+	//		account:"bbhntrjt16yvunll9iyayufn4",
+	//		keyword: "chainsaw",
+	//		category: 1,
+	//		include_discounts: "true",
+	//		results_per_page: 50,
+	//	},
+	//},
 ];
