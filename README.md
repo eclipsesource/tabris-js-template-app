@@ -1,4 +1,4 @@
-# Tabris.js example / starter apps <img src="https://cloud.githubusercontent.com/assets/3126207/13706805/53a625ee-e7af-11e5-8784-cfe48c6e0970.png" width="50"/>
+# Tabris.js template app <img src="https://cloud.githubusercontent.com/assets/3126207/13706805/53a625ee-e7af-11e5-8784-cfe48c6e0970.png" width="50"/>
 
  
 [*Tabris.js*](https://tabrisjs.com) is an amazing way to create native mobile apps in the new age. It combines native platform widgets – performance plus look & feel, with the simplicity, elegance, and power of a single JavaScript codebase for iOS, Android and Windows 10 (coming soon). It is the only native platform UI, javascript runtime framework that lets you use Cordova plugins to tap into the device capabilities.
@@ -7,8 +7,8 @@ Moreover, Tabris.js also offers some unique advantages to developers, like a clo
 
 # About
 
-This repo serves as a starter / example for Tabris.js applications. 
-The same UI can accept different datasources and configurations, this repo has 7 apps in 1 codebase:
+This repo serves as a template for starting a Tabris.js application. 
+The same UI can accept different data sources and configurations, this repo has 7 apps in 1 codebase:
 
 *  rss,
 *  rss_showcase,
