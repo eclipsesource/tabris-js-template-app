@@ -1,8 +1,10 @@
 var getItemDetails = require('./../../config.js').config.dataService.getItemDetails;
+var getIconSrc = require('./../helpers/icon').getIconSrc;
 
 function init(pageTitle, feedItem){
 	var page = tabris.create("Page", { title: "Loading...", topLevel: false, _feedItem: feedItem });
 	addItemWebView(page,feedItem, pageTitle);
+
 	registerPageActions(page, feedItem);
 
 	return page;
@@ -63,7 +65,7 @@ function registerPageActions(page, feedItem){
 	var openURLAction = tabris.create("Action", {
 		placementPriority: "high",
 		title: " ",
-		image: {src:"images/home@2x.png", scale:4}
+		image: getIconSrc("external_link",1)
 	}).on("select", function() {
 		var itemDetails = getItemDetails(feedItem);
 		var appLauncher = tabris.create("AppLauncher");
@@ -72,7 +74,6 @@ function registerPageActions(page, feedItem){
 	page.on("disappear", function(){
 		openURLAction.dispose();
 	});
-
 }
 
 module.exports  = {
