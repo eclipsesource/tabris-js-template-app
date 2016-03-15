@@ -5,6 +5,15 @@ function init(){
 	var page = tabris.create("Page", { title: "Built with Tabris.js", topLevel: false});
 	createTabrisJsAttribution().appendTo(page);
 	createProjectAttribution().appendTo(page);
+
+	createAttributionsList([
+		{
+			subject: "Icons by ",
+			author: {name: "Icons8", url: "https://icons8.com/"},
+			information: {label: "LICENSE", url: "https://creativecommons.org/licenses/by-nd/3.0/"}
+		}
+	]).appendTo(page);
+
 	return page;
 }
 
@@ -55,4 +64,50 @@ function createProjectAttribution() {
 	}).appendTo(secondLine);
 	Link.create({text: "GitHub", url: "https://github.com/eclipsesource/tabris-js-starter-apps", left: seeSourceText, top: 0}).appendTo(secondLine);
 	return projectAttribution;
+}
+
+
+
+
+
+
+
+
+function createAttributionsList(attributions) {
+	var attributionsList = tabris.create("Composite", {
+		id: "attributionsList",
+		left: 16, bottom: 8, right: 16
+	});
+	attributions.forEach(function(attribution) {
+		createAttributionRow(attribution).appendTo(attributionsList);
+		if (attributions.indexOf(attribution) !== attributions.length - 1) {
+			createAttributionListSeparator().appendTo(attributionsList);
+		}
+	});
+	return attributionsList;
+}
+
+function createAttributionRow(attribution) {
+	var row = tabris.create("Composite", {left: 0, top: "prev()", right: 0, height: 24});
+	tabris.create("TextView", {
+		left: 0, centerY: 0,
+		textColor: "rgba(0, 0, 0, 0.54)",
+		text: attribution.subject + " by "
+	}).appendTo(row);
+	Link.create({
+		left: "prev()", centerY: 0, text: attribution.author.name, url: attribution.author.url,
+	}).appendTo(row);
+	Link.create({
+		right: 0, centerY: 0,
+		text: attribution.information.label,
+		page: attribution.information.page,
+		url: attribution.information.url,
+	}).appendTo(row);
+	return row;
+}
+function createAttributionListSeparator() {
+	return tabris.create("Composite", {
+		left: 0, top: "prev()", right: 0, height: 1,
+		background: "#d9d9d9"
+	});
 }
