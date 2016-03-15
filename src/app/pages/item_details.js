@@ -3,6 +3,7 @@ var getItemDetails = require('./../../config.js').config.dataService.getItemDeta
 function init(pageTitle, feedItem){
 	var page = tabris.create("Page", { title: "Loading...", topLevel: false, _feedItem: feedItem });
 	addItemWebView(page,feedItem, pageTitle);
+	registerPageActions(page, feedItem);
 
 	return page;
 }
@@ -40,6 +41,38 @@ function addItemWebView(container, feedItem, titleOnLoad){
 function open(pageTitle, feedItem) {
 	var p = init(pageTitle, feedItem);
 	return p.open();
+}
+
+function registerPageActions(page, feedItem){
+	//tabris.create("Action", {
+	//	placementPriority: "low",
+	//	title: " ",
+	//	image: {src:"images/info@2x.png", scale:4}
+	//}).on("select", function() {
+	//	aboutPage.open();
+	//});
+	//
+	//tabris.create("Action", {
+	//	placementPriority: "normal",
+	//	title: "Bookmark",
+	//	//image: {src:"images/search@2x.png", scale:4}
+	//}).on("select", function() {
+	//	aboutPage.open();
+	//});
+	
+	var openURLAction = tabris.create("Action", {
+		placementPriority: "high",
+		title: " ",
+		image: {src:"images/home@2x.png", scale:4}
+	}).on("select", function() {
+		var itemDetails = getItemDetails(feedItem);
+		var appLauncher = tabris.create("AppLauncher");
+		appLauncher.openUrl(itemDetails.link || itemDetails.content);
+	});
+	page.on("disappear", function(){
+		openURLAction.dispose();
+	});
+
 }
 
 module.exports  = {
