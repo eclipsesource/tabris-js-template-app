@@ -39,11 +39,18 @@ The examples apps work in phones and tablets - both for iOS and Android. The exa
 Seting up is really easy (you just need node installed):
 
 ```shell
-$ git clone git@github.com:eclipsesource/tabris-js-template-app.git
-$ cd tabris-js-rss-example
-$ npm install
+# Make http-server available globally 
 $ npm install -g http-server
-$ http-server
+
+# Clone this repo
+$ git clone git@github.com:eclipsesource/tabris-js-template-app.git
+$ cd tabris-js-template-app
+
+# Npm install dependencies 
+$ npm install
+
+# Fire up the server that your device will connect to
+$ npm start
 ```
 
 Then, connect to your code from the Tabris.js Developer App ([*Play Store*](https://play.google.com/store/apps/details?id=com.eclipsesource.tabris.js) / [*App Store*](https://itunes.apple.com/us/app/tabris.js/id939600018?ls=1&mt=8)).
