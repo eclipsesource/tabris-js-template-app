@@ -59,7 +59,7 @@ function registerPageActions(page, feedItem){
 	//}).on("select", function() {
 	//	aboutPage.open();
 	//});
-	
+
 	var openURLAction = tabris.create("Action", {
 		placementPriority: "high",
 		title: " ",

@@ -55,7 +55,8 @@ function getItems(feedConfig, overideConfig){
 function getItemDetails(item) {
 	return {
 		type: 'html', // can be 'html', 'url', 'component'
-		content: rssItemWebViewHTML(item)
+		content: rssItemWebViewHTML(item),
+		link: item.link || item.url
 	};
 }
 
