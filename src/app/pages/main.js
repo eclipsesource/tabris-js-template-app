@@ -4,7 +4,7 @@ var feedShowcase = require('./../components/feed_showcase');
 var updateUIColors = require('./../styles/theme').updateUIColors;
 var getThemeStyle = require('./../styles/theme').getThemeStyle;
 var aboutPage = require('./about.js');
-
+var getIconSrc = require('./../helpers/icon').getIconSrc;
 
 // Sizing helpers.
 var sizing = require('./../helpers/sizing');
@@ -120,7 +120,7 @@ function addViewAction(page){
     var openLinkAction = tabris.create("Action", {
         placementPriority: "high",
         title: " ",
-        image: {src:"images/info@2x.png", scale:4}
+        image: getIconSrc("info")
     }).on("select", function() {
         aboutPage.open();
     });

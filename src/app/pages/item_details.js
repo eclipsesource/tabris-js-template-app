@@ -65,7 +65,7 @@ function registerPageActions(page, feedItem){
 	var openURLAction = tabris.create("Action", {
 		placementPriority: "high",
 		title: " ",
-		image: getIconSrc("external_link",1)
+		image: getIconSrc("external_link")
 	}).on("select", function() {
 		var itemDetails = getItemDetails(feedItem);
 		var appLauncher = tabris.create("AppLauncher");
