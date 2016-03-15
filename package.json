@@ -3,6 +3,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "http-server -c-1",
     "jshint": "jshint src test",
     "jscs": "jscs src test",
     "posttest": "npm run jshint && npm run jscs",
