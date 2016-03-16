@@ -48,7 +48,7 @@ var apps = {
         imgShowcaseScreenWidthRatio: {
             phone: 0.25,
             tablet: 0.16,
-        },
+        }
     },
     shop_fashion: {
         appName: 'Tabris.js Ecommerce example',
@@ -70,6 +70,11 @@ var apps = {
             phone: 0.25,
             tablet: 0.16,
         },
+        slider: [
+            {title: 'great bag 1', image:'https://resources.shopstyle.com/pim/9d/c2/9dc260913e015b4f2d0b0d17822938b3_best.jpg',clickUrl: 'http://api.shopstyle.com/action/apiVisitRetailer?id=512695420&pid=uid4961-26577031-68'},
+            {title: 'great bag 2', image:'https://resources.shopstyle.com/pim/d1/f1/d1f1fe6f59f2f5a17195f22aa1fceb99_best.jpg',clickUrl: 'http://api.shopstyle.com/action/apiVisitRetailer?id=505229452&pid=uid4961-26577031-68'},
+            {title: 'great bag 3', image:'https://resources.shopstyle.com/pim/a3/e0/a3e06a910fc662efa055e372404530bc_best.jpg', clickUrl: 'http://api.shopstyle.com/action/apiVisitRetailer?id=512695420&pid=uid4961-26577031-68'}
+        ]
     },
     wordpress_pets: {
         appName: 'Tabris.js Wordpress example',
@@ -116,7 +121,7 @@ var baseConfig = {
 	/****************************
      * IMPORTANT: Change this value to uncover 7 different apps  :)
      ****************************/
-    app: apps.rss , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
+    app: apps.shop_fashion , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
 
     pullToRefresh:true,
     imgSizeHeightToWidthRatio: {

@@ -5,6 +5,9 @@ var updateUIColors = require('./../styles/theme').updateUIColors;
 var getThemeStyle = require('./../styles/theme').getThemeStyle;
 var aboutPage = require('./about.js');
 var getIconSrc = require('./../helpers/icon').getIconSrc;
+var imageSlider = require('./../components/image_slider');
+var detailScreen = require('./../pages/item_details');
+
 
 // Sizing helpers.
 var sizing = require('./../helpers/sizing');
@@ -18,8 +21,8 @@ function init() {
     // Ok we need a page to contain all the application UI
     var page = tabris.create("Page", { title: config.appName , topLevel : true}) ;
 
-    var Navigation = tabris.create('TabFolder', { left: 0, top: 0, right: 0, bottom:0 , elevation: 8 , tabBarLocation: "bottom", paging:  false,  textColor: "#ff8400",}).appendTo(page);
-    page.set("_navigation", Navigation);
+    //var Navigation = tabris.create('TabFolder', { left: 0, top: 0, right: 0, bottom:0 , elevation: 8 , tabBarLocation: "bottom", paging:  false,  textColor: "#ff8400",}).appendTo(page);
+    //page.set("_navigation", Navigation);
 
     // Now we will create a tab per source and add to the container
 
@@ -70,6 +73,12 @@ function init() {
          *   Showcase
          ******************/
         var container = tabris.create("ScrollView", { left: 0, right: 0, top: 0, bottom: 0 , direction:"vertical"}).appendTo(MainContent);
+
+        if (config.slider){
+            imageSlider(config.slider).on("itemClicked",function(item){
+               detailScreen.open(item.title, item);
+            }).appendTo(container);
+        }
 
         // Now we will create a tab per source and add to the container
         config.feeds.forEach(function( feed ){

@@ -8,7 +8,7 @@ function init(){
 
 	createAttributionsList([
 		{
-			subject: "Icons by ",
+			subject: "Icons ",
 			author: {name: "Icons8", url: "https://icons8.com/"},
 			information: {label: "LICENSE", url: "https://creativecommons.org/licenses/by-nd/3.0/"}
 		}
