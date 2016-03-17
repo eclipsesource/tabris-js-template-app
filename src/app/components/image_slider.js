@@ -1,3 +1,6 @@
+var DOT_RADIUS = 6;
+var DOT_RADIUS_HALF = DOT_RADIUS / 2;
+
 module.exports = function( items ) {
 	var container = tabris.create("Composite", {
 		left: 0, top: "prev()", right: 0, height: 150,
@@ -21,7 +24,7 @@ module.exports = function( items ) {
 
 	items.forEach(function(item, index){
 		addImageTab(item, tabFolder, itemSelected, index);
-		addDot(item,dotContainer);
+		addDot(dotContainer);
 	});
 
 	updateDots(0,dotContainer);
@@ -44,24 +47,21 @@ function addImageTab(item, tabFolder, itemSelected, index) {
 
 
 function createDotContainer() {
-	//var tab = tabris.create("Tab").on("tap",function(){
-	//	tabFolder.trigger("itemSelected",item);
-	//}).appendTo(tabFolder);
 	return tabris.create("Composite", {
-		height: 10,
-		bottom: 10,
-		left:5,
-		//right: 0,
-		//background:'red',
+		height: DOT_RADIUS,
+		bottom: DOT_RADIUS,
+		//left: DOT_RADIUS_HALF
+		centerX:0
 	});
 }
 
-function addDot(item, container) {
+function addDot(container) {
 	tabris.create("Composite", {
 		class: "itemDot",
-		left: ["prev()",5],
-		height: 10, width: 10,
-		background:'blue',
+		left: ["prev()",DOT_RADIUS_HALF],
+		height: DOT_RADIUS, width: DOT_RADIUS,
+		cornerRadius: DOT_RADIUS_HALF,
+		background:'black',
 	}).appendTo(container);
 }
 
