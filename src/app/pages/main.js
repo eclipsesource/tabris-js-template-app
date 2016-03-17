@@ -75,7 +75,7 @@ function init() {
         var container = tabris.create("ScrollView", { left: 0, right: 0, top: 0, bottom: 0 , direction:"vertical"}).appendTo(MainContent);
 
         if (config.slider){
-            imageSlider(config.slider).on("itemClicked",function(item){
+            imageSlider(config.slider).on("itemSelected",function(item){
                detailScreen.open(item.title, item);
             }).appendTo(container);
         }
