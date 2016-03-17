@@ -1,7 +1,19 @@
+var _ = require('lodash');
 var DOT_RADIUS = 6;
-var DOT_RADIUS_HALF = DOT_RADIUS / 2;
+var DOT_COLOR = 'black';
+var DOT_ROUND = true;
+var DEFAULT_OPTIONS = {
+	DOT_RADIUS : DOT_RADIUS,
+	DOT_COLOR  : 'black',
+	DOT_ROUND  : true,
+	DOT_CENTER : true
+};
 
-module.exports = function( items ) {
+module.exports = function( items , options) {
+
+	var config = _.extend(DEFAULT_OPTIONS, options);
+	config.DOT_RADIUS_HALF = Math.floor(config.DOT_RADIUS / 2);
+
 	var container = tabris.create("Composite", {
 		left: 0, top: "prev()", right: 0, height: 150,
 	});
@@ -16,7 +28,7 @@ module.exports = function( items ) {
 		tabBarLocation: "hidden"
 	}).appendTo(container);
 
-	var dotContainer = createDotContainer().appendTo(container);
+	var dotContainer = createDotContainer(config).appendTo(container);
 
 	tabFolder.on("change:selection", function(widget, tab) {
 		updateDots(tab.get('_index'),dotContainer);
@@ -24,7 +36,7 @@ module.exports = function( items ) {
 
 	items.forEach(function(item, index){
 		addImageTab(item, tabFolder, itemSelected, index);
-		addDot(dotContainer);
+		addDot(dotContainer , config);
 	});
 
 	updateDots(0,dotContainer);
@@ -46,22 +58,27 @@ function addImageTab(item, tabFolder, itemSelected, index) {
 }
 
 
-function createDotContainer() {
-	return tabris.create("Composite", {
-		height: DOT_RADIUS,
-		bottom: DOT_RADIUS,
-		//left: DOT_RADIUS_HALF
-		centerX:0
-	});
+function createDotContainer(config) {
+	var composite = {
+		height: config.DOT_RADIUS,
+		bottom: config.DOT_RADIUS
+	};
+	if(config.DOT_CENTER) {
+		composite.centerX = 0;
+	}
+	else {
+		composite.left = config.DOT_RADIUS_HALF;
+	}
+	return tabris.create("Composite", composite);
 }
 
-function addDot(container) {
+function addDot(container , config) {
 	tabris.create("Composite", {
 		class: "itemDot",
-		left: ["prev()",DOT_RADIUS_HALF],
-		height: DOT_RADIUS, width: DOT_RADIUS,
-		cornerRadius: DOT_RADIUS_HALF,
-		background:'black',
+		left: ["prev()", config.DOT_RADIUS_HALF],
+		height: config.DOT_RADIUS, width: config.DOT_RADIUS,
+		cornerRadius: config.DOT_RADIUS_HALF,
+		background: config.DOT_COLOR,
 	}).appendTo(container);
 }
 
