@@ -24,7 +24,7 @@ module.exports = function( feedConfig , tab) {
 	var header = tabris.create("Composite", style.header ).appendTo(container);
 	tabris.create('TextView',  style.headerText).appendTo(header);
 	tabris.create('TextView',  style.headerSeeAll).appendTo(header);
-	header.on('tap',function(){
+	header.on('touchend',function(){
 		itemListPage.open(feedConfig.name,feedConfig);
 	});
 

@@ -46,21 +46,13 @@ function open(pageTitle, feedItem) {
 }
 
 function registerPageActions(page, feedItem){
-	//tabris.create("Action", {
-	//	placementPriority: "low",
-	//	title: " ",
-	//	image: {src:"images/info@2x.png", scale:4}
-	//}).on("select", function() {
-	//	aboutPage.open();
-	//});
-	//
-	//tabris.create("Action", {
-	//	placementPriority: "normal",
-	//	title: "Bookmark",
-	//	//image: {src:"images/search@2x.png", scale:4}
-	//}).on("select", function() {
-	//	aboutPage.open();
-	//});
+	var callback = function(buttonIndex) {
+		setTimeout(function() {
+			// like other Cordova plugins (prompt, confirm) the buttonIndex is 1-based (first button is index 1)
+			console.log("button index clicked: " + buttonIndex);
+			window.plugins.toast.showShortCenter("button index clicked: " + buttonIndex);
+		});
+	};
 
 	var openURLAction = tabris.create("Action", {
 		placementPriority: "high",
@@ -71,8 +63,41 @@ function registerPageActions(page, feedItem){
 		var appLauncher = tabris.create("AppLauncher");
 		appLauncher.openUrl(itemDetails.link || itemDetails.content);
 	});
+
+	var openShareAction = tabris.create("Action", {
+		placementPriority:  tabris.device.get("platform") === "iOS" ? "low": "high",
+		title: " ",
+		image: getIconSrc("share")
+	}).on("select", function() {
+		var itemDetails = getItemDetails(feedItem);
+		window.plugins.socialsharing.share("Check out this awesome thing", feedItem.title,
+			feedItem.image,
+			itemDetails.link || itemDetails.content);
+	});
+
+	var openMoreAction = tabris.create("Action", {
+		placementPriority:  tabris.device.get("platform") === "iOS" ? "normal": "high",
+		title: " ",
+		image: getIconSrc("more")
+	}).on("select", function() {
+		//var itemDetails = getItemDetails(feedItem);
+		var options = {
+			androidTheme: window.plugins.actionsheet.ANDROID_THEMES.THEME_HOLO_LIGHT,
+			title: "What to do with this item",
+			buttonLabels: ["Share", "Share via Facebook", "Share via Twitter", "Open in Safari", "Add to watchlist"],
+			androidEnableCancelButton: true,
+			winphoneEnableCancelButton: true,
+			addCancelButtonWithLabel: "Cancel",
+			addDestructiveButtonWithLabel: "Remove from watchlist"
+		};
+		window.plugins.actionsheet.show(options, callback);
+	});
+
+
 	page.on("disappear", function(){
+		openMoreAction.dispose();
 		openURLAction.dispose();
+		openShareAction.dispose();
 	});
 }
 
