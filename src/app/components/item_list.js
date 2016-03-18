@@ -57,7 +57,7 @@ module.exports = function( feedConfig , tab) {
             });
         }
     }).on("select", function(target, feedItem) {
-        console.log("AWESOME!");
+        //console.log("AWESOME!");
         return;
         feedItem.watched = true;
         updateCellItemElements(feedItem);
@@ -102,7 +102,10 @@ function cellStyle(feedConfig){
     var themeStyle = getThemeStyle(feedConfig.color);
     return {
         container : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background},
-        image: { left: ["prev()",1], width: Math.floor(imageWidth / 3), top: 1, bottom: 1, scaleMode: 'fill' , background: "rgb(220, 220, 220)"},
+        image: { left: ["prev()",1], width: Math.floor(imageWidth / 3), top: 1, bottom: 1, scaleMode: 'fit' , background: "white"},
+        image1: { left: ["prev()",1], width: Math.floor(imageWidth / 3) * 2, top: 1, bottom: 1, scaleMode: 'fit' , background: "white"},
+        image2: { right: 0, width: Math.floor(imageWidth / 3), top: 1, height: Math.floor(imageHeight / 2) - 10, scaleMode: 'fit' , background: "white"},
+        image3: { right: 0, width: Math.floor(imageWidth / 3), bottom: 1, height: Math.floor(imageHeight / 2) - 10, scaleMode: 'fit' , background: "white"},
         overlay: { left: 0, right: 0, height: 46, bottom: 1 ,background: themeStyle.overlayBG, opacity: 0.8},
         title: { maxLines: 2, font: '16px', left: 10, right: 10, bottom: 5, textColor: themeStyle.textColor }
     };
