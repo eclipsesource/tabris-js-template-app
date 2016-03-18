@@ -184,7 +184,7 @@ function updateCellItemElements(feedItem){
   var imageUpdate = {opacity: feedItem.watched ? 0.5 : 1};
   var imageUpdate2 = {opacity: feedItem.watched ? 0.5 : 1};
   var imageUpdate3 = {opacity: feedItem.watched ? 0.5 : 1};
-  var imageUrl = resizeImageURLByWidth(feedItem[0].image, imageWidth);
+  var imageUrl = resizeImageURLByWidth(feedItem[0].image, imageWidth/3);
 
   // Image update
   if(!imageUrl || imageUrl.length === 0) {
@@ -199,7 +199,7 @@ function updateCellItemElements(feedItem){
     },1)
 
     if(feedItem[1]) {
-        var imageUrl2 = resizeImageURLByWidth(feedItem[1].image, imageWidth);
+        var imageUrl2 = resizeImageURLByWidth(feedItem[1].image, imageWidth/3);
         elements.icon2.set({image:{src: 'images/tabrisjs_logo@3x.png'}, "_feedItem":feedItem[1]});
         imageUpdate2.image = {src: imageUrl2};
         setTimeout(function(){
@@ -210,7 +210,7 @@ function updateCellItemElements(feedItem){
 
 
     if(feedItem[2]){
-        var imageUrl3 = resizeImageURLByWidth(feedItem[2].image, imageWidth);
+        var imageUrl3 = resizeImageURLByWidth(feedItem[2].image, imageWidth/3);
         elements.icon3.set({image:{src: 'images/tabrisjs_logo@3x.png'} , "_feedItem":feedItem[2]});
         imageUpdate3.image =  {src: imageUrl3};
         setTimeout(function() {

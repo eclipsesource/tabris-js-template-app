@@ -55,7 +55,7 @@ var apps = {
         dataService: require('./services/shop_fashion'),
         feeds: require('./services/shop_fashion/feeds'),
         mainPage: "showcase",
-        theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal',
+        theme: 'light',
         // Overrides...
         pullToRefresh:false,
         imgSizeHeightToWidthRatio: {
@@ -116,7 +116,7 @@ var baseConfig = {
 
     mainPage: "tabs", // can be "showcase" or "tabs"
 
-    imgResizeService: 'none', // can be 'weserv', 'google', or 'none'.
+    imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
 
 	/****************************
      * IMPORTANT: Change this value to uncover 7 different apps  :)
