@@ -59,7 +59,7 @@ var apps = {
         // Overrides...
         pullToRefresh:false,
         imgSizeHeightToWidthRatio: {
-            phone: 1.3,
+            phone: 0.7,
             tablet: 1,
         },
         imgShowcaseSizeHeightToWidthRatio: {
@@ -116,12 +116,12 @@ var baseConfig = {
 
     mainPage: "tabs", // can be "showcase" or "tabs"
 
-    imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
+    imgResizeService: 'none', // can be 'weserv', 'google', or 'none'.
 
 	/****************************
      * IMPORTANT: Change this value to uncover 7 different apps  :)
      ****************************/
-    app: apps.rss , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
+    app: apps.shop_fashion , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
 
     pullToRefresh:true,
     imgSizeHeightToWidthRatio: {
