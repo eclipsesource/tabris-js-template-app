@@ -17,7 +17,7 @@ var imageWidth = isTablet ? tabris.device.get("screenWidth") * tabletWidthRatio 
 var imageHeightRatio = isTablet ? config.imgSizeHeightToWidthRatio.tablet : config.imgSizeHeightToWidthRatio.phone;
 var imageHeight = Math.floor(imageHeightRatio * imageWidth);
 
-var PRELOAD_CELLS = 2;
+var PRELOAD_CELLS = 4;
 
 
 module.exports = function( feedConfig , tab) {
@@ -182,9 +182,14 @@ function updateCellItemElements(feedItem){
     imageUpdate.opacity = 0;
   }
   else if(  !(elements.icon.get('image') && elements.icon.get('image').src === imageUrl)){
-    imageUpdate.image =  {src: imageUrl};
+      elements.icon.set( {image: undefined });
+      imageUpdate.image =  {src: imageUrl};
   }
-  elements.icon.set( imageUpdate );
+
+  setTimeout(function(){
+    elements.icon.set( imageUpdate );
+  },1);
+
 
   // Dummy for preloading
   if(feedItem._dummy){
