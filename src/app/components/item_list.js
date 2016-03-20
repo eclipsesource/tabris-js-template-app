@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 var getThemeStyle = require('./../styles/theme').getThemeStyle;
 var detailScreen = require('./../pages/item_details');
 var resizeImageURLByWidth = require('./../../app/helpers/img_resize').resizeImageURLByWidth;
@@ -18,6 +20,7 @@ var imageHeightRatio = isTablet ? config.imgSizeHeightToWidthRatio.tablet : conf
 var imageHeight = Math.floor(imageHeightRatio * imageWidth);
 
 var PRELOAD_CELLS = 4;
+var CELLS_PER_ROW = 1;
 
 
 module.exports = function( feedConfig , tab) {
@@ -38,19 +41,29 @@ module.exports = function( feedConfig , tab) {
         _feed: feedConfig, // Save the feed config used by this widget so it can be used later.
         _tab: tab,
         initializeCell: function(cell){
-            var container = tabris.create('Composite', style.container).appendTo(cell),
-                icon      = tabris.create('ImageView', style.image).appendTo(container),
-                overlay   = tabris.create('Composite', style.overlay).appendTo(container),
-                title     = tabris.create('TextView',  style.title).appendTo(container);
+            var masterContainer = tabris.create('Composite', style.container).appendTo(cell);
 
-            cell.on("change:item", function(widget, feedItem) {
-                feedItem._elements = {
-                  title: title,
-                  icon: icon,
-                  overlay: overlay,
-                  container: container
-                };
-                updateCellItemElements(feedItem);
+            var elements = [];
+                //containers: [],
+                //images : [],
+                //overlays : [],
+                //titles : []
+            //};
+            for (var i=0; i<CELLS_PER_ROW; i++){
+                elements.push({});
+                elements[i].container = tabris.create('Composite', style.container).appendTo(masterContainer);
+                elements[i].image = tabris.create('ImageView', style.image).appendTo(elements[i].container);
+                elements[i].overlay = tabris.create('Composite', style.overlay).appendTo(elements[i].container);
+                elements[i].title = tabris.create('TextView',  style.title).appendTo(elements[i].container);
+            }
+
+            //var container = tabris.create('Composite', style.container).appendTo(masterContainer),
+            //    icon      = tabris.create('ImageView', style.image).appendTo(container),
+            //    overlay   = tabris.create('Composite', style.overlay).appendTo(container),
+            //    title     = tabris.create('TextView',  style.title).appendTo(container);
+
+            cell.on("change:item", function(widget, feedItems) {
+                updateCellMultipleElements(feedItems, elements);
             });
         }
     }).on("select", function(target, feedItem) {
@@ -97,7 +110,8 @@ function cellStyle(feedConfig){
     var themeStyle = getThemeStyle(feedConfig.color);
     return {
         container : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background},
-        image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: 'fill' , background: "rgb(220, 220, 220)"},
+        //image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: 'fill' , background: "rgb(220, 220, 220)"},
+        image: { left: ["prev()"], width: (imageWidth / CELLS_PER_ROW), top: 1, bottom: 1, scaleMode: 'fill' , background: "white"},
         overlay: { left: 0, right: 0, height: 46, bottom: 1 ,background: themeStyle.overlayBG, opacity: 0.8},
         title: { maxLines: 2, font: '16px', left: 10, right: 10, bottom: 5, textColor: themeStyle.textColor }
     };
@@ -110,6 +124,7 @@ function refreshItems( widget , forceFetch) {
         var arr = [].concat(results.items);
         if (results.state && results.state.hasMore) {
             arr = arr.concat({loadingNext: true});
+            arr = _.chunk(arr,CELLS_PER_ROW);
             widget.set('_loadedAll', false);
         }
         else {
@@ -143,7 +158,8 @@ function loadMoreItems( widget ) {
     var newPage = widget.get('_loadedPage')+1;
     getItems( widget.get('_feed') , {page: newPage } ).then( function(results){
 
-        widget.insert(results.items, -( 1 + PRELOAD_CELLS ));
+        var arr = _.chunk(results.items,3);
+        widget.insert(arr, -( 1 + PRELOAD_CELLS ));
         widget.set('_loadedPage', newPage );
         widget.set('_loadingNext', false);
 
@@ -154,6 +170,7 @@ function loadMoreItems( widget ) {
             widget.set('_loadedAll', true);
             widget.remove(-1); //TODO: remove the loading animation at the end of feed and handle preload cells
         }
+
     }).catch(function(err){
         console.log("Failed fetching items for: "+ widget.get('_feed').name);
         console.log(err);
@@ -173,8 +190,14 @@ function updateWidgetLoading(widget,loading){
     });
 }
 
-function updateCellItemElements(feedItem){
-  var elements = feedItem._elements;
+function updateCellMultipleElements(feedItems, elements){
+    feedItems.forEach(function(feedItem,index){
+        updateCellItemElements(feedItem, elements[index]);
+    });
+}
+
+
+function updateCellItemElements(feedItem, elements){
   var imageUpdate = {opacity: feedItem.watched ? 0.5 : 1};
   var imageUrl = resizeImageURLByWidth(feedItem.image, imageWidth);
 
@@ -182,13 +205,13 @@ function updateCellItemElements(feedItem){
   if(!imageUrl || imageUrl.length === 0 || feedItem._dummy) {
     imageUpdate.opacity = 0;
   }
-  else if(  !(elements.icon.get('image') && elements.icon.get('image').src === imageUrl)){
-      elements.icon.set( {image: undefined });
+  else if(  !(elements.image.get('image') && elements.image.get('image').src === imageUrl)){
+      elements.image.set( {image: undefined });
       imageUpdate.image =  {src: imageUrl};
   }
 
   setTimeout(function(){
-    elements.icon.set( imageUpdate );
+    elements.image.set( imageUpdate );
   },1);
 
 
