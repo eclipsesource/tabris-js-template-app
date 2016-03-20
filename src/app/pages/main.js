@@ -80,7 +80,7 @@ function init() {
             }).appendTo(container);
         }
 
-        // Now we will create a tab per source and add to the container
+        // Now we will showcase per source and add to the container
         config.feeds.forEach(function( feed ){
             feedShowcase( feed , container ).appendTo(container);
         });

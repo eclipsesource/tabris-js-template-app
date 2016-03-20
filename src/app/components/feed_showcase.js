@@ -15,6 +15,8 @@ var imageWidth = Math.floor( isTablet ? tabris.device.get("screenWidth") * confi
 var imageHeightRatio = isTablet ? config.imgShowcaseSizeHeightToWidthRatio.tablet : config.imgShowcaseSizeHeightToWidthRatio.phone;
 var imageHeight = Math.floor(imageHeightRatio * imageWidth);
 
+var ITEMS_MARGIN = 10;
+var SHOWCASE_ITEMS = 10;
 
 module.exports = function( feedConfig , tab) {
 	var style = cellStyle(feedConfig);
@@ -55,8 +57,8 @@ function refreshItems( widget ) {
 
 	getItems( feedConfig ).then( function(results){
 
-		results.items.slice(0,10).forEach(function(feedItem){
-				appendItemBox(widget,feedItem);
+		results.items.slice(0,Math.min(SHOWCASE_ITEMS,results.items.length)).forEach(function(feedItem, index){
+				appendItemBox(widget,feedItem, tabris.device.get("screenWidth") < ((index) * (imageWidth + ITEMS_MARGIN)));
 		});
 		appendSeeAllBox(widget);
 
@@ -78,11 +80,23 @@ function updateWidgetLoading(widget,loading){
 	});
 }
 
-function appendItemBox(widget , feedItem){
+function appendItemBox(widget , feedItem, delayed){
 	var imageUrl = resizeImageURLByWidth(feedItem.image, imageWidth);
+
 	if(imageUrl){
-		var boxContainer = tabris.create('Composite', { left: ["prev()", 10], width: imageWidth, top: 0, bottom: 0}).appendTo(widget);
-		tabris.create('ImageView', { image:imageUrl,left: 0, right: 0, top: 0, height: imageHeight, scaleMode: 'fill' , background: "rgb(220, 220, 220)"}).appendTo(boxContainer);
+		var imgCell;
+		var boxContainer = tabris.create('Composite', { left: ["prev()", ITEMS_MARGIN], width: imageWidth, top: 0, bottom: 0}).appendTo(widget);
+		imgCell = { left: 0, right: 0, top: 0, height: imageHeight, scaleMode: 'fill' , background: "rgb(220, 220, 220)"};
+		if(!delayed){
+			imgCell.image = imageUrl;
+		}
+		var imgView = tabris.create('ImageView', imgCell).appendTo(boxContainer);
+		if(delayed){
+			setTimeout(function(){
+				imgView.set({image:imageUrl});
+			},1000);
+		}
+
 		if(feedItem.price){
 			tabris.create('TextView', { text: '$'+Math.round(feedItem.price),left: 0, right: 0, bottom: 13, height: 30, textColor: "#aaa",  alignment:'center', maxLines:1}).appendTo(boxContainer);
 		}
