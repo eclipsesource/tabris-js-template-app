@@ -20,7 +20,7 @@ var imageHeightRatio = isTablet ? config.imgSizeHeightToWidthRatio.tablet : conf
 var imageHeight = Math.floor(imageHeightRatio * imageWidth);
 
 var PRELOAD_CELLS = 4;
-var CELLS_PER_ROW = 1;
+var CELLS_PER_ROW = 2;
 
 
 module.exports = function( feedConfig , tab) {
@@ -41,7 +41,7 @@ module.exports = function( feedConfig , tab) {
         _feed: feedConfig, // Save the feed config used by this widget so it can be used later.
         _tab: tab,
         initializeCell: function(cell){
-            var masterContainer = tabris.create('Composite', style.container).appendTo(cell);
+            var masterContainer = tabris.create('Composite', style.masterContainer).appendTo(cell);
 
             var elements = [];
                 //containers: [],
@@ -109,9 +109,10 @@ module.exports = function( feedConfig , tab) {
 function cellStyle(feedConfig){
     var themeStyle = getThemeStyle(feedConfig.color);
     return {
-        container : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background},
+        container : { left: "prev()", width: Math.floor(imageWidth / CELLS_PER_ROW), top: 0, bottom: 0 , background: themeStyle.background},
+        masterContainer : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background},
         //image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: 'fill' , background: "rgb(220, 220, 220)"},
-        image: { left: ["prev()"], width: (imageWidth / CELLS_PER_ROW), top: 1, bottom: 1, scaleMode: 'fill' , background: "white"},
+        image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: 'fill' , background: "white"},
         overlay: { left: 0, right: 0, height: 46, bottom: 1 ,background: themeStyle.overlayBG, opacity: 0.8},
         title: { maxLines: 2, font: '16px', left: 10, right: 10, bottom: 5, textColor: themeStyle.textColor }
     };
