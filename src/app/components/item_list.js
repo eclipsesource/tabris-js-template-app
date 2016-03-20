@@ -20,7 +20,7 @@ var imageHeightRatio = isTablet ? config.imgSizeHeightToWidthRatio.tablet : conf
 var imageHeight = Math.floor(imageHeightRatio * imageWidth);
 
 var PRELOAD_CELLS = 4;
-var CELLS_PER_ROW = 2;
+var CELLS_PER_ROW = 1;
 
 
 module.exports = function( feedConfig , tab) {
@@ -91,9 +91,9 @@ function refreshItems( widget , forceFetch) {
     updateWidgetLoading ( widget, true);
     getItems( widget.get('_feed') , {forceFetch: forceFetch} ).then( function(results){
         var arr = [].concat(results.items);
+        arr = _.chunk(arr,CELLS_PER_ROW);
         if (results.state && results.state.hasMore) {
             arr = arr.concat({loadingNext: true});
-            arr = _.chunk(arr,CELLS_PER_ROW);
             widget.set('_loadedAll', false);
         }
         else {
@@ -104,7 +104,6 @@ function refreshItems( widget , forceFetch) {
         }
         widget.set('items', arr );
         widget.set('_loadedPage', 1);
-
         updateWidgetLoading ( widget, false );
 
     }).catch(function(err){
