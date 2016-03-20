@@ -59,7 +59,7 @@ var apps = {
         // Overrides...
         pullToRefresh:false,
         imgSizeHeightToWidthRatio: {
-            phone: 1.3,
+            phone: 0.4,
             tablet: 1,
         },
         imgShowcaseSizeHeightToWidthRatio: {
