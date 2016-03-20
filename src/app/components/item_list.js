@@ -17,6 +17,7 @@ var imageWidth = isTablet ? tabris.device.get("screenWidth") * tabletWidthRatio 
 var imageHeightRatio = isTablet ? config.imgSizeHeightToWidthRatio.tablet : config.imgSizeHeightToWidthRatio.phone;
 var imageHeight = Math.floor(imageHeightRatio * imageWidth);
 
+var PRELOAD_CELLS = 2;
 
 
 module.exports = function( feedConfig , tab) {
@@ -27,7 +28,7 @@ module.exports = function( feedConfig , tab) {
     }
 
     var widget = tabris.create("CollectionView", {
-        layoutData: {left: 0,  top: 0,  bottom: 0},
+        layoutData: {left: 0,  top: 0,  bottom: (-1)*PRELOAD_CELLS*imageHeight },
         elevation: 20,
         items: [],
         right: isTablet? tabletColumnRight : 0,
@@ -113,6 +114,9 @@ function refreshItems( widget , forceFetch) {
         else {
             widget.set('_loadedAll', true);
         }
+        for (var i=0 ; i< PRELOAD_CELLS; i++){
+            arr = arr.concat({_dummy: true});
+        }
         widget.set('items', arr );
         widget.set('_loadedPage', 1);
 
@@ -138,7 +142,7 @@ function loadMoreItems( widget ) {
     var newPage = widget.get('_loadedPage')+1;
     getItems( widget.get('_feed') , {page: newPage } ).then( function(results){
 
-        widget.insert(results.items, -1);
+        widget.insert(results.items, -( 1 + PRELOAD_CELLS ));
         widget.set('_loadedPage', newPage );
         widget.set('_loadingNext', false);
 
@@ -147,7 +151,7 @@ function loadMoreItems( widget ) {
         }
         else {
             widget.set('_loadedAll', true);
-            widget.remove(-1); //TODO: remove the loading animation at the end of feed.
+            widget.remove(-1); //TODO: remove the loading animation at the end of feed and handle preload cells
         }
     }).catch(function(err){
         console.log("Failed fetching items for: "+ widget.get('_feed').name);
@@ -174,13 +178,19 @@ function updateCellItemElements(feedItem){
   var imageUrl = resizeImageURLByWidth(feedItem.image, imageWidth);
 
   // Image update
-  if(!imageUrl || imageUrl.length === 0) {
+  if(!imageUrl || imageUrl.length === 0 || feedItem._dummy) {
     imageUpdate.opacity = 0;
   }
   else if(  !(elements.icon.get('image') && elements.icon.get('image').src === imageUrl)){
     imageUpdate.image =  {src: imageUrl};
   }
   elements.icon.set( imageUpdate );
+
+  // Dummy for preloading
+  if(feedItem._dummy){
+      elements.title.set({text:"THIS IS A DUMMY ITEM"});
+      return;
+  }
 
   // Title + Overlay update
   elements.title.set({text: feedItem.title});
@@ -194,7 +204,7 @@ function updateCellItemElements(feedItem){
   }
 
     // Loading next.
-    if(feedItem.loadingNext){
+    if(feedItem._loadingNext){
         elements.title.set({text: "Loading more items..."});
         //TODO: remove the loading animation at the end of feed.
     }
