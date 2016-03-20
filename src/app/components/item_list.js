@@ -22,16 +22,17 @@ var PRELOAD_CELLS = 4;
 
 module.exports = function( feedConfig , tab) {
     var style = cellStyle(feedConfig);
-    if(isTablet){
-        // Create a left panel for tablets only.
-        tabris.create("Composite", { left: 0, right: tabletColumnRight, top: 0, bottom: 0 ,background: "white", elevation: 10}).appendTo(tab);
-    }
+    //if(isTablet){
+    //    // Create a left panel for tablets only.
+    //    tabris.create("Composite", { left: 0, right: tabletColumnRight, top: 0, bottom: 0 ,background: "white", elevation: 10}).appendTo(tab);
+    //}
 
     var widget = tabris.create("CollectionView", {
         layoutData: {left: 0,  top: 0,  bottom: (-1)*PRELOAD_CELLS*imageHeight },
         elevation: 20,
         items: [],
-        right: isTablet? tabletColumnRight : 0,
+        //right: isTablet? tabletColumnRight : 0,
+        right: 0,
         itemHeight: imageHeight,
         refreshEnabled: config.pullToRefresh,
         _feed: feedConfig, // Save the feed config used by this widget so it can be used later.
@@ -56,21 +57,21 @@ module.exports = function( feedConfig , tab) {
         feedItem.watched = true;
         updateCellItemElements(feedItem);
 
-        if(sizing.isTablet){
-            if(tab.get('_tabletHtmlContainer')){
-                tab.get('_tabletHtmlContainer').get('_itemWebView').dispose();
-            }
-            else {
-                var tabletHtmlContainer = tabris.create("Composite", { left: tabletColumnLeft, right: 0, top: 0, bottom: 0 ,background: "white", elevation: 0}).appendTo(tab);
-                tab.set('_tabletHtmlContainer', tabletHtmlContainer);
-                // For iOS ?
-                // tabris.create("Composite", { left: 0, width: 1, top: 0, bottom: 0 ,background: style.overlay.background , opacity: 0.6}).appendTo(tabletHtmlContainer);
-            }
-            detailScreen.addItemWebView(tab.get('_tabletHtmlContainer'),feedItem);
-        }
-        else {
+        //if(sizing.isTablet){
+        //    if(tab.get('_tabletHtmlContainer')){
+        //        tab.get('_tabletHtmlContainer').get('_itemWebView').dispose();
+        //    }
+        //    else {
+        //        var tabletHtmlContainer = tabris.create("Composite", { left: tabletColumnLeft, right: 0, top: 0, bottom: 0 ,background: "white", elevation: 0}).appendTo(tab);
+        //        tab.set('_tabletHtmlContainer', tabletHtmlContainer);
+        //        // For iOS ?
+        //        // tabris.create("Composite", { left: 0, width: 1, top: 0, bottom: 0 ,background: style.overlay.background , opacity: 0.6}).appendTo(tabletHtmlContainer);
+        //    }
+        //    detailScreen.addItemWebView(tab.get('_tabletHtmlContainer'),feedItem);
+        //}
+        //else {
             detailScreen.open(feedItem.title, feedItem);
-        }
+        //}
     }).on("scroll", function(widget, scroll) {
         if( widget.get('_loadingNext') || widget.get('_loadedAll') ) { return; }
         if (scroll.deltaY > 0) {
