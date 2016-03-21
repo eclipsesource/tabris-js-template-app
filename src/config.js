@@ -17,10 +17,8 @@ var apps = {
 
         // Overrides...
         pullToRefresh:false,
-        imgSizeHeightToWidthRatio: {
-            phone: 0.8,
-            tablet: 1,
-        },
+        imgSizeHeightToWidthRatio : 0.8,
+
         imgShowcaseSizeHeightToWidthRatio: {
             phone: 1.3,
             tablet: 1.1,
@@ -37,10 +35,7 @@ var apps = {
         mainPage: "showcase",
         // Overrides...
         pullToRefresh:false,
-        imgSizeHeightToWidthRatio: {
-            phone: 0.8,
-            tablet: 1,
-        },
+        imgSizeHeightToWidthRatio: 0.8,
         imgShowcaseSizeHeightToWidthRatio: {
             phone: 1.3,
             tablet: 1.1,
@@ -58,10 +53,7 @@ var apps = {
         theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal',
         // Overrides...
         pullToRefresh:false,
-        imgSizeHeightToWidthRatio: {
-            phone: 0.4,
-            tablet: 1,
-        },
+        imgSizeHeightToWidthRatio:  2.4,
         imgShowcaseSizeHeightToWidthRatio: {
             phone: 1.3,
             tablet: 1.1,
@@ -124,10 +116,7 @@ var baseConfig = {
     app: apps.rss , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
 
     pullToRefresh:true,
-    imgSizeHeightToWidthRatio: {
-        phone: 0.7,
-        tablet: 1,
-    },
+    imgSizeHeightToWidthRatio :0.6,
 
     imgShowcaseScreenWidthRatio: {
         phone: 0.6,

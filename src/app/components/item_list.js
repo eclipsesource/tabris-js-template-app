@@ -110,7 +110,7 @@ function calculateCellSizes(feedConfig, CELLS_PER_ROW){
 function cellStyle(feedConfig, CELL_SIZES){
     var themeStyle = getThemeStyle(feedConfig.color);
     var scaleMode = 'fill';
-    if(feedConfig.layout.scaleMode){
+    if(feedConfig.layout && feedConfig.layout.scaleMode){
         scaleMode = feedConfig.layout.scaleMode;
     }
     return {
