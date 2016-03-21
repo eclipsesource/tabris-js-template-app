@@ -4,7 +4,6 @@ var getIconSrc = require('./../helpers/icon').getIconSrc;
 function init(pageTitle, feedItem){
 	var page = tabris.create("Page", { title: "Loading...", topLevel: false, _feedItem: feedItem });
 	addItemWebView(page,feedItem, pageTitle);
-
 	registerPageActions(page, feedItem);
 
 	return page;
@@ -33,12 +32,20 @@ var handlers = {
 };
 
 function addItemWebView(container, feedItem, titleOnLoad){
+	var itemWebView = appendItemWebViewToContainer(container);
+	var itemDetails = getItemDetails(feedItem);
+
+	handlers[itemDetails.type] (itemWebView, itemDetails, container, titleOnLoad);
+
+	return itemWebView;
+}
+
+function appendItemWebViewToContainer(container){
 	var itemWebView = tabris.create('WebView',{ left: 0, right: 0, top: 0, bottom: 0}).appendTo(container);
 	container.set('_itemWebView', itemWebView);
-
-	var itemDetails = getItemDetails(feedItem);
-	handlers[itemDetails.type] (itemWebView, itemDetails, container, titleOnLoad);
+	return itemWebView;
 }
+
 
 function open(pageTitle, feedItem) {
 	var p = init(pageTitle, feedItem);
@@ -68,16 +75,30 @@ function registerPageActions(page, feedItem){
 		title: " ",
 		image: getIconSrc("more")
 	}).on("select", function() {
+		var itemDetails = getItemDetails(feedItem);
+		var actions = ["Share", "Open in Browser"];
+		var handlers = [share, openExternal];
+
+		// Add another action when in url mode (RSS reader).
+		if(itemDetails.type === "html" && !page.get("_isInURL")){
+			actions.push("Read Full Article");
+			handlers.push(function(){
+				page.get('_itemWebView').dispose();
+				appendItemWebViewToContainer(page).set("url", itemDetails.link );
+				page.set("_isInURL",true);
+			});
+		}
+
 		var options = {
 			androidTheme: window.plugins.actionsheet.ANDROID_THEMES.THEME_HOLO_LIGHT,
 			title: "What to do with this item",
-			buttonLabels: ["Share", "Open in Browser"],
+			buttonLabels: actions,
 			androidEnableCancelButton: true,
 			winphoneEnableCancelButton: true,
 			addCancelButtonWithLabel: "Cancel",
 			//addDestructiveButtonWithLabel: "Remove from watchlist"
 		};
-		var handlers = [share, openExternal];
+
 		window.plugins.actionsheet.show(options,function(buttonIndex) {
 
 			setTimeout(function() {
