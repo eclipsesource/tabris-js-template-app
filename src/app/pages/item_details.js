@@ -46,22 +46,13 @@ function open(pageTitle, feedItem) {
 }
 
 function registerPageActions(page, feedItem){
-	var callback = function(buttonIndex) {
-		setTimeout(function() {
-			// like other Cordova plugins (prompt, confirm) the buttonIndex is 1-based (first button is index 1)
-			console.log("button index clicked: " + buttonIndex);
-			window.plugins.toast.showShortCenter("button index clicked: " + buttonIndex);
-		});
-	};
 
 	var openURLAction = tabris.create("Action", {
 		placementPriority: "high",
 		title: " ",
 		image: getIconSrc("external_link")
 	}).on("select", function() {
-		var itemDetails = getItemDetails(feedItem);
-		var appLauncher = tabris.create("AppLauncher");
-		appLauncher.openUrl(itemDetails.link || itemDetails.content);
+		openExternal(feedItem)
 	});
 
 	var openShareAction = tabris.create("Action", {
@@ -69,10 +60,7 @@ function registerPageActions(page, feedItem){
 		title: " ",
 		image: getIconSrc("share")
 	}).on("select", function() {
-		var itemDetails = getItemDetails(feedItem);
-		window.plugins.socialsharing.share("Check out this awesome thing", feedItem.title,
-			feedItem.image,
-			itemDetails.link || itemDetails.content);
+		share(feedItem);
 	});
 
 	var openMoreAction = tabris.create("Action", {
@@ -80,17 +68,27 @@ function registerPageActions(page, feedItem){
 		title: " ",
 		image: getIconSrc("more")
 	}).on("select", function() {
-		//var itemDetails = getItemDetails(feedItem);
 		var options = {
 			androidTheme: window.plugins.actionsheet.ANDROID_THEMES.THEME_HOLO_LIGHT,
 			title: "What to do with this item",
-			buttonLabels: ["Share", "Share via Facebook", "Share via Twitter", "Open in Safari", "Add to watchlist"],
+			buttonLabels: ["Share", "Open in Browser"],
 			androidEnableCancelButton: true,
 			winphoneEnableCancelButton: true,
 			addCancelButtonWithLabel: "Cancel",
-			addDestructiveButtonWithLabel: "Remove from watchlist"
+			//addDestructiveButtonWithLabel: "Remove from watchlist"
 		};
-		window.plugins.actionsheet.show(options, callback);
+		var handlers = [share, openExternal];
+		window.plugins.actionsheet.show(options,function(buttonIndex) {
+
+			setTimeout(function() {
+				// like other Cordova plugins (prompt, confirm) the buttonIndex is 1-based (first button is index 1)
+				buttonIndex = buttonIndex - 1;
+				if( handlers[buttonIndex] ){
+					handlers[buttonIndex](feedItem);
+				}
+			});
+
+		});
 	});
 
 
@@ -100,6 +98,21 @@ function registerPageActions(page, feedItem){
 		openShareAction.dispose();
 	});
 }
+
+
+function openExternal(feedItem){
+	var itemDetails = getItemDetails(feedItem);
+	var appLauncher = tabris.create("AppLauncher");
+	appLauncher.openUrl(itemDetails.link || itemDetails.content);
+}
+
+function share(feedItem){
+	var itemDetails = getItemDetails(feedItem);
+	window.plugins.socialsharing.share("Check out this awesome thing", feedItem.title,
+		feedItem.image,
+		itemDetails.link || itemDetails.content);
+}
+
 
 module.exports  = {
 	open: open,
