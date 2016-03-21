@@ -11,6 +11,10 @@ module.exports = [
     {
 		name: 'Jeans',
 		color: '#333',
+	    layout: {
+		    CELL_WIDTH: 150,
+	    },
+
 		config: {
 			fts: "Jeans",
 		},
