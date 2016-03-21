@@ -76,8 +76,8 @@ module.exports = function( feedConfig , tab) {
 function calculateCellsPerRow(feedConfig){
 
     // Manually defined!
-    if (feedConfig.layout && feedConfig.layout.CELL_WIDTH){
-        return Math.floor( tabris.device.get("screenWidth") / feedConfig.layout.CELL_WIDTH );
+    if (feedConfig.layout && feedConfig.layout.cellWidth){
+        return Math.max(1, Math.floor( tabris.device.get("screenWidth") / feedConfig.layout.cellWidth ));
     }
 
     // Default
@@ -92,7 +92,10 @@ function calculateCellsPerRow(feedConfig){
 
 function calculateCellSizes(feedConfig, CELLS_PER_ROW){
     var cellWidth = Math.floor(tabris.device.get("screenWidth")/CELLS_PER_ROW);
-    var cellHeightRatio = config.imgSizeHeightToWidthRatio.phone;
+    var cellHeightRatio = config.imgSizeHeightToWidthRatio;
+    if(feedConfig.layout && feedConfig.layout.imgSizeHeightToWidthRatio){
+        cellHeightRatio = feedConfig.layout.imgSizeHeightToWidthRatio;
+    }
     var cellHeight = Math.floor(cellHeightRatio * cellWidth);
     return {
         cellWidth : cellWidth,
@@ -106,10 +109,14 @@ function calculateCellSizes(feedConfig, CELLS_PER_ROW){
 
 function cellStyle(feedConfig, CELL_SIZES){
     var themeStyle = getThemeStyle(feedConfig.color);
+    var scaleMode = 'fill';
+    if(feedConfig.layout.scaleMode){
+        scaleMode = feedConfig.layout.scaleMode;
+    }
     return {
         container : { left: "prev()", width: CELL_SIZES.cellWidth, top: 0, bottom: 0 , background: themeStyle.background},
         masterContainer : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background},
-        image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: 'fill' , background: "white"},
+        image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: scaleMode , background: "white"},
         overlay: { left: 0, right: 0, height: 46, bottom: 1 ,background: themeStyle.overlayBG, opacity: 0.8},
         title: { maxLines: 2, font: '16px', left: 10, right: 10, bottom: 5, textColor: themeStyle.textColor }
     };
