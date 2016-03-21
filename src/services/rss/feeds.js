@@ -18,19 +18,29 @@ module.exports = [
         name: 'LifeHacker',
         color: '#709602',
         feed: rss2json('http://lifehacker.com/rss'),
+        layout: {
+            cellWidth: 300
+        },
     },
     {
         name: 'TechRadar',
         color: '#2F6E91',
         feed: rss2json('http://www.techradar.com/rss'),
+        layout: {
+            cellWidth: 300
+        },
         contentSanitizer: function(html){
             return html.replace(/<br clear="all".*?alt="">/igm,'');
-        }
+        },
+
     },
     {
         name: 'TechCrunch',
         color: '#0A9E01',
         feed: rss2json('http://feeds.feedburner.com/Techcrunch'),
+        layout: {
+            cellWidth: 300
+        },
         imageResolver: function(feedItem){
             if(feedItem.enclosure && feedItem.enclosure.link){
                 // TODO: device width!

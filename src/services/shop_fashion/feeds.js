@@ -11,6 +11,11 @@ module.exports = [
     {
 		name: 'Jeans',
 		color: '#333',
+	    layout: {
+		    cellWidth: 150,
+		    imgSizeHeightToWidthRatio: 2.2,
+	    },
+
 		config: {
 			fts: "Jeans",
 		},
@@ -18,6 +23,10 @@ module.exports = [
 	{
 		name: 'Dresses',
 		color: '#333',
+		layout: {
+			cellWidth: 150,
+			imgSizeHeightToWidthRatio: 2.2,
+		},
 		config: {
 			fts: "Dress",
 		},
@@ -25,6 +34,12 @@ module.exports = [
 	{
 		name: 'Hats',
 		color: '#333',
+		layout: {
+			cellWidth: 150,
+			imgSizeHeightToWidthRatio: 1,
+			scaleMode: 'fit'
+		},
+
 		config: {
 			fts: "summer hat",
 		},
@@ -32,6 +47,11 @@ module.exports = [
 	{
 		name: 'watches',
 		color: '#333',
+		layout: {
+			cellWidth: 110,
+			imgSizeHeightToWidthRatio: 1.4,
+			scaleMode: 'fit'
+		},
 		config: {
 			fts: "watch",
 		},
@@ -39,6 +59,12 @@ module.exports = [
 	{
 		name: 'Bags',
 		color: '#333',
+		layout: {
+			cellWidth: 150,
+			imgSizeHeightToWidthRatio: 1,
+			scaleMode: 'fit'
+		},
+
 		config: {
 			fts: "bag",
 		},
