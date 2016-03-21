@@ -1,6 +1,6 @@
 var apps = {
     rss: {
-        appName: 'Tabris.js RSS Reader Example',
+        appName: 'Tabris.js Open Source RSS Reader',
         dataService: require('./services/rss'),
         feeds: require('./services/rss/feeds').slice(0,3),
     },
@@ -11,7 +11,7 @@ var apps = {
         mainPage: "showcase",
     },
     shop: {
-        appName: 'Tabris.js Ecommerce example',
+        appName: 'Tabris.js Open Source Ecommerce Shop',
         dataService: require('./services/shop'),
         feeds: require('./services/shop/feeds'),
 
@@ -29,7 +29,7 @@ var apps = {
         },
     },
     shop_showcase: {
-        appName: 'Tabris.js Ecommerce example',
+        appName: 'Tabris.js Open Source Ecommerce Shop',
         dataService: require('./services/shop'),
         feeds: require('./services/shop/feeds'),
         mainPage: "showcase",
@@ -46,7 +46,7 @@ var apps = {
         }
     },
     shop_fashion: {
-        appName: 'Tabris.js Ecommerce example',
+        appName: 'Tabris.js Open Source Ecommerce Shop',
         dataService: require('./services/shop_fashion'),
         feeds: require('./services/shop_fashion/feeds'),
         mainPage: "showcase",

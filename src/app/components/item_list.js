@@ -14,6 +14,8 @@ var DEFAULTS = {
     CELLS_PER_ROW: 1,
 };
 
+var tapListener = tabris.device.get("platform") === 'iOS' ? "touchend": "tap";
+
 module.exports = function( feedConfig , tab) {
 
     var CELLS_PER_ROW = calculateCellsPerRow(feedConfig);
@@ -34,7 +36,7 @@ module.exports = function( feedConfig , tab) {
             var elementsList = [];
             for (var i=0; i<CELLS_PER_ROW; i++){
                 elementsList.push({});
-                elementsList[i].container = tabris.create('Composite', style.container).appendTo(masterContainer).on("touchend", function(target) {
+                elementsList[i].container = tabris.create('Composite', style.container).appendTo(masterContainer).on(tapListener, function(target) {
                     var feedItem = target.get("_feedItem");
                     detailScreen.open(feedItem.title, feedItem);
                 });
