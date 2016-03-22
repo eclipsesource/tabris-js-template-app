@@ -1,3 +1,4 @@
+var _ = require("lodash");
 var apps = {
     rss: {
         appName: 'Tabris.js Open Source RSS Reader',
@@ -81,11 +82,11 @@ var apps = {
     }
     // TODO: Youtube / Vimeo ?
 };
-var _ = require("lodash");
+
 
 var baseConfig = {
     /******************************************
-     *  This project comes with some starter apps That show off different abilities:
+     *  This project comes with 7 starter apps That show off different abilities and components:
      *
      *  rss,
      *  rss_showcase,
@@ -95,12 +96,14 @@ var baseConfig = {
      *  wordpress_pets,
      *  wordpress_eclipsesource,
      *
-     *
-     *  appName  - The title of the tab and more...
-     *  theme    - TRY THIS! Theme accepts 'normal', 'light', 'full'
-     *  mainPage - Can be 'tabs' view or 'showcase' - overriden by some app definitions.
      **********************************/
+    app: apps.rss , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
 
+
+
+	/******************************************
+     *  The default configuration is below...
+     ***********************/
     //theme: 'normal',
     //theme: 'light',
     //theme: 'full',
@@ -109,11 +112,6 @@ var baseConfig = {
     mainPage: "tabs", // can be "showcase" or "tabs"
 
     imgResizeService: 'weserv', // can be 'weserv', 'google', or 'none'.
-
-	/****************************
-     * IMPORTANT: Change this value to uncover 7 different apps  :)
-     ****************************/
-    app: apps.rss , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
 
     pullToRefresh:true,
     imgSizeHeightToWidthRatio :0.6,
