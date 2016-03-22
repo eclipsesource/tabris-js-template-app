@@ -1,13 +1,11 @@
 {
-  "title": "Tabris.js RSS Reader",
-  "description": "",
+  "title": "Tabris.js Template App",
+  "description": "7 apps in 1 with examples for multiple use cases.",
   "main": "index.js",
   "scripts": {
     "start": "http-server -c-1",
     "jshint": "jshint src test",
-    "jscs": "jscs src test",
-    "posttest": "npm run jshint && npm run jscs",
-    "test": "mocha"
+    "jscs": "jscs src test"
   },
   "dependencies": {
     "lodash": "^4.6.1",
