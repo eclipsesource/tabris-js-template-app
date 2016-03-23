@@ -8,8 +8,8 @@
         EclipseSource
     </author>
     <access origin="*" />
+
     <plugin name="cordova-plugin-x-socialsharing" />
-    <!--<plugin name="cordova-plugin-dialogs" />-->
     <plugin name="cordova-plugin-actionsheet" />
 
     <platform name="android">

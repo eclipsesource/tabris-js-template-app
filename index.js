@@ -7,10 +7,6 @@
 // Shai Alon
 // https://github.com/shaialon
 
-// Shim Web Services
-Promise = require("promise");
-require("whatwg-fetch");
-
 // Add applauncher
 tabris.registerWidget("AppLauncher", {
 	_type: "tabris.AppLauncher",
