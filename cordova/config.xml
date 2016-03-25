@@ -12,6 +12,8 @@
     <plugin name="cordova-plugin-x-socialsharing" />
     <plugin name="cordova-plugin-actionsheet" />
 
+    <plugin name="onesignal-cordova-plugin" />
+
     <platform name="android">
         <icon src="res/android/mipmap-ldpi/ic_launcher.png" density="ldpi" />
         <icon src="res/android/mipmap-mdpi/ic_launcher.png" density="mdpi" />
