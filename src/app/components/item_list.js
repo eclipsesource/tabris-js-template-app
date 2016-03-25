@@ -243,14 +243,21 @@ function updateCellItemElements(feedItem, elements , CELL_SIZES){
 
 
     // Title + Overlay update
-    elements.title.set({text: feedItem.title});
-    if(!imageUrl || imageUrl.length === 0) {
-        elements.overlay.set({ top: 1, height:undefined });
-        elements.title.set({ maxLines: 5});
-    } else {
-        elements.overlay.set({ top: undefined, height:46 });
-        elements.title.set({ maxLines: 2});
+    if(feedItem.price_display){
+        elements.overlay.set({ top: undefined, height:23 });
+        elements.title.set({ text: feedItem.price_display, maxLines: 1, bottom: 2, alignment:'center'});
     }
+    else {
+        elements.title.set({text: feedItem.title});
+        if(!imageUrl || imageUrl.length === 0) {
+            elements.overlay.set({ top: 1, height:undefined });
+            elements.title.set({ maxLines: 5});
+        } else {
+            elements.overlay.set({ top: undefined, height:46 });
+            elements.title.set({ maxLines: 2});
+        }
+    }
+
 }
 
 function hideElements(elements){

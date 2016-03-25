@@ -100,8 +100,8 @@ function appendItemBox(widget , feedItem, delayed){
 			},1000);
 		}
 
-		if(feedItem.price){
-			tabris.create('TextView', { text: '$'+Math.round(feedItem.price),left: 0, right: 0, bottom: 13, height: 30, textColor: "#aaa",  alignment:'center', maxLines:1}).appendTo(boxContainer);
+		if(feedItem.price_display){
+			tabris.create('TextView', { text: feedItem.price_display,left: 0, right: 0, bottom: 13, height: 30, textColor: "#aaa",  alignment:'center', maxLines:1}).appendTo(boxContainer);
 		}
 		else {
 			tabris.create('TextView', { text: feedItem.title, left: 0, right: 0, bottom: 6, height: 40, textColor: "#aaa",  alignment:'left', maxLines:2}).appendTo(boxContainer);
@@ -121,7 +121,7 @@ function appendSeeAllBox(widget){
 
 	var boxContainer = tabris.create('Composite', { left: ["prev()", 10], width: imageWidth + 40, top: 0, bottom: 0 }).appendTo(widget);
 	var seeAllBox = tabris.create('Composite', { left: 20, right: 20, top: 0, height: imageHeight, background: feedConfig.color}).appendTo(boxContainer);
-	tabris.create('TextView', { text: ''+ '' + "See All<br/>'" +feedConfig.name +"'"  , maxLines: 2, font: '14px', left: 0, right: 20, bottom: 0, top: 0, textColor: "white",  alignment:'center', markupEnabled:true}).appendTo(seeAllBox);
+	tabris.create('TextView', { text: ''+ '' + "See All       '" +feedConfig.name +"'"  , maxLines: 2, font: '14px', left: 0, right: 20, bottom: 0, top: 0, textColor: "white",  alignment:'center', markupEnabled:false}).appendTo(seeAllBox);
 	tabris.create('TextView', { text: '>'  , maxLines: 1, font: '20px', width: 14, right: 6, bottom: 0, top: 0, textColor: "white",  alignment:'center'}).appendTo(seeAllBox);
 
 	seeAllBox.on('tap',function(){

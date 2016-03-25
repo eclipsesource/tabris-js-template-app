@@ -51,6 +51,7 @@ function getItems(feedConfig , overideConfig){
 					itemsProcessed.forEach(function(item){
 						item.title = item.name;
 						item.image = item.image.sizes.Original.url;
+						item.price_display = '$'+numberWithCommas((Math.round(item.price)));
 					});
 
 					state.count = res.metadata.total;
@@ -77,6 +78,9 @@ function getItemDetails(item) {
 	};
 }
 
+function numberWithCommas(x) {
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 module.exports = {
 	getItems: getItems,
