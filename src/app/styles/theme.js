@@ -29,7 +29,8 @@ function getThemeStyle(color){
 			},
 			ui: {
 				background: 'white',
-				textColor: color
+				textColor: color,
+				statusBarTheme: 'light'
 			},
 			tabs: {
 				background: 'white',
@@ -48,7 +49,8 @@ function getThemeStyle(color){
 			},
 			ui: {
 				background: color,
-				textColor: 'white'
+				textColor: 'white',
+				statusBarTheme: 'dark'
 			},
 			tabs: {
 				background: 'white',
@@ -67,7 +69,8 @@ function getThemeStyle(color){
 			},
 			ui: {
 				background: color,
-				textColor: 'white'
+				textColor: 'white',
+				statusBarTheme: 'dark'
 			},
 			tabs: {
 				background: color,
