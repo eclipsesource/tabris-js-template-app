@@ -15,12 +15,12 @@ var imageWidth = Math.floor( isTablet ? tabris.device.get("screenWidth") * confi
 var imageHeightRatio = isTablet ? config.imgShowcaseSizeHeightToWidthRatio.tablet : config.imgShowcaseSizeHeightToWidthRatio.phone;
 var imageHeight = Math.floor(imageHeightRatio * imageWidth);
 
-var ITEMS_MARGIN = 10;
+var ITEMS_MARGIN = 16;
 var SHOWCASE_ITEMS = 10;
 
 module.exports = function( feedConfig , tab) {
 	var style = cellStyle(feedConfig);
-	var container = tabris.create("Composite", { left: 0, right: 0, top: "prev()", height: ( 90 + imageHeight )}).appendTo(tab);
+	var container = tabris.create("Composite", { left: 0, right: 0, top: "prev()", height: ( 103 + imageHeight )}).appendTo(tab);
 
 	// Showcase header
 	var header = tabris.create("Composite", style.header ).appendTo(container);
@@ -33,6 +33,8 @@ module.exports = function( feedConfig , tab) {
 	// Showcase scroll
 	var itemShowcase = tabris.create("ScrollView", style.itemShowcase).appendTo(container);
 	tabris.create("Composite", style.itemShowcaseScrollHider).appendTo(container);
+
+	tabris.create("Composite", style.divider).appendTo(container);
 	refreshItems(itemShowcase);
 
 	return container;
@@ -42,11 +44,12 @@ module.exports = function( feedConfig , tab) {
 function cellStyle(feedConfig){
 	var themeStyle = getThemeStyle(feedConfig.color);
 	return {
+		divider: { opacity: 0.1, background: themeStyle.showcase.textColor, layoutData: {left: ITEMS_MARGIN,  height:1,  bottom: 0, right: 0 }},
 		itemShowcaseScrollHider: { layoutData: {left: 0,  height:8,  bottom: 0, right: 0},  background: "white"},
-		itemShowcase: { layoutData: {left: 0,  top:42,  bottom: 0, right: 0}, direction: "horizontal", _feed: feedConfig},
-		header: {left: 0, right: 0, height: 30, top:0, background: themeStyle.showcase.background},
-		headerText: { maxLines: 1, font: 'bold 16px', left: 10, right: 0, bottom: 5, top:5, text:feedConfig.name, textColor: themeStyle.showcase.textColor , alignment:'left' },
-		headerSeeAll: { maxLines: 1, font: '12px', width: 100, right: 10, bottom: 5, top:5, text: "See all >", textColor: themeStyle.showcase.textColor , alignment:'right' }
+		itemShowcase: { layoutData: {left: 0,  top:46,  bottom: 0, right: 0}, direction: "horizontal", _feed: feedConfig},
+		header: {left: 0, right: 0, height: 45, top:0, background: themeStyle.showcase.background},
+		headerText: { maxLines: 1, font: '18px', left: ITEMS_MARGIN, right: 0, bottom: 10,  text:feedConfig.name, textColor: themeStyle.showcase.textColor , alignment:'left' },
+		headerSeeAll: { maxLines: 1, font: 'bold 10px', width: 100, right: ITEMS_MARGIN, bottom: 10, opacity: 0.7, text: "See All >", textColor: themeStyle.showcase.textColor , alignment:'right' }
 	};
 }
 
@@ -118,7 +121,7 @@ function appendSeeAllBox(widget){
 
 	var boxContainer = tabris.create('Composite', { left: ["prev()", 10], width: imageWidth + 40, top: 0, bottom: 0 }).appendTo(widget);
 	var seeAllBox = tabris.create('Composite', { left: 20, right: 20, top: 0, height: imageHeight, background: feedConfig.color}).appendTo(boxContainer);
-	tabris.create('TextView', { text: ''+ '' + "See all<br/>'" +feedConfig.name +"'"  , maxLines: 2, font: '14px', left: 0, right: 20, bottom: 0, top: 0, textColor: "white",  alignment:'center', markupEnabled:true}).appendTo(seeAllBox);
+	tabris.create('TextView', { text: ''+ '' + "See All<br/>'" +feedConfig.name +"'"  , maxLines: 2, font: '14px', left: 0, right: 20, bottom: 0, top: 0, textColor: "white",  alignment:'center', markupEnabled:true}).appendTo(seeAllBox);
 	tabris.create('TextView', { text: '>'  , maxLines: 1, font: '20px', width: 14, right: 6, bottom: 0, top: 0, textColor: "white",  alignment:'center'}).appendTo(seeAllBox);
 
 	seeAllBox.on('tap',function(){

@@ -6,8 +6,10 @@ var DEFAULT_OPTIONS = {
 	DOT_RADIUS : DOT_RADIUS,
 	DOT_COLOR  : 'black',
 	DOT_ROUND  : true,
-	DOT_CENTER : true
+	DOT_CENTER : true,
+	IMAGE_HEIGHT: 152
 };
+
 
 module.exports = function( items , options) {
 
@@ -15,7 +17,7 @@ module.exports = function( items , options) {
 	config.DOT_RADIUS_HALF = Math.floor(config.DOT_RADIUS / 2);
 
 	var container = tabris.create("Composite", {
-		left: 0, top: "prev()", right: 0, height: 150,
+		left: 0, top: "prev()", right: 0, height: config.IMAGE_HEIGHT,
 	});
 	function itemSelected(item){
 		container.trigger("itemSelected",item);
@@ -35,7 +37,7 @@ module.exports = function( items , options) {
 	});
 
 	items.forEach(function(item, index){
-		addImageTab(item, tabFolder, itemSelected, index);
+		addImageTab(item, tabFolder, itemSelected, index, config);
 		addDot(dotContainer , config);
 	});
 
@@ -44,13 +46,13 @@ module.exports = function( items , options) {
 	return container;
 };
 
-function addImageTab(item, tabFolder, itemSelected, index) {
+function addImageTab(item, tabFolder, itemSelected, index, config) {
 	var tab = tabris.create("Tab",{_index:index}).on("tap",function(){
 		itemSelected(item);
 	}).appendTo(tabFolder);
 	tabris.create("ImageView", {
 		centerX: 0, centerY: 0,
-		height: 150,
+		height: config.IMAGE_HEIGHT,
 		background:'#ccc',
 		scaleMode:'fit',
 		image:{src:item.image}
