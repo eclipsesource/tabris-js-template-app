@@ -51,7 +51,7 @@ var apps = {
         dataService: require('./services/shop_fashion'),
         feeds: require('./services/shop_fashion/feeds'),
         mainPage: "showcase",
-        theme: tabris.device.get("platform") === "iOS" ? 'light' : 'normal',
+        theme: tabris.device.get("platform") === "iOS" ? 'normal' : 'normal',
         // Overrides...
         pullToRefresh:false,
         imgSizeHeightToWidthRatio:  2.4,
@@ -97,7 +97,7 @@ var baseConfig = {
      *  wordpress_eclipsesource,
      *
      **********************************/
-    app: apps.rss , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
+    app: apps.shop_fashion , // can be apps.rss, apps.rss_showcase, apps.shop, apps.shop_showcase, apps.shop_fashion, apps.wordpress_pets, apps.wordpress_eclipsesource,
 
 
 
