@@ -3,6 +3,9 @@
  
 [*Tabris.js*](https://tabrisjs.com) is an amazing way to create native mobile apps in the new age. It combines native platform widgets – performance plus look & feel, with the simplicity, elegance, and power of a single JavaScript codebase for iOS, Android and Windows 10 (coming soon). It is the only native platform UI, javascript runtime framework that lets you use Cordova plugins to tap into the device capabilities.
 
+> Watch this intro video that explains the easy set up and features:
+> <a href="https://www.youtube.com/watch?v=I8KHE6Yx7T0" target="_blank"><img src="https://cloud.githubusercontent.com/assets/3126207/14099738/d3990548-f590-11e5-922a-80f8b554df2c.png"/></a>
+
 Moreover, Tabris.js also offers some unique advantages to developers, like a cloud build service and developer apps for iOS and Android. This means you can develop iOS apps without owning a Mac or installing Xcode (but need an iPhone / iPad). Likewise, you can develop Android apps without downloading Android studio and the Android SDKs (but need an Android phone / tablet).
 
 # About
