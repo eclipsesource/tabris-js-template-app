@@ -73,4 +73,5 @@ For any questions ping me: shai@eclipsesource.com
 
 # Thanks
 
-- [Carlos Lopez - For the initial rss idea and codebase](https://github.com/carloslopez1990/tabrisjs-rss-reader-example)
+- [Carlos Lopez](https://github.com/carloslopez1990/tabrisjs-rss-reader-example)  - For the initial RSS idea and codebase
+- [Eddy Verbruggen](https://github.com/EddyVerbruggen) - For the Social Sharing & Actionsheet Cordova plugins used here
