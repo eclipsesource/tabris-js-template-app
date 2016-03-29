@@ -61,9 +61,13 @@ Then, connect to your code from the Tabris.js Developer App ([*Play Store*](http
 
 # Contribute
 Add Some fancy behaviour like:
-* Localstorage for favorites
-* Sharing with cordova plugin
-* More cool services
+
+* [ ] Localstorage for favorites
+* [x] Sharing with cordova plugin
+* [ ] Youtube / Vimeo data service
+* [ ] Login functionality
+* [ ] Push notifications
+* [ ] Rate app functionality
 
 For any questions ping me: shai@eclipsesource.com
 
