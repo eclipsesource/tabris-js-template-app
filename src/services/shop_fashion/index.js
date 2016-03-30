@@ -51,7 +51,8 @@ function getItems(feedConfig , overideConfig){
 					itemsProcessed.forEach(function(item){
 						item.title = item.name;
 						item.image = item.image.sizes.Original.url;
-						item.price_display = '$'+numberWithCommas((Math.round(item.price)));
+						item.price_display = '$'+numberWithCommas((Math.round(item.salePrice || item.price)));
+
 					});
 
 					state.count = res.metadata.total;
