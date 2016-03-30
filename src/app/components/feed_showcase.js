@@ -18,13 +18,14 @@ var imageHeight = Math.floor(imageHeightRatio * imageWidth);
 var ITEMS_MARGIN = 16;
 var SHOWCASE_ITEMS = 10;
 
-module.exports = function( feedConfig , tab) {
+ function init( feedConfig , tab) {
 	var style = cellStyle(feedConfig);
 	var container = tabris.create("Composite", { left: 0, right: 0, top: "prev()", height: ( 103 + imageHeight )}).appendTo(tab);
 
 	// Showcase header
 	var header = tabris.create("Composite", style.header ).appendTo(container);
-	tabris.create('TextView',  style.headerText).appendTo(header);
+	var headerText =tabris.create('TextView',  style.headerText).appendTo(header);
+
 	tabris.create('TextView',  style.headerSeeAll).appendTo(header);
 	header.on('touchend',function(){
 		itemListPage.open(feedConfig.name,feedConfig);
@@ -35,9 +36,25 @@ module.exports = function( feedConfig , tab) {
 	tabris.create("Composite", style.itemShowcaseScrollHider).appendTo(container);
 
 	tabris.create("Composite", style.divider).appendTo(container);
+
+	 container.set({
+		 _headerText:headerText,
+		 _itemShowcase: itemShowcase,
+	 });
 	refreshItems(itemShowcase);
 
 	return container;
+};
+
+function updateCell(showcase, feedConfig){
+	showcase.get("_headerText").set({text:feedConfig.name});
+	showcase.get("_itemShowcase").set("_feed",feedConfig);
+	refreshItems( showcase.get("_itemShowcase") );
+}
+
+module.exports = {
+	init: init,
+	updateCell: updateCell
 };
 
 
@@ -47,11 +64,12 @@ function cellStyle(feedConfig){
 		divider: { opacity: 0.1, background: themeStyle.showcase.textColor, layoutData: {left: ITEMS_MARGIN,  height:1,  bottom: 0, right: 0 }},
 		itemShowcaseScrollHider: { layoutData: {left: 0,  height:8,  bottom: 0, right: 0},  background: "white"},
 		itemShowcase: { layoutData: {left: 0,  top:46,  bottom: 0, right: 0}, direction: "horizontal", _feed: feedConfig},
-		header: {left: 0, right: 0, height: 45, top:0, background: themeStyle.showcase.background},
-		headerText: { maxLines: 1, font: '18px', left: ITEMS_MARGIN, right: 0, bottom: 10,  text:feedConfig.name, textColor: themeStyle.showcase.textColor , alignment:'left' },
+		header: { class:"header", left: 0, right: 0, height: 45, top:0, background: themeStyle.showcase.background},
+		headerText: { class:"headerText", maxLines: 1, font: '18px', left: ITEMS_MARGIN, right: 0, bottom: 10,  text:feedConfig.name, textColor: themeStyle.showcase.textColor , alignment:'left' },
 		headerSeeAll: { maxLines: 1, font: 'bold 10px', width: 100, right: ITEMS_MARGIN, bottom: 10, opacity: 0.7, text: "See All >", textColor: themeStyle.showcase.textColor , alignment:'right' }
 	};
 }
+
 
 
 function refreshItems( widget ) {

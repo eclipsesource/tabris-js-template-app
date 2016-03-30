@@ -1,6 +1,6 @@
 var config = require('./../../config.js').config;
 var itemListComponent = require('./../components/item_list');
-var feedShowcase = require('./../components/feed_showcase');
+var feedShowcase = require('./../components/feed_showcase_new');
 var updateUIColors = require('./../styles/theme').updateUIColors;
 var getThemeStyle = require('./../styles/theme').getThemeStyle;
 var aboutPage = require('./about.js');
@@ -12,7 +12,7 @@ var detailScreen = require('./../pages/item_details');
 // Sizing helpers.
 var sizing = require('./../helpers/sizing');
 var isTablet = sizing.isTablet;
-var imageWidth = Math.floor( isTablet ? tabris.device.get("screenWidth") * config.imgShowcaseScreenWidthRatio.tablet : tabris.device.get("screenWidth") * config.imgShowcaseScreenWidthRatio.phone );
+var imageWidth = Math.ceil( isTablet ? tabris.device.get("screenWidth") * config.imgShowcaseScreenWidthRatio.tablet : tabris.device.get("screenWidth") * config.imgShowcaseScreenWidthRatio.phone );
 var imageHeightRatio = isTablet ? config.imgShowcaseSizeHeightToWidthRatio.tablet : config.imgShowcaseSizeHeightToWidthRatio.phone;
 var imageHeight = Math.floor(imageHeightRatio * imageWidth);
 
@@ -72,26 +72,77 @@ function init() {
         /**********************
          *   Showcase
          ******************/
-        var container = tabris.create("ScrollView", { left: 0, right: 0, top: 0, bottom: 0 , direction:"vertical"}).appendTo(MainContent);
+        //var container = tabris.create("ScrollView", { left: 0, right: 0, top: 0, bottom: 0 , direction:"vertical"}).appendTo(MainContent);
+        //
+        //if (config.slider){
+        //    imageSlider(config.slider).on("itemSelected",function(item){
+        //       detailScreen.open(item.title, item);
+        //    }).appendTo(container);
+        //}
+        //
+        //// Now we will showcase per source and add to the container
+        //config.feeds.forEach(function( feed ){
+        //    feedShowcase( feed , container ).appendTo(container);
+        //});
+        //
+        //container.on("scroll",function(widget, offset){
+        //    var activeFeedIndex = Math.min (Math.max (Math.floor (offset.y / (imageHeight + 90)) , 0 ) , config.feeds.length-1);
+        //    colorUpdates (config.feeds[activeFeedIndex].color);
+        //});
+        //
+        //// Update the UI based on the theme and active tab.
+        //colorUpdates (config.feeds[0].color);
 
-        if (config.slider){
-            imageSlider(config.slider).on("itemSelected",function(item){
-               detailScreen.open(item.title, item);
-            }).appendTo(container);
+        var PRELOAD_CELLS = 2;
+        var items = config.feeds;
+        for (var i =0 ; i< PRELOAD_CELLS ; i++){
+            items= [{_dummy:true}].concat((items.concat({_dummy:true})));
         }
 
-        // Now we will showcase per source and add to the container
-        config.feeds.forEach(function( feed ){
-            feedShowcase( feed , container ).appendTo(container);
-        });
+        //if (config.slider){
+        //    imageSlider(config.slider).on("itemSelected",function(item){
+        //        detailScreen.open(item.title, item);
+        //    }).appendTo(MainContent);
+        //}
 
-        container.on("scroll",function(widget, offset){
-            var activeFeedIndex = Math.min (Math.max (Math.floor (offset.y / (imageHeight + 90)) , 0 ) , config.feeds.length-1);
-            colorUpdates (config.feeds[activeFeedIndex].color);
-        });
 
-        // Update the UI based on the theme and active tab.
+        var container = tabris.create("CollectionView", { left: 0, right: 0, top: (-1)*PRELOAD_CELLS*feedShowcase.elemHeight, bottom: 0 ,
+            itemHeight: feedShowcase.elemHeight,
+            items: items,
+
+            bottom: (-1)*PRELOAD_CELLS*feedShowcase.elemHeight,
+
+            initializeCell: function(cell){
+                cell.on("change:item", function(widget, feedConfig) {
+                    var elem = cell.get('_elem');
+                    if(!elem){
+                        if(feedConfig._dummy){return;}
+                        elem = feedShowcase.init( feedConfig , cell ).appendTo(cell);
+                        cell.set('_elem',elem);
+                    } else {
+                        feedShowcase.updateCell( elem, feedConfig );
+                    }
+                });
+            }
+
+        }).appendTo(MainContent);
+
         colorUpdates (config.feeds[0].color);
+
+
+        //
+        //// Now we will showcase per source and add to the container
+        //config.feeds.forEach(function( feed ){
+        //    feedShowcase( feed , container ).appendTo(container);
+        //});
+        //
+        //container.on("scroll",function(widget, offset){
+        //    var activeFeedIndex = Math.min (Math.max (Math.floor (offset.y / (imageHeight + 90)) , 0 ) , config.feeds.length-1);
+        //    colorUpdates (config.feeds[activeFeedIndex].color);
+        //});
+        //
+        //// Update the UI based on the theme and active tab.
+        //colorUpdates (config.feeds[0].color);
     }
 
 
