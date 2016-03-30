@@ -33,7 +33,7 @@ function getItems(feedConfig , overideConfig){
 			// This has been requested before
 			setTimeout(function(){
 				resolve(_.cloneDeep(requestCache[queryParamsStr]));
-			},1);
+			},10);
 		}
 		else {
 			fetch( "http://api.shopstyle.com/api/v2/products?pid="+ API_KEY +"&" + queryParamsStr ).then(function( res ){

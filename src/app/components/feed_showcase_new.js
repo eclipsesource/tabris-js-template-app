@@ -75,7 +75,7 @@ function cellStyle(feedConfig){
 	return {
 		divider: { opacity: 0.1, background: themeStyle.showcase.textColor, layoutData: {left: ITEMS_MARGIN,  height:1,  bottom: 0, right: 0 }},
 		itemShowcaseScrollHider: { layoutData: {left: 0,  height:8,  bottom: 0, right: 0},  background: "white"},
-		itemShowcase: { layoutData: {left: 0,  top:46,  bottom: 0, right: 0}, background: "white", direction: "horizontal", _feed: feedConfig},
+		itemShowcase: { layoutData: {left: 0,  top:46,  bottom: 0, right: 0}, background: "white", direction: "horizontal", _feed: feedConfig, _fetchIndexer:0},
 		header: { class:"header", left: 0, right: 0, height: 46, top:0, background: themeStyle.showcase.background},
 		headerText: { class:"headerText", maxLines: 1, font: '18px', left: ITEMS_MARGIN, right: 0, bottom: 10,  text:feedConfig.name, textColor: themeStyle.showcase.textColor , alignment:'left' },
 		headerSeeAll: { maxLines: 1, font: 'bold 10px', width: 100, right: ITEMS_MARGIN, bottom: 10, opacity: 0.7, text: "See All >", textColor: themeStyle.showcase.textColor , alignment:'right' }
@@ -91,6 +91,12 @@ function buildItemPlaceholders (widget){
 function buildItemBox(widget){
 	var imgCell;
 	var boxContainer = tabris.create('Composite', { class:"boxContainer", left: ["prev()", ITEMS_MARGIN], width: imageWidth, top: 0, bottom: 0}).appendTo(widget);
+	boxContainer.on('tap',function(){
+		var feedItem = boxContainer.get("_feedItem");
+		if(feedItem){
+			detailScreen.open(feedItem.title, feedItem);
+		}
+	});
 	imgCell = { class:"imgCell", left: 0, right: 0, top: 0, height: imageHeight, scaleMode: 'fill' , background: "rgb(220, 220, 220)"};
 	var imgView = tabris.create('ImageView', imgCell).appendTo(boxContainer);
 
@@ -104,7 +110,7 @@ function buildItemBox(widget){
 
 function updateItemBox(boxContainer , feedItem, delayed){
 	if(feedItem){
-		boxContainer.set({visible:true, width:imageWidth});
+		boxContainer.set({visible:true, width:imageWidth, _feedItem: feedItem});
 		var imageUrl = resizeImageURLByWidth(feedItem.image, imageWidth);
 		if(imageUrl){
 			var imgCell;
@@ -123,7 +129,7 @@ function updateItemBox(boxContainer , feedItem, delayed){
 		}
 	}
 	else {
-		boxContainer.set({visible:false, width:0 });
+		boxContainer.set({visible:false, width:0  });
 	}
 }
 
@@ -152,17 +158,25 @@ function refreshItems( widget ) {
 	for(var i=0; i< SHOWCASE_ITEMS; i++){
 		cleanCell(itemBoxes[i]);
 	}
-
+	var fetchIndexer = widget.get('_fetchIndexer')+1;
+	widget.set('_fetchIndexer',fetchIndexer);
 	if(feedConfig){
 		getItems( feedConfig ).then( function(results){
+			if(fetchIndexer !== widget.get('_fetchIndexer')){
+				return; // the cell has already changed.
+			}
 
 			setTimeout(function(){
+				if(fetchIndexer !== widget.get('_fetchIndexer')){
+					return; // the cell has already changed.
+				}
 				widget.set("_unScrolled",true);
 			},100);
 
 			for(var i=0; i< SHOWCASE_ITEMS; i++){
 				updateItemBox(itemBoxes[i],results.items[i], tabris.device.get("screenWidth") < ((i) * (imageWidth + ITEMS_MARGIN)));
 			}
+
 		}).catch(function(err){
 			console.log("Failed fetching items for: "+ widget.get('_feed'));
 			console.log(err);
