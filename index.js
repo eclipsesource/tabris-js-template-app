@@ -16,4 +16,7 @@ tabris.registerWidget("AppLauncher", {
 });
 
 // Run the first page
-require('./src/app/pages/main').open();
+require('./src/config.js').init().then(function(){
+	require('./src/app/pages/main').open();
+})
+

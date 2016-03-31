@@ -7,6 +7,7 @@
 ****************************/
 var API_KEY = 'uid4961-26577031-68' ;
 var PAGESIZE = 60;
+var feeds = require('./feeds');
 
 var requestCache = {};
 var _ = require("lodash");
@@ -23,19 +24,7 @@ function getItems(feedConfig , overideConfig){
 		}
 
  		var queryParamsStr = "limit="+ PAGESIZE +"&offset="+ ( PAGESIZE * (targetFeed.page-1) ) +"&";
- 		var tmp = [];
- 		for (var key in targetFeed){
-		    if(typeof targetFeed[key] ==='string'){
-			    tmp.push(key + "=" + encodeURIComponent( targetFeed[key] ));
-		    }
-		    else if(typeof targetFeed[key] ==='object'){
-			    targetFeed[key].forEach(function(filterValue){
-				    tmp.push(key + "=" + encodeURIComponent( filterValue ));
-			    });
-		    }
-
- 		}
- 		queryParamsStr += tmp.join("&");
+ 		queryParamsStr += paramsToQueryStr(targetFeed)
 
 		if(requestCache[queryParamsStr]){
 			// This has been requested before
@@ -91,7 +80,43 @@ function numberWithCommas(x) {
 	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+var config = {
+	// diamond-jewelry  ,  maternity-clothes  ,
+
+	CATEGORY: "maternity-clothes",
+	//PRICE_RANGE : 'p27:49',
+	PRICE_RANGE : 'p0:49',
+};
+
+function paramsToQueryStr(config){
+	var tmp = [];
+	for (var key in config){
+		if(typeof config[key] ==='string'){
+			tmp.push(key + "=" + encodeURIComponent( config[key] ));
+		}
+		else if(typeof config[key] ==='object'){
+			config[key].forEach(function(filterValue){
+				tmp.push(key + "=" + encodeURIComponent( filterValue ));
+			});
+		}
+
+	}
+	return tmp.join("&");
+}
+
+function init( ){
+	return new Promise(function(resolve, reject) {
+		fetch("http://api.shopstyle.com/api/v2/products/histogram?pid=" + API_KEY + "&filters=Brand&cat="+encodeURIComponent(config.CATEGORY)+"&fl="+encodeURIComponent(config.PRICE_RANGE)).then(function (res) {
+			return res.json();
+		}).then(function (res) {
+			var activeCategories = res.brandHistogram.sort(function(a,b){return b.count-a.count}).filter(function(item){return item.count > 10});
+			resolve ( feeds(config, activeCategories) );
+		});
+	});
+}
+
 module.exports = {
+	init:init,
 	getItems: getItems,
     getItemDetails: getItemDetails
 };
