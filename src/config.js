@@ -47,7 +47,7 @@ var apps = {
         }
     },
     shop_fashion: {
-        appName: 'Tabris.js Open Source Ecommerce Shop',
+        appName: "Men's Luxury Watches",
         dataService: require('./services/shop_fashion'),
         feeds: require('./services/shop_fashion/feeds'),
         mainPage: "showcase",

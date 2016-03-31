@@ -95,6 +95,9 @@ function init() {
 
         var PRELOAD_CELLS = 2;
         var items = config.feeds;
+        if (config.slider) {
+            items = [{_dummy: true, _banners: true}].concat(items);
+        }
         for (var i =0 ; i< PRELOAD_CELLS ; i++){
             items= [{_dummy:true}].concat((items.concat({_dummy:true})));
         }
@@ -107,13 +110,34 @@ function init() {
 
 
         var container = tabris.create("CollectionView", { left: 0, right: 0, top: (-1)*PRELOAD_CELLS*feedShowcase.elemHeight, bottom: 0 ,
-            itemHeight: feedShowcase.elemHeight,
+            cellType: function(feedConfig) {
+                if(feedConfig._banners){
+                    return 'banner';
+                }
+                else if(feedConfig._dummy){
+                    return 'dummy';
+                }
+                return 'showcase';
+            },
+            itemHeight: function(feedConfig, type) {
+                if(type === 'banner'){
+                    return 152;
+                }
+                return feedShowcase.elemHeight;
+            },
             items: items,
 
             bottom: (-1)*PRELOAD_CELLS*feedShowcase.elemHeight,
 
-            initializeCell: function(cell){
+            initializeCell: function(cell, type){
+                if(type === 'banner'){
+                    imageSlider(config.slider).on("itemSelected",function(item){
+                        detailScreen.open(item.title, item);
+                    }).appendTo(cell);
+                }
+
                 cell.on("change:item", function(widget, feedConfig) {
+                    if(feedConfig._banners){return;}
                     var elem = cell.get('_elem');
                     if(!elem){
                         if(feedConfig._dummy){return;}
@@ -149,12 +173,12 @@ function init() {
     /*************************
      * Add an action to the nav bar
      **************************/
-    page.on("appear", function(){
-        addViewAction(page);
-    })
-    .on("disappear", function(){
-        page.get('_openLinkAction').dispose();
-    });
+    //page.on("appear", function(){
+    //    addViewAction(page);
+    //})
+    //.on("disappear", function(){
+    //    page.get('_openLinkAction').dispose();
+    //});
 
     return page;
 }

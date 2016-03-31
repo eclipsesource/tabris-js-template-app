@@ -25,7 +25,15 @@ function getItems(feedConfig , overideConfig){
  		var queryParamsStr = "limit="+ PAGESIZE +"&offset="+ ( PAGESIZE * (targetFeed.page-1) ) +"&";
  		var tmp = [];
  		for (var key in targetFeed){
-		    tmp.push(key + "=" + encodeURIComponent( targetFeed[key] ));
+		    if(typeof targetFeed[key] ==='string'){
+			    tmp.push(key + "=" + encodeURIComponent( targetFeed[key] ));
+		    }
+		    else if(typeof targetFeed[key] ==='object'){
+			    targetFeed[key].forEach(function(filterValue){
+				    tmp.push(key + "=" + encodeURIComponent( filterValue ));
+			    });
+		    }
+
  		}
  		queryParamsStr += tmp.join("&");
 
