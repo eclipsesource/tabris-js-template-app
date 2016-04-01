@@ -100,18 +100,30 @@ var Layout = {
 
 
 module.exports = function (config , categories){
-	var exp = [{
-		name: "All items",
-		color: '#523A35',//'#111', // #002366
-		layout: Layout,
+	var exp = [
+		{
+			name: "Elite models",
+			color: '#523A35',//'#111', // #002366
+			layout: Layout,
 
-		config: {
-			cat:config.CATEGORY,
-			fl: [config.PRICE_RANGE],
-			sort: 'PriceLoHi'
-			//fts: "Rolex",
+			config: {
+				cat:config.CATEGORY,
+				fl: ['p38:49']
+				//fts: "Rolex",
+			},
 		},
-	}];
+		{
+			name: "Premium brands at 50% off",
+			color: '#523A35',//'#111', // #002366
+			layout: Layout,
+
+			config: {
+				cat: config.CATEGORY,
+				fl: [config.PRICE_RANGE, 'd3']
+				//fts: "Rolex",
+			}
+		}
+	];
 	categories.forEach(function(item){
 		exp.push({
 			name: item.name,
@@ -126,5 +138,19 @@ module.exports = function (config , categories){
 			},
 		});
 	});
+
+	exp.push(
+		{
+			name: "All luxury watches",
+			color: '#523A35',//'#111', // #002366
+			layout: Layout,
+
+			config: {
+				cat:config.CATEGORY,
+				fl: [config.PRICE_RANGE]
+				//fts: "Rolex",
+			},
+		}
+	);
 	return exp;
 };

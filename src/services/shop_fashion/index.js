@@ -86,8 +86,8 @@ var config = {
 	// tie store
 	// Search aliexpress?
 
-	CATEGORY: "handbags",
-	PRICE_RANGE : 'p33:49',
+	CATEGORY: "mens-watches",
+	PRICE_RANGE : 'p27:49',
 	//PRICE_RANGE : 'p0:10',
 };
 
