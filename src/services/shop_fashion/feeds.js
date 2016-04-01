@@ -93,14 +93,25 @@
 //module.exports = exp;
 
 var Layout = {
-	cellWidth: 150,
-	imgSizeHeightToWidthRatio: 1.4,
+	cellWidth: 110,
+	imgSizeHeightToWidthRatio: 1.7,
 	scaleMode: 'fit'
 };
 
 
 module.exports = function (config , categories){
-	var exp = [];
+	var exp = [{
+		name: "All items",
+		color: '#523A35',//'#111', // #002366
+		layout: Layout,
+
+		config: {
+			cat:config.CATEGORY,
+			fl: [config.PRICE_RANGE],
+			sort: 'PriceLoHi'
+			//fts: "Rolex",
+		},
+	}];
 	categories.forEach(function(item){
 		exp.push({
 			name: item.name,
@@ -109,7 +120,8 @@ module.exports = function (config , categories){
 
 			config: {
 				cat:config.CATEGORY,
-				fl: ['b'+item.id, config.PRICE_RANGE]
+				fl: ['b'+item.id, config.PRICE_RANGE],
+				//sort: 'PriceLoHi'
 				//fts: "Rolex",
 			},
 		});

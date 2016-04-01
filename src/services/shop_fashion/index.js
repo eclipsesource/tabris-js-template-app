@@ -81,11 +81,14 @@ function numberWithCommas(x) {
 }
 
 var config = {
-	// diamond-jewelry  ,  maternity-clothes  ,
+	// diamond-jewelry  ,  maternity-clothes  ,  mens-watches  , petites  , plus-sizes  , womens-tops  ,  womens-shoes , womens-beauty , diamond-rings ,  mens-ties
+	// handbags
+	// tie store
+	// Search aliexpress?
 
-	CATEGORY: "maternity-clothes",
-	//PRICE_RANGE : 'p27:49',
-	PRICE_RANGE : 'p0:49',
+	CATEGORY: "handbags",
+	PRICE_RANGE : 'p33:49',
+	//PRICE_RANGE : 'p0:10',
 };
 
 function paramsToQueryStr(config){
@@ -106,7 +109,11 @@ function paramsToQueryStr(config){
 
 function init( ){
 	return new Promise(function(resolve, reject) {
-		fetch("http://api.shopstyle.com/api/v2/products/histogram?pid=" + API_KEY + "&filters=Brand&cat="+encodeURIComponent(config.CATEGORY)+"&fl="+encodeURIComponent(config.PRICE_RANGE)).then(function (res) {
+		var query = paramsToQueryStr({
+			cat: config.CATEGORY,
+			fl:[config.PRICE_RANGE],
+		})
+		fetch("http://api.shopstyle.com/api/v2/products/histogram?pid=" + API_KEY + "&filters=Brand&"+query).then(function (res) {
 			return res.json();
 		}).then(function (res) {
 			var activeCategories = res.brandHistogram.sort(function(a,b){return b.count-a.count}).filter(function(item){return item.count > 10});
