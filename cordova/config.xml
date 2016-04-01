@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="9" id="com.eclipsesource.tabrisrss" version="1.1.7" xmlns="http://www.w3.org/ns/widgets">
-    <name>Tabris.js RSS reader</name>
+<widget android-versionCode="9" id="com.shaialon.luxurywatches" version="1.1.7" xmlns="http://www.w3.org/ns/widgets">
+    <name>Men's Luxury Watches</name>
     <description>
-        An exemplary Tabris.js Rss reader.
+        Men's Luxury Watches catalog
     </description>
-    <author email="tabris@eclipsesource.com" href="https://tabrisjs.com">
-        EclipseSource
+    <author email="shaialon84@gmail.com" href="https://tapthatshop.com">
+        Shai Alon
     </author>
     <access origin="*" />
 
