@@ -9,12 +9,10 @@ var sizing = require('./../helpers/sizing');
 var config = require('./../../config.js').config;
 var getItems = config.dataService.getItems;
 
-var PRELOAD_CELLS = 4;
+var PRELOAD_CELLS = 0;
 var DEFAULTS = {
     CELLS_PER_ROW: 1,
 };
-
-var tapListener = tabris.device.get("platform") === 'iOS' ? "touchend": "tap";
 
 module.exports = function( feedConfig , tab) {
 
@@ -34,15 +32,8 @@ module.exports = function( feedConfig , tab) {
         _tab: tab,
         initializeCell: function(cell){
             var style = cellStyle(feedConfig , CELL_SIZES);
-            //var masterContainer = tabris.create('Composite', style.masterContainer).appendTo(cell);
             var elementsList = {};
-
-
                 elementsList.container = tabris.create('Composite', style.container).appendTo(cell)
-                //.on(tapListener, function(target) {
-                //    var feedItem = target.get("_feedItem");
-                //    detailScreen.open(feedItem.title, feedItem);
-                //});
                 elementsList.image   = tabris.create('ImageView', style.image).appendTo(elementsList.container);
                 elementsList.overlay = tabris.create('Composite', style.overlay).appendTo(elementsList.container);
                 elementsList.title   = tabris.create('TextView',  style.title).appendTo(elementsList.container);
@@ -63,6 +54,9 @@ module.exports = function( feedConfig , tab) {
             }
 
         }
+    })
+    .on("select", function(widget, feedItem) {
+        detailScreen.open(feedItem.title, feedItem);
     });
     if (config.pullToRefresh ){
       widget.on('refresh', function(widget){
@@ -120,7 +114,6 @@ function cellStyle(feedConfig, CELL_SIZES){
     }
     return {
         container : { left: "prev()", width: CELL_SIZES.cellWidth, top: 0, bottom: 0 , background: themeStyle.background},
-        //masterContainer : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background},
         image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: scaleMode , background: "white"},
         overlay: { left: 0, right: 0, height: 46, bottom: 1 ,background: themeStyle.overlayBG, opacity: 0.8},
         title: { maxLines: 2, font: '16px', left: 10, right: 10, bottom: 5, textColor: themeStyle.textColor }
