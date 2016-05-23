@@ -9,7 +9,6 @@ var sizing = require('./../helpers/sizing');
 var config = require('./../../config.js').config;
 var getItems = config.dataService.getItems;
 
-var PRELOAD_CELLS = 0;
 var DEFAULTS = {
     CELLS_PER_ROW: 1,
 };
@@ -18,10 +17,9 @@ module.exports = function( feedConfig , tab) {
 
     var CELLS_PER_ROW = calculateCellsPerRow(feedConfig);
     var CELL_SIZES = calculateCellSizes(feedConfig, CELLS_PER_ROW);
-    //var PRELOAD_CELLS = PRELOAD_CELLS * CELLS_PER_ROW;
 
     var widget = tabris.create("CollectionView", {
-        layoutData: {left: 0,  top: 0,  bottom: (-1)*PRELOAD_CELLS*CELL_SIZES.cellHeight },
+        layoutData: {left: 0,  top: 0,  bottom: 0},
         elevation: 20,
         items: [],
         right: 0,
@@ -144,9 +142,6 @@ function refreshItems( widget , forceFetch, CELLS_PER_ROW) {
         else {
             widget.set('_loadedAll', true);
         }
-        for (var i=0 ; i< PRELOAD_CELLS; i++){
-            arr = arr.concat({_dummy: true});
-        }
         widget.set('items', arr );
         widget.set('_loadedPage', 1);
         updateWidgetLoading ( widget, false );
@@ -169,7 +164,7 @@ function loadMoreItems( widget , CELLS_PER_ROW) {
     getItems( widget.get('_feed') , {page: newPage } ).then( function(results){
 
         var arr = results.items;
-        widget.insert(arr, -( CELLS_PER_ROW + PRELOAD_CELLS ));
+        widget.insert(arr, -( CELLS_PER_ROW ));
         widget.set('_loadedPage', newPage );
         widget.set('_loadingNext', false);
 
@@ -178,7 +173,7 @@ function loadMoreItems( widget , CELLS_PER_ROW) {
         }
         else {
             widget.set('_loadedAll', true);
-            widget.remove(-CELLS_PER_ROW); //TODO: remove the loading animation at the end of feed and handle preload cells
+            widget.remove(-CELLS_PER_ROW);
         }
 
     }).catch(function(err){
