@@ -38,7 +38,6 @@ module.exports = function( feedConfig , tab) {
                 elementsList.overlay = tabris.create('Composite', style.overlay).appendTo(elementsList.container);
                 elementsList.title   = tabris.create('TextView',  style.title).appendTo(elementsList.container);
 
-
             cell.on("change:item", function(widget, feedItem) {
                 feedItem._elementsList = elementsList;
                 updateCellItemElements(feedItem, elementsList, CELL_SIZES);
@@ -198,18 +197,6 @@ function loadMoreItems( widget) {
  * CollectionView Cell updates
  *************************/
 
-//function updateCellItemElements(feedItem, elementsList , CELL_SIZES){
-//    // Loading next.
-//    //if(feedItem._loadingNext){
-//    //    elements.title.set({text: "Loading more items..."});
-//    //    //TODO: remove the loading animation at the end of feed.
-//    //}
-//    elementsList.container.set("_feedItem",feedItem);
-//    updateCellItemElements(feedItem, elementsList , CELL_SIZES);
-//
-//}
-
-
 function updateCellItemElements(feedItem, elements , CELL_SIZES){
     elements.container.set("_feedItem",feedItem);
     if(!feedItem) {
@@ -232,8 +219,6 @@ function updateCellItemElements(feedItem, elements , CELL_SIZES){
     setTimeout(function(){
         elements.image.set( imageUpdate );
     },1);
-
-
 
     // Title + Overlay update
     if(feedItem.price_display){
