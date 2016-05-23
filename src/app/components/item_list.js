@@ -20,6 +20,7 @@ module.exports = function( feedConfig , tab) {
 
     var CELLS_PER_ROW = calculateCellsPerRow(feedConfig);
     var CELL_SIZES = calculateCellSizes(feedConfig, CELLS_PER_ROW);
+    //var PRELOAD_CELLS = PRELOAD_CELLS * CELLS_PER_ROW;
 
     var widget = tabris.create("CollectionView", {
         layoutData: {left: 0,  top: 0,  bottom: (-1)*PRELOAD_CELLS*CELL_SIZES.cellHeight },
@@ -28,26 +29,28 @@ module.exports = function( feedConfig , tab) {
         right: 0,
         itemHeight: CELL_SIZES.cellHeight,
         refreshEnabled: config.pullToRefresh,
+        columnCount: CELLS_PER_ROW,
         _feed: feedConfig,
         _tab: tab,
         initializeCell: function(cell){
             var style = cellStyle(feedConfig , CELL_SIZES);
-            var masterContainer = tabris.create('Composite', style.masterContainer).appendTo(cell);
-            var elementsList = [];
-            for (var i=0; i<CELLS_PER_ROW; i++){
-                elementsList.push({});
-                elementsList[i].container = tabris.create('Composite', style.container).appendTo(masterContainer).on(tapListener, function(target) {
-                    var feedItem = target.get("_feedItem");
-                    detailScreen.open(feedItem.title, feedItem);
-                });
-                elementsList[i].image   = tabris.create('ImageView', style.image).appendTo(elementsList[i].container);
-                elementsList[i].overlay = tabris.create('Composite', style.overlay).appendTo(elementsList[i].container);
-                elementsList[i].title   = tabris.create('TextView',  style.title).appendTo(elementsList[i].container);
-            }
+            //var masterContainer = tabris.create('Composite', style.masterContainer).appendTo(cell);
+            var elementsList = {};
 
-            cell.on("change:item", function(widget, feedItems) {
-                feedItems._elementsList = elementsList;
-                updateCellMultipleElements(feedItems, elementsList, CELL_SIZES);
+
+                elementsList.container = tabris.create('Composite', style.container).appendTo(cell)
+                //.on(tapListener, function(target) {
+                //    var feedItem = target.get("_feedItem");
+                //    detailScreen.open(feedItem.title, feedItem);
+                //});
+                elementsList.image   = tabris.create('ImageView', style.image).appendTo(elementsList.container);
+                elementsList.overlay = tabris.create('Composite', style.overlay).appendTo(elementsList.container);
+                elementsList.title   = tabris.create('TextView',  style.title).appendTo(elementsList.container);
+
+
+            cell.on("change:item", function(widget, feedItem) {
+                feedItem._elementsList = elementsList;
+                updateCellItemElements(feedItem, elementsList, CELL_SIZES);
             });
         }
     })
@@ -56,17 +59,17 @@ module.exports = function( feedConfig , tab) {
         if (scroll.deltaY > 0) {
             var remaining = widget.get("items").length - widget.get("lastVisibleIndex");
             if (remaining < 8) {
-                loadMoreItems(widget, CELLS_PER_ROW);
+                loadMoreItems(widget);
             }
 
         }
     });
     if (config.pullToRefresh ){
       widget.on('refresh', function(widget){
-          refreshItems( widget , true, CELLS_PER_ROW);
+          refreshItems( widget , true);
       });
     }
-    refreshItems(widget, false, CELLS_PER_ROW);
+    refreshItems(widget, false);
     return widget;
 };
 
@@ -117,7 +120,7 @@ function cellStyle(feedConfig, CELL_SIZES){
     }
     return {
         container : { left: "prev()", width: CELL_SIZES.cellWidth, top: 0, bottom: 0 , background: themeStyle.background},
-        masterContainer : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background},
+        //masterContainer : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background},
         image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: scaleMode , background: "white"},
         overlay: { left: 0, right: 0, height: 46, bottom: 1 ,background: themeStyle.overlayBG, opacity: 0.8},
         title: { maxLines: 2, font: '16px', left: 10, right: 10, bottom: 5, textColor: themeStyle.textColor }
@@ -136,11 +139,10 @@ function updateWidgetLoading(widget,loading){
  * Data fetching
  *************************/
 
-function refreshItems( widget , forceFetch, CELLS_PER_ROW) {
+function refreshItems( widget , forceFetch) {
     updateWidgetLoading ( widget, true);
     getItems( widget.get('_feed') , {forceFetch: forceFetch} ).then( function(results){
         var arr = [].concat(results.items);
-        arr = _.chunk(arr,CELLS_PER_ROW);
         if (results.state && results.state.hasMore) {
             arr = arr.concat({loadingNext: true});
             widget.set('_loadedAll', false);
@@ -167,12 +169,12 @@ function refreshItems( widget , forceFetch, CELLS_PER_ROW) {
 }
 
 
-function loadMoreItems( widget , CELLS_PER_ROW) {
+function loadMoreItems( widget) {
     widget.set('_loadingNext', true);
     var newPage = widget.get('_loadedPage')+1;
     getItems( widget.get('_feed') , {page: newPage } ).then( function(results){
 
-        var arr = _.chunk(results.items,CELLS_PER_ROW);
+        var arr = results.items;
         widget.insert(arr, -( 1 + PRELOAD_CELLS ));
         widget.set('_loadedPage', newPage );
         widget.set('_loadingNext', false);
@@ -203,22 +205,20 @@ function loadMoreItems( widget , CELLS_PER_ROW) {
  * CollectionView Cell updates
  *************************/
 
-function updateCellMultipleElements(feedItems, elementsList , CELL_SIZES){
-    // Loading next.
-    //if(feedItem._loadingNext){
-    //    elements.title.set({text: "Loading more items..."});
-    //    //TODO: remove the loading animation at the end of feed.
-    //}
-
-
-    elementsList.forEach(function( elements, index ) {
-        elements.container.set("_feedItem",feedItems[index]);
-        updateCellItemElements(feedItems[index], elements , CELL_SIZES);
-    })
-}
+//function updateCellItemElements(feedItem, elementsList , CELL_SIZES){
+//    // Loading next.
+//    //if(feedItem._loadingNext){
+//    //    elements.title.set({text: "Loading more items..."});
+//    //    //TODO: remove the loading animation at the end of feed.
+//    //}
+//    elementsList.container.set("_feedItem",feedItem);
+//    updateCellItemElements(feedItem, elementsList , CELL_SIZES);
+//
+//}
 
 
 function updateCellItemElements(feedItem, elements , CELL_SIZES){
+    elements.container.set("_feedItem",feedItem);
     if(!feedItem) {
         hideElements(elements);
         return;
