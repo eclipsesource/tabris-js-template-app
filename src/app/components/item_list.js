@@ -31,7 +31,7 @@ module.exports = function( feedConfig , tab) {
         _feed: feedConfig,
         _tab: tab,
         initializeCell: function(cell){
-            var style = cellStyle(feedConfig , CELL_SIZES);
+            var style = cellStyle(feedConfig);
             var elementsList = {};
                 elementsList.container = tabris.create('Composite', style.container).appendTo(cell)
                 elementsList.image   = tabris.create('ImageView', style.image).appendTo(elementsList.container);
@@ -49,7 +49,7 @@ module.exports = function( feedConfig , tab) {
         if (scroll.deltaY > 0) {
             var remaining = widget.get("items").length - widget.get("lastVisibleIndex");
             if (remaining < 8) {
-                loadMoreItems(widget);
+                loadMoreItems(widget, CELLS_PER_ROW);
             }
 
         }
@@ -59,10 +59,10 @@ module.exports = function( feedConfig , tab) {
     });
     if (config.pullToRefresh ){
       widget.on('refresh', function(widget){
-          refreshItems( widget , true);
+          refreshItems( widget , true, CELLS_PER_ROW);
       });
     }
-    refreshItems(widget, false);
+    refreshItems(widget, false, CELLS_PER_ROW);
     return widget;
 };
 
@@ -105,14 +105,14 @@ function calculateCellSizes(feedConfig, CELLS_PER_ROW){
  * Cell Styling and updating
  *************************/
 
-function cellStyle(feedConfig, CELL_SIZES){
+function cellStyle(feedConfig){
     var themeStyle = getThemeStyle(feedConfig.color);
     var scaleMode = 'fill';
     if(feedConfig.layout && feedConfig.layout.scaleMode){
         scaleMode = feedConfig.layout.scaleMode;
     }
     return {
-        container : { left: "prev()", width: CELL_SIZES.cellWidth, top: 0, bottom: 0 , background: themeStyle.background},
+        container : { left: 0,right:0, top: 0, bottom: 0 , background: themeStyle.background},
         image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: scaleMode , background: "white"},
         overlay: { left: 0, right: 0, height: 46, bottom: 1 ,background: themeStyle.overlayBG, opacity: 0.8},
         title: { maxLines: 2, font: '16px', left: 10, right: 10, bottom: 5, textColor: themeStyle.textColor }
@@ -131,12 +131,14 @@ function updateWidgetLoading(widget,loading){
  * Data fetching
  *************************/
 
-function refreshItems( widget , forceFetch) {
+function refreshItems( widget , forceFetch, CELLS_PER_ROW) {
     updateWidgetLoading ( widget, true);
     getItems( widget.get('_feed') , {forceFetch: forceFetch} ).then( function(results){
         var arr = [].concat(results.items);
         if (results.state && results.state.hasMore) {
-            arr = arr.concat({loadingNext: true});
+            for (var i=0 ; i< CELLS_PER_ROW; i++){
+                arr = arr.concat({loadingNext: true});
+            }
             widget.set('_loadedAll', false);
         }
         else {
@@ -161,13 +163,13 @@ function refreshItems( widget , forceFetch) {
 }
 
 
-function loadMoreItems( widget) {
+function loadMoreItems( widget , CELLS_PER_ROW) {
     widget.set('_loadingNext', true);
     var newPage = widget.get('_loadedPage')+1;
     getItems( widget.get('_feed') , {page: newPage } ).then( function(results){
 
         var arr = results.items;
-        widget.insert(arr, -( 1 + PRELOAD_CELLS ));
+        widget.insert(arr, -( CELLS_PER_ROW + PRELOAD_CELLS ));
         widget.set('_loadedPage', newPage );
         widget.set('_loadingNext', false);
 
@@ -176,7 +178,7 @@ function loadMoreItems( widget) {
         }
         else {
             widget.set('_loadedAll', true);
-            widget.remove(-1); //TODO: remove the loading animation at the end of feed and handle preload cells
+            widget.remove(-CELLS_PER_ROW); //TODO: remove the loading animation at the end of feed and handle preload cells
         }
 
     }).catch(function(err){
@@ -199,7 +201,7 @@ function loadMoreItems( widget) {
 
 function updateCellItemElements(feedItem, elements , CELL_SIZES){
     elements.container.set("_feedItem",feedItem);
-    if(!feedItem) {
+    if(!feedItem || !feedItem.title) {
         hideElements(elements);
         return;
     }
