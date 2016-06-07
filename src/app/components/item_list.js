@@ -30,15 +30,50 @@ module.exports = function( feedConfig , tab) {
         _tab: tab,
         initializeCell: function(cell){
             var style = cellStyle(feedConfig);
-            var elementsList = {};
-                elementsList.container = tabris.create('Composite', style.container).appendTo(cell)
-                elementsList.image   = tabris.create('ImageView', style.image).appendTo(elementsList.container);
-                elementsList.overlay = tabris.create('Composite', style.overlay).appendTo(elementsList.container);
-                elementsList.title   = tabris.create('TextView',  style.title).appendTo(elementsList.container);
+            var elements = {};
+                elements.container = tabris.create('Composite', style.container).appendTo(cell)
+                elements.image   = tabris.create('ImageView', style.image).appendTo(elements.container);
+                elements.overlay = tabris.create('Composite', style.overlay).appendTo(elements.container);
+                elements.title   = tabris.create('TextView',  style.title).appendTo(elements.container);
+
+
+            elements.image.on("load",function(imageView, event) {
+                if (event.error) {
+                    console.log("Error loading the image");
+                }
+                else {
+                     //TODO: ANIMATION BUG ON IOS
+                    if(elements.container.get("_feedItem").hasAnimated){
+                        //No need to animate
+                        if(elements.image.get('image') && elements.image.get('image').src){
+                            //console.log("Loaded the image - fading in");
+                            elements.image.set({opacity:1});
+                        }
+                        else {
+                            //console.log("cleared the image");
+                            elements.image.set({opacity:0});
+                        }
+                    }
+                    else {
+                        if(elements.image.get('image') && elements.image.get('image').src){
+                            //console.log("Loaded the image - fading in");
+                            elements.container.get("_feedItem").hasAnimated = true;
+                            elements.image.animate({opacity:1}, {duration:400});
+                        }
+                        else {
+                            //console.log("cleared the image");
+                            elements.image.set({opacity:0});
+                        }
+                    }
+
+
+
+                }
+            });
 
             cell.on("change:item", function(widget, feedItem) {
-                feedItem._elementsList = elementsList;
-                updateCellItemElements(feedItem, elementsList, CELL_SIZES);
+                feedItem._elements = elements;
+                updateCellItemElements(feedItem, elements, CELL_SIZES);
             });
         }
     })
@@ -161,8 +196,9 @@ function refreshItems( widget , forceFetch, CELLS_PER_ROW) {
 function loadMoreItems( widget , CELLS_PER_ROW) {
     widget.set('_loadingNext', true);
     var newPage = widget.get('_loadedPage')+1;
+    console.log("DISPATCHING");
     getItems( widget.get('_feed') , {page: newPage } ).then( function(results){
-
+        console.log("RECIEVED");
         var arr = results.items;
         widget.insert(arr, -( CELLS_PER_ROW ));
         widget.set('_loadedPage', newPage );
@@ -201,7 +237,7 @@ function updateCellItemElements(feedItem, elements , CELL_SIZES){
         return;
     }
     elements.container.set({opacity:1});
-    var imageUpdate = {opacity: 1};
+    var imageUpdate = {};
     var imageUrl = resizeImageURLByWidth(feedItem.image, CELL_SIZES.cellWidth);
 
     // Image update
@@ -210,7 +246,7 @@ function updateCellItemElements(feedItem, elements , CELL_SIZES){
     }
     else if(  !(elements.image.get('image') && elements.image.get('image').src === imageUrl)){
         // Image actually changed
-        elements.image.set( {image: undefined });
+        elements.image.set( {image: undefined , opacity:0 });
         imageUpdate.image =  {src: imageUrl};
     }
     setTimeout(function(){
