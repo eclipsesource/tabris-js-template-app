@@ -8,7 +8,7 @@
     "jscs": "jscs src test"
   },
   "dependencies": {
-    "tabris": "^1.7.0",
+    "tabris": "^1.8.0",
     "lodash": "^4.6.1"
   },
   "devDependencies": {

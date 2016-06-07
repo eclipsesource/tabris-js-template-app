@@ -9,12 +9,9 @@ var sizing = require('./../helpers/sizing');
 var config = require('./../../config.js').config;
 var getItems = config.dataService.getItems;
 
-var PRELOAD_CELLS = 4;
 var DEFAULTS = {
     CELLS_PER_ROW: 1,
 };
-
-var tapListener = tabris.device.get("platform") === 'iOS' ? "touchend": "tap";
 
 module.exports = function( feedConfig , tab) {
 
@@ -22,32 +19,26 @@ module.exports = function( feedConfig , tab) {
     var CELL_SIZES = calculateCellSizes(feedConfig, CELLS_PER_ROW);
 
     var widget = tabris.create("CollectionView", {
-        layoutData: {left: 0,  top: 0,  bottom: (-1)*PRELOAD_CELLS*CELL_SIZES.cellHeight },
+        layoutData: {left: 0,  top: 0,  bottom: 0},
         elevation: 20,
         items: [],
         right: 0,
         itemHeight: CELL_SIZES.cellHeight,
         refreshEnabled: config.pullToRefresh,
+        columnCount: CELLS_PER_ROW,
         _feed: feedConfig,
         _tab: tab,
         initializeCell: function(cell){
-            var style = cellStyle(feedConfig , CELL_SIZES);
-            var masterContainer = tabris.create('Composite', style.masterContainer).appendTo(cell);
-            var elementsList = [];
-            for (var i=0; i<CELLS_PER_ROW; i++){
-                elementsList.push({});
-                elementsList[i].container = tabris.create('Composite', style.container).appendTo(masterContainer).on(tapListener, function(target) {
-                    var feedItem = target.get("_feedItem");
-                    detailScreen.open(feedItem.title, feedItem);
-                });
-                elementsList[i].image   = tabris.create('ImageView', style.image).appendTo(elementsList[i].container);
-                elementsList[i].overlay = tabris.create('Composite', style.overlay).appendTo(elementsList[i].container);
-                elementsList[i].title   = tabris.create('TextView',  style.title).appendTo(elementsList[i].container);
-            }
+            var style = cellStyle(feedConfig);
+            var elementsList = {};
+                elementsList.container = tabris.create('Composite', style.container).appendTo(cell)
+                elementsList.image   = tabris.create('ImageView', style.image).appendTo(elementsList.container);
+                elementsList.overlay = tabris.create('Composite', style.overlay).appendTo(elementsList.container);
+                elementsList.title   = tabris.create('TextView',  style.title).appendTo(elementsList.container);
 
-            cell.on("change:item", function(widget, feedItems) {
-                feedItems._elementsList = elementsList;
-                updateCellMultipleElements(feedItems, elementsList, CELL_SIZES);
+            cell.on("change:item", function(widget, feedItem) {
+                feedItem._elementsList = elementsList;
+                updateCellItemElements(feedItem, elementsList, CELL_SIZES);
             });
         }
     })
@@ -60,6 +51,9 @@ module.exports = function( feedConfig , tab) {
             }
 
         }
+    })
+    .on("select", function(widget, feedItem) {
+        detailScreen.open(feedItem.title, feedItem);
     });
     if (config.pullToRefresh ){
       widget.on('refresh', function(widget){
@@ -109,15 +103,14 @@ function calculateCellSizes(feedConfig, CELLS_PER_ROW){
  * Cell Styling and updating
  *************************/
 
-function cellStyle(feedConfig, CELL_SIZES){
+function cellStyle(feedConfig){
     var themeStyle = getThemeStyle(feedConfig.color);
     var scaleMode = 'fill';
     if(feedConfig.layout && feedConfig.layout.scaleMode){
         scaleMode = feedConfig.layout.scaleMode;
     }
     return {
-        container : { left: "prev()", width: CELL_SIZES.cellWidth, top: 0, bottom: 0 , background: themeStyle.background},
-        masterContainer : { left: 0, right: 0, top: 0, bottom: 0 , background: themeStyle.background},
+        container : { left: 0,right:0, top: 0, bottom: 0 , background: themeStyle.background},
         image: { left: 0, right: 0, top: 1, bottom: 1, scaleMode: scaleMode , background: "white"},
         overlay: { left: 0, right: 0, height: 46, bottom: 1 ,background: themeStyle.overlayBG, opacity: 0.8},
         title: { maxLines: 2, font: '16px', left: 10, right: 10, bottom: 5, textColor: themeStyle.textColor }
@@ -140,16 +133,14 @@ function refreshItems( widget , forceFetch, CELLS_PER_ROW) {
     updateWidgetLoading ( widget, true);
     getItems( widget.get('_feed') , {forceFetch: forceFetch} ).then( function(results){
         var arr = [].concat(results.items);
-        arr = _.chunk(arr,CELLS_PER_ROW);
         if (results.state && results.state.hasMore) {
-            arr = arr.concat({loadingNext: true});
+            for (var i=0 ; i< CELLS_PER_ROW; i++){
+                arr = arr.concat({loadingNext: true});
+            }
             widget.set('_loadedAll', false);
         }
         else {
             widget.set('_loadedAll', true);
-        }
-        for (var i=0 ; i< PRELOAD_CELLS; i++){
-            arr = arr.concat({_dummy: true});
         }
         widget.set('items', arr );
         widget.set('_loadedPage', 1);
@@ -172,8 +163,8 @@ function loadMoreItems( widget , CELLS_PER_ROW) {
     var newPage = widget.get('_loadedPage')+1;
     getItems( widget.get('_feed') , {page: newPage } ).then( function(results){
 
-        var arr = _.chunk(results.items,CELLS_PER_ROW);
-        widget.insert(arr, -( 1 + PRELOAD_CELLS ));
+        var arr = results.items;
+        widget.insert(arr, -( CELLS_PER_ROW ));
         widget.set('_loadedPage', newPage );
         widget.set('_loadingNext', false);
 
@@ -182,7 +173,7 @@ function loadMoreItems( widget , CELLS_PER_ROW) {
         }
         else {
             widget.set('_loadedAll', true);
-            widget.remove(-1); //TODO: remove the loading animation at the end of feed and handle preload cells
+            widget.remove(-CELLS_PER_ROW);
         }
 
     }).catch(function(err){
@@ -203,23 +194,9 @@ function loadMoreItems( widget , CELLS_PER_ROW) {
  * CollectionView Cell updates
  *************************/
 
-function updateCellMultipleElements(feedItems, elementsList , CELL_SIZES){
-    // Loading next.
-    //if(feedItem._loadingNext){
-    //    elements.title.set({text: "Loading more items..."});
-    //    //TODO: remove the loading animation at the end of feed.
-    //}
-
-
-    elementsList.forEach(function( elements, index ) {
-        elements.container.set("_feedItem",feedItems[index]);
-        updateCellItemElements(feedItems[index], elements , CELL_SIZES);
-    })
-}
-
-
 function updateCellItemElements(feedItem, elements , CELL_SIZES){
-    if(!feedItem) {
+    elements.container.set("_feedItem",feedItem);
+    if(!feedItem || !feedItem.title) {
         hideElements(elements);
         return;
     }
@@ -239,8 +216,6 @@ function updateCellItemElements(feedItem, elements , CELL_SIZES){
     setTimeout(function(){
         elements.image.set( imageUpdate );
     },1);
-
-
 
     // Title + Overlay update
     if(feedItem.price_display){
