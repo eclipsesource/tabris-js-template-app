@@ -9,8 +9,8 @@
     </author>
     <access origin="*" />
 
-    <plugin name="cordova-plugin-x-socialsharing" />
-    <plugin name="cordova-plugin-actionsheet" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="^4.3.81" />
+    <plugin name="cordova-plugin-actionsheet" spec="^2.2.2" />
 
     <platform name="android">
         <icon src="res/android/mipmap-ldpi/ic_launcher.png" density="ldpi" />
