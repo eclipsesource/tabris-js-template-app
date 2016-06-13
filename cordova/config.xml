@@ -9,7 +9,7 @@
     </author>
     <access origin="*" />
 
-    <plugin name="cordova-plugin-x-socialsharing" spec="^4.3.81" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="^5.1.1" />
     <plugin name="cordova-plugin-actionsheet" spec="^2.2.2" />
 
     <platform name="android">
